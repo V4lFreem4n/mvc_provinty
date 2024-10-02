@@ -46,6 +46,7 @@
                 <tbody id="usuariosTableBody" class="bg-gray-700">
                 
                         <?php
+                        
                         foreach($usuarios as $usuario){
                             echo '<tr class="py-2 px-4 border-b border-gray-700 text-center"><td><img src="" alt="Foto" class="h-12 w-12 rounded-full object-cover"></td>
                 <td class="py-2 px-4 border-b border-gray-700 text-center">'.$usuario['Nombre'].' '.$usuario['Apellido'].'</td>

@@ -85,28 +85,28 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 <div class="bg-slate-200 p-5 grid grid-cols-3">
   <div>
     <div class="ml-2">
-      <input id="input-evento-nombre-'.$evento['ID_Evento'].'" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
+      <input id="input-evento-nombre-'.$evento['ID_Evento'].'" value="'.$evento['Titulo'].'" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
       <p class="text-xs ml-1">Nombre del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-fecha-'.$evento['ID_Evento'].'" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-fecha-'.$evento['ID_Evento'].'" value="'.date('Y-m-d', strtotime($evento['Fecha_Creacion'])).'" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Fecha del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-ubicacion-'.$evento['ID_Evento'].'" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
+      <input id="input-evento-ubicacion-'.$evento['ID_Evento'].'" value="Ubicación" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <a id="input-evento-ubicacion-'.$evento['ID_Evento'].'" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas('.$evento['ID_Evento'].')">Categorías de entrada</a>
-      <p class="text-xs ml-1">Ubicación del evento*</p>
+      <a id="input-evento-categoria-'.$evento['ID_Evento'].'" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas('.$evento['ID_Evento'].')">Categorías de entrada</a>
+      <p class="text-xs ml-1">Categorías de la entrada*</p>
     </div>
 
     <div class="ml-2 my-1">
       <div class="flex">
-      <input onclick="validarHora('.$evento['ID_Evento'].')" type="time" id="input-evento-hora-inicio-'.$evento['ID_Evento'].'" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input onclick="validarHora('.$evento['ID_Evento'].')"  type="time" id="input-evento-hora-inicio-'.$evento['ID_Evento'].'" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <input disabled type="time" id="input-evento-hora-fin-'.$evento['ID_Evento'].'" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       
       </div>
@@ -114,7 +114,7 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
     </div>
 
     <div class="ml-2 my-1">
-      <input type="number" id="input-evento-capacidad-'.$evento['ID_Evento'].'" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input type="number" id="input-evento-capacidad-'.$evento['ID_Evento'].'" value="'.$evento['Aforo'].'" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Capacidad del evento*</p>
     </div>
 
@@ -122,17 +122,17 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <div>
 <div class="ml-2 my-1">
-      <input id="input-evento-organizador-'.$evento['ID_Evento'].'" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-organizador-'.$evento['ID_Evento'].'" value="'.$evento['Artista_Autor'].'" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Organizador del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-contacto-organizador-'.$evento['ID_Evento'].'" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-contacto-organizador-'.$evento['ID_Evento'].'" value="contacto" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Contacto del organizador del evento*</p>
     </div>
 
  <div class="ml-2 my-1">
-      <input id="input-evento-redes-'.$evento['ID_Evento'].'" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-redes-'.$evento['ID_Evento'].'" value="redes" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Redes sociales del evento*</p>
     </div>
 
@@ -142,7 +142,7 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
     </div>
 
     <div>
-    <textarea id="input-evento-descripcion-'.$evento['ID_Evento'].'" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
+    <textarea id="input-evento-descripcion-'.$evento['ID_Evento'].'" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required >'.$evento['Descripcion'].'</textarea>
     <p class="text-xs ml-1">Descripción del evento*</p>
     </div>
   </div>

@@ -1,3 +1,5 @@
+let ultimoId1 = 0;
+
 let verificadorEventoDesplegado = false;
 
 let estados_descripcion = [];
@@ -16,6 +18,12 @@ console.log("Cantidad de eventos :" + items.length);
 
 ArrayDeDivsEventos.forEach(div => {
   index = div.id;
+  let estado_panel_evento = {
+    "id":index,
+    "modificar":false
+}
+ultimoId1 = parseInt(index) + 1;
+estados_descripcion.push(estado_panel_evento);
   console.log("El id del div es : " + index)
 });
 
@@ -93,41 +101,41 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 </div>
 
 <!--Panel de descripción-->
-<form><div id="collapse-panel-${index}" style="display:block">
+<form><div id="collapse-panel-${ultimoId1}" style="display:block">
   <div class="bg-green-200 p-1"></div>
 <div class="bg-slate-200 p-5 grid grid-cols-3">
   <div>
     <div class="ml-2">
-      <input id="input-evento-nombre-${index}" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
+      <input id="input-evento-nombre-${ultimoId1}" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
       <p class="text-xs ml-1">Nombre del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-fecha-${index}" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-fecha-${ultimoId1}" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Fecha del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-ubicacion-${index}" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
+      <input id="input-evento-ubicacion-${ultimoId1}" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <a id="input-evento-ubicacion-${index}" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas(${index})">Categorías de entrada</a>
+      <a id="input-evento-ubicacion-${ultimoId1}" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas(${ultimoId1})">Categorías de entrada</a>
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
       <div class="flex">
-      <input onclick="validarHora(${index})" type="time" id="input-evento-hora-inicio-${index}" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <input disabled type="time" id="input-evento-hora-fin-${index}" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input onclick="validarHora(${ultimoId1})" type="time" id="input-evento-hora-inicio-${ultimoId1}" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input disabled type="time" id="input-evento-hora-fin-${ultimoId1}" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       
       </div>
       <p class="text-xs ml-1">Hora de inicio y fin del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input type="number" id="input-evento-capacidad-${index}" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input type="number" id="input-evento-capacidad-${ultimoId1}" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Capacidad del evento*</p>
     </div>
 
@@ -135,27 +143,27 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
   <div>
 <div class="ml-2 my-1">
-      <input id="input-evento-organizador-${index}" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-organizador-${ultimoId1}" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Organizador del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-contacto-organizador-${index}" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-contacto-organizador-${ultimoId1}" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Contacto del organizador del evento*</p>
     </div>
 
  <div class="ml-2 my-1">
-      <input id="input-evento-redes-${index}" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-redes-${ultimoId1}" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Redes sociales del evento*</p>
     </div>
 
 <div class="ml-2 my-1">
-      <input type="file" id="input-evento-cancelacion-${index}" required >
+      <input type="file" id="input-evento-cancelacion-${ultimoId1}" required >
       <p class="text-xs ml-1 text-red-900">Política de cancelación del evento*</p>
     </div>
 
     <div>
-    <textarea id="input-evento-descripcion-${index}" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
+    <textarea id="input-evento-descripcion-${ultimoId1}" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
     <p class="text-xs ml-1">Descripción del evento*</p>
     </div>
   </div>
@@ -163,13 +171,13 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
   <div>
     <div class="bg-white px-5 ml-5 mb-1 flex" style="width: 150px; height: 150px;">
-      <img src="images/imagen.png" class="my-auto mx-auto" id="imagen_evento_${index}">
+      <img src="images/imagen.png" class="my-auto mx-auto" id="imagen_evento_${ultimoId1}">
  
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
-    <input id="input-evento-imagen-${index}" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${index}')" accept=".jpg, .jpeg, .png">
+    <input id="input-evento-imagen-${ultimoId1}" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId1}')" accept=".jpg, .jpeg, .png">
     <div class="flex">
-      <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${index})">GUARDAR</button>
+      <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${ultimoId1})">GUARDAR</button>
     </div>
   </div>
 
@@ -344,15 +352,19 @@ fetch('../controlador/controladorCrearEvento.php', {
 
 
 function validarHora(e){
+  console.log("Se llegó a la hora inicio",e)
   let horaInicioInput = document.getElementById('input-evento-hora-inicio-'+e);
   let horaFinInput = document.getElementById('input-evento-hora-fin-'+e);
   // Deshabilitar el input de hora de fin hasta que se ingrese una hora en el de inicio
   horaInicioInput.addEventListener('input', function() {
+    console.log("LLegamos a esta parte de la hora")
     if (horaInicioInput.value) {
+      console.log("Se habilitó para cambiar de hora")
       // Habilitar el input de hora de fin cuando se ingrese una hora de inicio
       horaFinInput.disabled = false;
       console.log("INPUT DE HORA FIN")
     } else {
+      console.log("Se deshabilitó para cambiar de hora")
       // Volver a deshabilitar el input si se borra la hora de inicio
       horaFinInput.disabled = true;
       horaFinInput.value = ''; // Limpiar el valor de la hora de fin
@@ -431,3 +443,7 @@ function guardarEventoCategoria(e){
   alert("Las categorías del evento se guardaron con Éxito")
 }
 
+
+function conseguirEventosAlIniciar(){
+  
+}
