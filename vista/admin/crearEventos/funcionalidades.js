@@ -185,17 +185,19 @@ let estado_panel_evento = {
     "modificar":true
 }
 estados_descripcion.push(estado_panel_evento);
-index++;
 document.getElementById("eventos").appendChild(evento);
 //alert("El evento se creó exitosamente")
+
 }
 
 //Vamos a crear una función que identifique el evento donde lo aparezca y desaparezca a voluntad.
 function visiblePanelModificar(e){
-console.log("Se pulsó :", "panel visible")
-    estados_descripcion.forEach(elemento => {
+console.log("Se pulsó :", "panel visible : ID ->", e)
 
+    estados_descripcion.forEach(elemento => {
+      console.log("Se llegó acá eo", e)
     if(elemento.id == e){
+      console.log("Se llegó acá eoooo", e)
         if(elemento.modificar == false){
             document.getElementById("collapse-panel-"+e).style.display="block";  //Aki desplegamos
             //document.getElementById("panel-stats-"+e).style.display="none";
@@ -211,28 +213,6 @@ console.log("Se pulsó :", "panel visible")
 });    
 }
 
-/*function visiblePanelEstadisticas(e){
-  console.log("Se pulsó :", "estadisticas visible")
-  estados_descripcion.forEach(elemento => {
-    if(elemento.id == e){
-        if(elemento.modificar == false){
-          document.getElementById("panel-stats-"+e).style.display="block";
-          document.getElementById("collapse-panel-"+e).style.display="none";
-              //Aki desplegamos
-            elemento.modificar = true; //<---Entramos al elemento y si está cerrado lo abrimos
-            console.log("Se pulsó :", "estadisticas visible - DESPLEGADO ","elemento.modificar = true;")
-        }else{
-            document.getElementById("panel-stats-"+e).style.display="none"; //Aki cerramos :v
-            elemento.modificar = false; //Entramos al elemento y si está abierto lo cerramos
-            console.log("Se pulsó :", "estadisticas visible - OCULTO ", "elemento.modificar = false;")
-        }
-
-    }
-});  
-
-
-  
-}*/
 
 function visibleModalCategoriaEntradas(e){
   document.getElementById("categoria_entrada").style.display="flex";
