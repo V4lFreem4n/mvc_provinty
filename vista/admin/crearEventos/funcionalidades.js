@@ -6,9 +6,19 @@ const listaEventos = [];
 
 let estado_panel_descripcion = false; //13:41 Acá desplegamos el panel
 
-let index = 0; //NO BORRAR
-
 let idAdvertenciaEventoNoRellenado = 0;
+
+const lista = document.getElementById('eventos');
+const items = lista.getElementsByTagName('li');
+const ArrayDeDivsEventos = Array.from(items);
+
+console.log("Cantidad de eventos :" + items.length);
+
+ArrayDeDivsEventos.forEach(div => {
+  index = div.id;
+  console.log("El id del div es : " + index)
+});
+
 
 let categorias = {
   cat1: "SUPER VIP",
@@ -340,7 +350,7 @@ fetch('../controlador/controladorCrearEvento.php', {
     alert("Evento guardado con éxito");
 })
 .catch((error) => {
-  alert("Sucedió un error al subir los datos :" + error)
+  //alert("Sucedió un error al subir los datos :" + error)
   console.error('Error:', error.message); // Muestra el mensaje de error
   console.error('Nombre del error:', error.name); // Muestra el tipo de error
   console.error('Stack trace:', error.stack); // Muestra el stack trace del error
