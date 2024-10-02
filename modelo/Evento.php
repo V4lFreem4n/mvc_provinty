@@ -9,17 +9,17 @@ class Evento {
      $this->connection = $bd;   
     }
 
-    public function crearEvento($titulo, $aforo, $asistentes_actuales, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista, $lugar, $fecha_evento, $fecha_creacion, $estado_publicacion) {
+    public function crearEvento($titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion) {
         // Supongamos que $this->conexion es tu conexión a la base de datos
-        $sql = "INSERT INTO eventos (titulo, aforo, asistentes_actuales, precio_entrada, precio_preventa, foto, descripcion, artista, lugar, fecha_evento, fecha_creacion, estado_publicacion) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO eventos (Titulo, Aforo, Precio_Entrada, Precio_Preventa, Foto, Descripcion, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
         // Prepara la declaración
         $stmt = mysqli_prepare($this->connection, $sql);
     
         if ($stmt) {
             // Vincula los parámetros
-            mysqli_stmt_bind_param($stmt, "siisssssssss", $titulo, $aforo, $asistentes_actuales, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista, $lugar, $fecha_evento, $fecha_creacion, $estado_publicacion);
+            mysqli_stmt_bind_param($stmt, "siiissssss", $titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion);
     
             // Ejecuta la declaración
             mysqli_stmt_execute($stmt);

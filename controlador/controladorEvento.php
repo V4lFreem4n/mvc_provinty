@@ -10,6 +10,8 @@ $conn = new Database();
 
 $crear = $data['crear']; //Trabajamos con esta variable
 
+
+
 if($crear){
 
 $eventos = new Evento($conn->connect());

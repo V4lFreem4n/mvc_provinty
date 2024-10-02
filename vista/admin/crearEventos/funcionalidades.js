@@ -10,6 +10,20 @@ let index = 0; //NO BORRAR
 
 let idAdvertenciaEventoNoRellenado = 0;
 
+let categorias = {
+  cat1: "SUPER VIP",
+  cat2: "VIP",
+  cat3: "PALCO VIP",
+  cat4: "GENERAL",
+  cat5: "PALCO GENERAL",
+  cat6: "NIÑOS SUPERVIP",
+  cat7: "NIÑOS VIP",
+  cat8: "NIÑOS PALCO VIP",
+  cat9: "NIÑOS GENERAL",
+  cat10: "NIÑOS PALCO GENERAL"
+};
+
+
 function crearEvento(){
 
 
@@ -235,6 +249,27 @@ function verificarCheck(e){
   }
 }
 
+function obtenerCategoriasSeleccionadas() {
+  let categoriasSeleccionadas = []; 
+
+  for (let i = 1; i <= 10; i++) {
+    let checkboxId = `cat${i}`; 
+    let inputId = `cat${i}-input`;
+    let checkbox = document.getElementById(checkboxId); 
+
+    if (checkbox.checked) {
+      let input_value = document.getElementById(inputId).value;
+      categoriasSeleccionadas.push({ categoria: categorias[checkboxId], cantidad: input_value });
+    }
+  }
+
+  console.log(categoriasSeleccionadas);
+
+  return categoriasSeleccionadas;
+}
+
+
+
 //Eliminar componente
 function eliminarEvento(e){
   document.getElementById("evento-"+e).remove();
@@ -245,11 +280,9 @@ function eliminarEvento(e){
 
 function guardarEvento(e) {
 
-  
-
   let nombreE = document.getElementById("input-evento-nombre-" + e).value;
   let fechaE = document.getElementById("input-evento-fecha-" + e).value;
-  let categoriaE = document.getElementById("input-evento-categoriaE-" + e).value;
+  let categoriaE = obtenerCategoriasSeleccionadas();
   let ubicacionE = document.getElementById("input-evento-ubicacion-" + e).value;
   let horaInicioE = document.getElementById("input-evento-hora-inicio-" + e).value;
   let horaFinE = document.getElementById("input-evento-hora-fin-" + e).value;
@@ -291,8 +324,27 @@ function guardarEvento(e) {
   // Actualizar el título del evento si es necesario
   document.getElementById("nombre-evento-titulo-" + e).value = nombreE;
 
-  alert("Evento guardado con éxito");
 
+
+// Enviar el POST usando fetch
+fetch('../controlador/controladorCrearEvento.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json' // Enviar como JSON
+  },
+  body: JSON.stringify(datosEvento) // Convertir el objeto a JSON
+})
+.then(response => response.json()) // Convertir la respuesta a JSON
+.then(data => {
+  console.log('Success:', data); // Ver la respuesta del servidor
+    alert("Evento guardado con éxito");
+})
+.catch((error) => {
+  alert("Sucedió un error al subir los datos :" + error)
+  console.error('Error:', error.message); // Muestra el mensaje de error
+  console.error('Nombre del error:', error.name); // Muestra el tipo de error
+  console.error('Stack trace:', error.stack); // Muestra el stack trace del error
+});
   verificadorEventoDesplegado = false; 
   document.getElementById("dangerEventoDesplegado_"+(index-1)).style.display="none";
 }
@@ -379,12 +431,13 @@ fetch(url, {
 
 
 
-    //crearEvento(); //El verificadorEventoDesplegado cambia de estado a false en "GUARDAR"
+    crearEvento(); //El verificadorEventoDesplegado cambia de estado a false en "GUARDAR"
   }
 }
 
 
 function guardarEventoCategoria(e){
+  obtenerCategoriasSeleccionadas();
   alert("Las categorías del evento se guardaron con Éxito")
 }
 
