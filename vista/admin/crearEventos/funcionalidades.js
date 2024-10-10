@@ -1,4 +1,4 @@
-let ultimoId1 = 0;
+let ultimoId = 0;
 
 let verificadorEventoDesplegado = false;
 
@@ -14,7 +14,10 @@ const lista = document.getElementById('eventos');
 const items = lista.getElementsByTagName('li');
 const ArrayDeDivsEventos = Array.from(items);
 
-console.log("Cantidad de eventos :" + items.length);
+console.log("Cantidad de eventos:" + items.length);
+console.log("Array : ",ArrayDeDivsEventos);
+
+let index = 0;
 
 ArrayDeDivsEventos.forEach(div => {
   index = div.id;
@@ -22,7 +25,8 @@ ArrayDeDivsEventos.forEach(div => {
     "id":index,
     "modificar":false
 }
-ultimoId1 = parseInt(index) + 1;
+
+ultimoId = parseInt(index) + 1;
 estados_descripcion.push(estado_panel_evento);
   console.log("El id del div es : " + index)
 });
@@ -47,7 +51,7 @@ function crearEvento(){
 
   
 let evento = document.createElement("li");
-evento.id = "evento-"+index;
+evento.id = "evento-"+ultimoId;
 evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 <svg class="h-8 w-8 text-black-400 mt-2"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -56,7 +60,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 <div class="ml-auto flex py-2">
 
 <!--DANGER-->
-    <div class="relative tooltip-container" style="display:none" id="dangerEventoDesplegado_${index}">
+    <div class="relative tooltip-container" style="display:none" id="dangerEventoDesplegado_${ultimoId}">
         <svg class="h-8 w-8 text-yellow-400 mr-2" id="tooltip" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  
             <path stroke="none" d="M0 0h24v24H0z"/>
             <path d="M12 9v2m0 4v.01" />
@@ -68,8 +72,8 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
 <!--CHECK SWITCH-->
 <div class="toggle mr-4">
-  <input type="checkbox" id="btn${index}">
-  <label for="btn${index}">
+  <input type="checkbox" id="btn${ultimoId}">
+  <label for="btn${ultimoId}">
     <span class="on">Público</span>
     <span class="off">Privado</span>
     <div class="slider"></div> <!-- El círculo que se desliza -->
@@ -77,16 +81,16 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 </div>
 
     <!--ID-->
-    <div class="mt-1 flex mr-4"><p class="font-bold mr-1">ID</p><p>1005${index}</p></div>
+    <div class="mt-1 flex mr-4"><p class="font-bold mr-1">ID</p><p>${ultimoId}</p></div>
     <!---->
     <!--MODIFICAR-->
-    <p onclick="visiblePanelModificar(${index})" class="bg-green-200 px-2 py-1 ml-2 mr-2 hover:bg-green-300 hover:cursor-pointer rounded-lg hover:rounded-lg disabled:pointer-events-none transition-all" id="collapse-${index}">Editar</p>
+    <p onclick="visiblePanelModificar(${ultimoId})" class="bg-green-200 px-2 py-1 ml-2 mr-2 hover:bg-green-300 hover:cursor-pointer rounded-lg hover:rounded-lg disabled:pointer-events-none transition-all" id="collapse-${ultimoId}">Editar</p>
     <!---->
     <!--ESTADISTICAS-->
-    <a class="bg-blue-200 px-2 py-1 hover:bg-blue-300 hover:cursor-pointer rounded-lg hover:rounded-lg" href="./admin-estadisticas-evento.php?id=${index}" target="_blank">Estadísticas</a>
+    <a class="bg-blue-200 px-2 py-1 hover:bg-blue-300 hover:cursor-pointer rounded-lg hover:rounded-lg" href="./admin-estadisticas-evento.php?id=${ultimoId}" target="_blank">Estadísticas</a>
     <!---->
     <!--ELIMINAR-->
-    <div class="bg-red-100 mr-2 ml-2 rounded-lg" onclick="eliminarEvento(${index})">
+    <div class="bg-red-100 mr-2 ml-2 rounded-lg" onclick="eliminarEvento(${ultimoId})">
         <svg class="h-8 w-8 text-red-900 hover:bg-red-300 hover:rounded-lg hover:cursor-pointer"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  
             <path stroke="none" d="M0 0h24v24H0z"/>  
             <line x1="4" y1="7" x2="20" y2="7" />  
@@ -101,41 +105,41 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 </div>
 
 <!--Panel de descripción-->
-<form><div id="collapse-panel-${ultimoId1}" style="display:block">
+<form><div id="collapse-panel-${ultimoId}" style="display:block">
   <div class="bg-green-200 p-1"></div>
 <div class="bg-slate-200 p-5 grid grid-cols-3">
   <div>
     <div class="ml-2">
-      <input id="input-evento-nombre-${ultimoId1}" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
+      <input id="input-evento-nombre-${ultimoId}" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
       <p class="text-xs ml-1">Nombre del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-fecha-${ultimoId1}" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-fecha-${ultimoId}" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Fecha del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-ubicacion-${ultimoId1}" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
+      <input id="input-evento-ubicacion-${ultimoId}" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <a id="input-evento-ubicacion-${ultimoId1}" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas(${ultimoId1})">Categorías de entrada</a>
+      <a id="input-evento-ubicacion-${ultimoId}" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas(${ultimoId})">Categorías de entrada</a>
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
       <div class="flex">
-      <input onclick="validarHora(${ultimoId1})" type="time" id="input-evento-hora-inicio-${ultimoId1}" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <input disabled type="time" id="input-evento-hora-fin-${ultimoId1}" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input onclick="validarHora(${ultimoId})" type="time" id="input-evento-hora-inicio-${ultimoId}" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input disabled type="time" id="input-evento-hora-fin-${ultimoId}" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       
       </div>
       <p class="text-xs ml-1">Hora de inicio y fin del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input type="number" id="input-evento-capacidad-${ultimoId1}" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input type="number" id="input-evento-capacidad-${ultimoId}" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Capacidad del evento*</p>
     </div>
 
@@ -143,27 +147,27 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
   <div>
 <div class="ml-2 my-1">
-      <input id="input-evento-organizador-${ultimoId1}" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-organizador-${ultimoId}" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Organizador del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-contacto-organizador-${ultimoId1}" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-contacto-organizador-${ultimoId}" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Contacto del organizador del evento*</p>
     </div>
 
  <div class="ml-2 my-1">
-      <input id="input-evento-redes-${ultimoId1}" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-redes-${ultimoId}" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Redes sociales del evento*</p>
     </div>
 
 <div class="ml-2 my-1">
-      <input type="file" id="input-evento-cancelacion-${ultimoId1}" required >
+      <input type="file" id="input-evento-cancelacion-${ultimoId}" required >
       <p class="text-xs ml-1 text-red-900">Política de cancelación del evento*</p>
     </div>
 
     <div>
-    <textarea id="input-evento-descripcion-${ultimoId1}" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
+    <textarea id="input-evento-descripcion-${ultimoId}" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
     <p class="text-xs ml-1">Descripción del evento*</p>
     </div>
   </div>
@@ -171,13 +175,13 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
   <div>
     <div class="bg-white px-5 ml-5 mb-1 flex" style="width: 150px; height: 150px;">
-      <img src="images/imagen.png" class="my-auto mx-auto" id="imagen_evento_${ultimoId1}">
+      <img src="images/imagen.png" class="my-auto mx-auto" id="imagen_evento_${ultimoId}">
  
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
-    <input id="input-evento-imagen-${ultimoId1}" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId1}')" accept=".jpg, .jpeg, .png">
+    <input id="input-evento-imagen-${ultimoId}" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId}')" accept=".jpg, .jpeg, .png">
     <div class="flex">
-      <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${ultimoId1})">GUARDAR</button>
+      <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${ultimoId})">GUARDAR</button>
     </div>
   </div>
 
@@ -189,7 +193,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 `;
 //Cada vez que creamos un evento, vamos a usar el array de estados
 let estado_panel_evento = {
-    "id":index,
+    "id":ultimoId,
     "modificar":true
 }
 estados_descripcion.push(estado_panel_evento);
@@ -273,11 +277,11 @@ function eliminarEvento(e){
   document.getElementById("evento-"+e).remove();
   alert("Se eliminó el evento de forma exitosa.")
   verificadorEventoDesplegado = false;
-  document.getElementById("dangerEventoDesplegado_"+(index-1)).style.display="none";
+  document.getElementById("dangerEventoDesplegado_"+(index)).style.display="none";
 }
-
+ 
 function guardarEvento(e) {
-
+console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
   let nombreE = document.getElementById("input-evento-nombre-" + e).value;
   let fechaE = document.getElementById("input-evento-fecha-" + e).value;
   let categoriaE = obtenerCategoriasSeleccionadas();
@@ -321,7 +325,7 @@ function guardarEvento(e) {
 
   // Actualizar el título del evento si es necesario
   document.getElementById("nombre-evento-titulo-" + e).value = nombreE;
-
+  console.log(e, "->ID DEL EVENTO")
 
 
 // Enviar el POST usando fetch
@@ -344,7 +348,7 @@ fetch('../controlador/controladorCrearEvento.php', {
   console.error('Stack trace:', error.stack); // Muestra el stack trace del error
 });
   verificadorEventoDesplegado = false; 
-  document.getElementById("dangerEventoDesplegado_"+(index-1)).style.display="none";
+  document.getElementById("dangerEventoDesplegado_"+(ultimoId)).style.display="none";
 }
 
 
@@ -402,7 +406,7 @@ function restringirMultiplesEventes(){
   if(verificadorEventoDesplegado==true){
     alert("Tiene un evento pendiente por completar!!");
     
-    document.getElementById("dangerEventoDesplegado_"+(index-1)).style.display="flex"; //ESTO SE TIENE QUE BORRAR
+    document.getElementById("dangerEventoDesplegado_"+(ultimoId)).style.display="flex"; //ESTO SE TIENE QUE BORRAR
 
   }else{ // Si se llega acá es que --> verificadorEventoDesplegado == false
     verificadorEventoDesplegado = true;
