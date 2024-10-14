@@ -243,11 +243,13 @@ document.getElementById("categoria_entrada").addEventListener('click',(event)=>{
 //Mostrar inputs en el modal por checks
 
 function verificarCheck(e){
-  let check = document.getElementById(e);
+  let check = document.getElementById('cat'+e);
   if(check.checked){
-    document.getElementById(e+"-input").style.display="flex";
+    document.getElementById("cat-venta-"+e).style.display="flex";
+    document.getElementById("cat-preventa-"+e).style.display="flex";
   }else{
-    document.getElementById(e+"-input").style.display="none";
+    document.getElementById("cat-venta-"+e).style.display="none";
+    document.getElementById("cat-preventa-"+e).style.display="none";
   }
 }
 

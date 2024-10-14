@@ -171,66 +171,166 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
 <!---MODAL--->
 <section id="categoria_entrada" class="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-60 z-50 flex" style="display: none;">
+
 <section class="rounded  my-auto mx-auto bg-white p-5">
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat1" onclick="verificarCheck('cat1')">
-    <p class="mx-2" >SUPER VIP</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat1-input" style="display: none;margin-left: auto;">
+<div class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+
+<div class="text-lg mb-2">Establecer Precios de Categorías de entrada</div>
+
+  <!-- Cabecera -->
+  <div class="grid grid-cols-3 gap-4 font-semibold">
+    <div>Categoría de entrada</div>
+    <div>Venta</div>
+    <div>Pre venta</div>
+  </div>
+  
+  <!-- Fila 1 -->
+  <div class="grid grid-cols-3 gap-4 bg-slate-100">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat1" onclick="verificarCheck(1)">
+      SUPER VIP
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-1" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-1" style="display: none;">
+    </div>
   </div>
 
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat2" onclick="verificarCheck('cat2')">
-    <p class="mx-2" >VIP</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat2-input" style="display: none;margin-left: auto;">
-  </div>
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat3" onclick="verificarCheck('cat3')">
-    <p class="mx-2" >PALCO VIP</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat3-input" style="display: none;margin-left: auto;">
-  </div>
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat4" onclick="verificarCheck('cat4')">
-    <p class="mx-2" >GENERAL </p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat4-input" style="display: none;margin-left: auto;">
+  <!-- Fila 2 -->
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat2" onclick="verificarCheck(2)">
+      VIP
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-2" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-2" style="display: none;">
+    </div>
   </div>
 
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat5" onclick="verificarCheck('cat5')" >
-    <p class="mx-2" >PALCO GENERAL</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat5-input" style="display: none;margin-left: auto;">
-  </div>
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat6" onclick="verificarCheck('cat6')" >
-    <p class="mx-2" >NIÑOS SUPERVIP</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat6-input" style="display: none;margin-left: auto;">
-  </div>
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat7" onclick="verificarCheck('cat7')" >
-    <p class="mx-2" >NIÑOS VIP</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat7-input" style="display: none;margin-left: auto;">
+  <!-- Fila 3 -->
+  <div class="grid grid-cols-3 gap-4 bg-slate-100">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat3" onclick="verificarCheck(3)">
+      PALCO VIP
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-3" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-3" style="display: none;">
+    </div>
   </div>
 
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat8" onclick="verificarCheck('cat8')" >
-    <p class="mx-2" >NIÑOS PALCO VIP</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat8-input" style="display: none;margin-left: auto;">
-  </div>
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat9" onclick="verificarCheck('cat9')" >
-    <p class="mx-2"  >NIÑOS GENERAL</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat9-input" style="display: none;margin-left: auto;">
-  </div>
-  <div class="flex">
-    <input type="checkbox" class="mr-2" id="cat10" onclick="verificarCheck('cat10')" >
-    <p class="mx-2"  >NIÑOS PALCO GENERAL</p>
-    <input class="border-2 border-slate-300 ml-auto"  type="number" id="cat10-input" style="display: none;margin-left: auto;">
+  <!-- Fila 4 -->
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat4" onclick="verificarCheck(4)">
+      GENERAL
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-4" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-4" style="display: none;">
+    </div>
   </div>
 
-  <div class="flex">
-<button class="rounded  p-2 bg-green-300 hover:bg-green-400 ml-auto mt-2" onclick="guardarEventoCategoria(event)"><p>GUARDAR</p></button>
+  <!-- Fila 5 -->
+  <div class="grid grid-cols-3 gap-4 bg-slate-100">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat5" onclick="verificarCheck(5)">
+      PALCO GENERAL
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-5" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-5" style="display: none;">
+    </div>
   </div>
+  <!-- Fila 6 -->
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat6" onclick="verificarCheck(6)">
+      NIÑOS SUPERVIP
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-6" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-6" style="display: none;">
+    </div>
+  </div>
+
+  <!-- Fila 7 -->
+  <div class="grid grid-cols-3 gap-4 bg-slate-100">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat7" onclick="verificarCheck(7)">
+      NIÑOS VIP
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-7" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-7" style="display: none;">
+    </div>
+  </div>
+
+  <!-- Fila 8 -->
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat8" onclick="verificarCheck(8)">
+      NIÑOS PALCO VIP
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-8" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-8" style="display: none;">
+    </div>
+  </div>
+
+  <!-- Fila 9 -->
+  <div class="grid grid-cols-3 gap-4 bg-slate-100">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat9" onclick="verificarCheck(9)">
+      NIÑOS GENERAL
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-9" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-9" style="display: none;">
+    </div>
+  </div>
+
+  <!-- Fila 10 -->
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <input type="checkbox" class="mr-2" id="cat10" onclick="verificarCheck(10)">
+      NIÑOS PALCO GENERAL
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-venta-10" style="display: none;">
+    </div>
+    <div>
+      <input class="border-2 border-slate-300" type="number" id="cat-preventa-10" style="display: none;">
+    </div>
+  </div>
+</div>
+
+ <div class="flex">
+  <div class="bg-slate-300 ml-auto cursor-pointer hover:bg-slate-400 p-2 rounded">GUARDAR</div>
+ </div>
+</div>
+
+
 </section>
-
 
 </section>
 
