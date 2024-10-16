@@ -299,6 +299,7 @@ function eliminarEvento(event){
 function guardarEvento(e) {
 console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
   let nombreE = document.getElementById("input-evento-nombre-" + e).value;
+  console.log("EL NOMBREEEEEEEEEE ES ;", nombreE)
   let fechaE = document.getElementById("input-evento-fecha-" + e).value;
   let categoriaE = obtenerCategoriasSeleccionadas();
   let ubicacionE = document.getElementById("input-evento-ubicacion-" + e).value;
@@ -340,9 +341,7 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
   listaEventos.push(datosEvento);  // Guarda el evento en la lista
 
   // Actualizar el título del evento si es necesario
-  document.getElementById("nombre-evento-titulo-" + e).value = nombreE;
-  console.log(e, "->ID DEL EVENTO")
-
+ 
 
 fetch('../controlador/controladorCrearEvento.php', {
   method: 'POST',
@@ -505,3 +504,89 @@ let precios = {
   }
 
 }
+
+
+const toggleSwitch = document.getElementById('toggleSwitch');
+const switchLabel = document.getElementById('switchLabel');
+
+function visibilizarEvento(e){
+
+
+  const url = '../controlador/Evento/controladorVisibilizarEvento.php';
+
+  // Los datos que quieres enviar
+  
+  
+  console.log("Estamos switcheando!")
+  if(document.getElementById("switchLabel_"+e).textContent == "Público"){
+    document.getElementById("switchLabel_"+e).textContent = "Privado"
+    console.log("Privado")
+    const data = {
+      estado: "Privado",
+      id:e,
+  };
+  
+  fetch(url, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Éxito:', data);
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+  }else{
+    document.getElementById("switchLabel_"+e).textContent = "Público"
+    console.log("Publico")
+    const data = {
+      estado: "Público",
+      id:e,
+  };
+  
+  fetch(url, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Éxito:', data);
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+  }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Aquí colocas la función que se ejecutará al cargar la página
+    establecerFuncionalidad();
+});
+  
+
+  function establecerFuncionalidad(){
+    ArrayDeDivsEventos.forEach(div => {
+      index = div.id;
+      let estado = document.getElementById("switchLabel_"+index).textContent;
+
+      if(estado=="Público"){
+        document.getElementById("switch_visibilidad_"+index).checked = true;
+      }
+
+      if(estado=="Privado"){
+        document.getElementById("switch_visibilidad_"+index).checked = false;
+      }
+  })}
+
+
+
+ 
+
+

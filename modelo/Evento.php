@@ -10,16 +10,19 @@ class Evento {
     }
 
     public function crearEvento($titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion) {
+        
+        $visibilidad = 'Privado';
+
         // Supongamos que $this->conexion es tu conexión a la base de datos
-        $sql = "INSERT INTO eventos (Titulo, Aforo, Precio_Entrada, Precio_Preventa, Foto, Descripcion, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO eventos (Titulo, Aforo, Precio_Entrada, Precio_Preventa, Foto, Descripcion, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, visibilidad) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
         // Prepara la declaración
         $stmt = mysqli_prepare($this->connection, $sql);
     
         if ($stmt) {
             // Vincula los parámetros
-            mysqli_stmt_bind_param($stmt, "siiissssss", $titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion);
+            mysqli_stmt_bind_param($stmt, "siiisssssss", $titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion,$visibilidad);
     
             // Ejecuta la declaración
             mysqli_stmt_execute($stmt);
@@ -164,6 +167,47 @@ class Evento {
         mysqli_stmt_close($stmt);
     }
     
+    public function visibilizarEvento($id) {
+        $sql = "UPDATE eventos SET visibilidad = 'Público' WHERE ID_Evento = ?";
+        $stmt = mysqli_prepare($this->connection, $sql);
+    
+        // Vincula el parámetro id con la consulta
+        mysqli_stmt_bind_param($stmt, "i", $id);
+    
+        // Ejecuta la consulta
+        mysqli_stmt_execute($stmt);
+        
+        // Verifica si se actualizó algún registro
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Evento actualizado correctamente.";
+        } else {
+            echo "No se encontró un evento con ese ID o no se realizaron cambios.";
+        }
+    
+        // Cierra la declaración
+        mysqli_stmt_close($stmt);
+    }
+
+    public function ocultarEvento($id) {
+        $sql = "UPDATE eventos SET visibilidad = 'Privado' WHERE ID_Evento = ?";
+        $stmt = mysqli_prepare($this->connection, $sql);
+    
+        // Vincula el parámetro id con la consulta
+        mysqli_stmt_bind_param($stmt, "i", $id);
+    
+        // Ejecuta la consulta
+        mysqli_stmt_execute($stmt);
+        
+        // Verifica si se actualizó algún registro
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Evento actualizado correctamente.";
+        } else {
+            echo "No se encontró un evento con ese ID o no se realizaron cambios.";
+        }
+    
+        // Cierra la declaración
+        mysqli_stmt_close($stmt);
+    }
     
     
 

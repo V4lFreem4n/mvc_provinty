@@ -85,14 +85,13 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     <!---->
 
 <!--CHECK SWITCH-->
-<div class="toggle mr-4">
-  <input type="checkbox" id="btn'.$evento['ID_Evento'].'">
-  <label for="btn'.$evento['ID_Evento'].'">
-    <span class="on">Público</span>
-    <span class="off">Privado</span>
-    <div class="slider"></div> <!-- El círculo que se desliza -->
-  </label>
-</div>
+ <div class="switch-container mr-3">
+    <label class="switch" style="cursor:pointer;">
+      <input type="checkbox" id="switch_visibilidad_'.$evento['ID_Evento'].'" onclick="visibilizarEvento('.$evento['ID_Evento'].')">
+      <span class="slider"></span>
+    </label>
+    <span id="switchLabel_'.$evento['ID_Evento'].'">'.$evento['visibilidad'].'</span>
+  </div>
 
     <!--ID-->
     <div class="mt-1 flex mr-4"><p class="font-bold mr-1">ID</p><p>'.$evento['ID_Evento'].'</p></div>
