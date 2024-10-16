@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2024 a las 19:47:15
+-- Tiempo de generación: 16-10-2024 a las 22:59:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -81,16 +81,24 @@ CREATE TABLE `eventos` (
   `Artista_Autor` varchar(100) DEFAULT NULL,
   `Fecha_Evento` datetime DEFAULT NULL,
   `Fecha_Creacion` datetime DEFAULT current_timestamp(),
-  `Estado_Publicacion` enum('Publicado','Borrador','Cancelado') DEFAULT 'Borrador'
+  `Estado_Publicacion` enum('Publicado','Borrador','Cancelado') DEFAULT 'Borrador',
+  `visibilidad` varchar(255) DEFAULT NULL,
+  `organizador` varchar(255) DEFAULT NULL,
+  `contacto_organizador` varchar(255) DEFAULT NULL,
+  `politica_cancelacion` text DEFAULT NULL,
+  `f_actualizacion` date DEFAULT NULL,
+  `f_borrado` date DEFAULT NULL,
+  `hora_borrado` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Precio_Entrada`, `Precio_Preventa`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`) VALUES
-(2, 'evento 2', 33, 123.00, 123.00, 'asdasdasd', 'sdasdddddd', 'nicki jam', '2024-10-23 17:35:38', '2024-10-12 17:35:38', 'Cancelado'),
-(4, '3333', 333, 10.00, 100.00, 'imagen', 'dddd', 'organizador', '2024-10-17 00:00:00', '2024-10-17 00:00:00', 'Borrador');
+INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Precio_Entrada`, `Precio_Preventa`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`) VALUES
+(6, 'Casa', 123, 10.00, 100.00, 'imagen', 'descreipcion', 'Beneficiosa', '2024-10-10 00:00:00', '2024-10-10 00:00:00', 'Publicado', 'Público', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'caassa', 444, 10.00, 100.00, 'imagen', 'descripcion', 'grupo 5', '2024-10-04 00:00:00', '2024-10-04 00:00:00', 'Cancelado', 'Público', NULL, NULL, NULL, NULL, '2024-10-16', '22:56:10'),
+(8, 'casitaaaa', 44, 10.00, 100.00, 'imagen', 'TTTTT', 'GFGF', '2024-10-03 00:00:00', '2024-10-03 00:00:00', 'Publicado', 'Público', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,7 +187,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`ID_Usuario`, `Nombre`, `Apellido`, `Rol`, `Contraseña`, `DNI`, `Fecha_Creacion_Cuenta`) VALUES
 (1, 'Víctor', 'Purizaca', 1, 'victor123victor123**', '72423362', '2024-10-16 11:12:12'),
 (2, 'Alejandro', 'Alejandro', 1, '$2y$10$o3l8WHmeUNAGccV4jmpwJuxkPBW0zvIPZML1G0DFqU7eDqZBuh9T.', '32413123', '0000-00-00 00:00:00'),
-(3, 'sadasd', 'sadasd', 1, '$2y$10$WABBTd5SAssuyAy/trPLHOlKN5XkCiRTY9QSGifihOXLKhtFWzlSm', '32413123', '0000-00-00 00:00:00');
+(3, 'sadasd', 'sadasd', 1, '$2y$10$WABBTd5SAssuyAy/trPLHOlKN5XkCiRTY9QSGifihOXLKhtFWzlSm', '32413123', '0000-00-00 00:00:00'),
+(4, 'Víctor Alejandro', 'Víctor Alejandro', 1, '$2y$10$5H6mKVOWrWaLNmDyV2UFXu4WzruxSiPUIIZvfdMJyBUquMiIypFha', '72424233', '0000-00-00 00:00:00');
 
 --
 -- Índices para tablas volcadas
@@ -273,7 +282,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -297,7 +306,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

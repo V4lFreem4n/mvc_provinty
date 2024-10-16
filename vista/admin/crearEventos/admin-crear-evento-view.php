@@ -40,17 +40,22 @@
 </div>
 
 <div class="grid grid-cols-6 border-b border-gray-300 p-1">
-  <div>
-  <div class="flex">
+  
+  <?php
+  foreach($eventos as $evento){
+    if($evento['Estado_Publicacion']=="Cancelado"){
+      echo '<div class="flex">
   <svg class="h-6 w-6 text-slate-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="12.41 6.75 13 2 10.57 4.92" />  <polyline points="18.57 12.91 21 10 15.66 10" />  <polyline points="8 8 3 14 12 14 11 22 16 16" />  <line x1="1" y1="1" x2="23" y2="23" /></svg>
-  <p class="flex font-bold text-slate-500">Día de la canción criolla</p>  
+  <p class="flex font-bold text-slate-500">'.$evento['Titulo'].'</p>  
 </div>
-  </div>
-  <div>25</div>
-  <div>Agua Marina</div>
-  <div>16/10/2024</div>
-  <div>16:45</div>
-  <div><a href="#" class="hover:text-blue-400 font-bold">Pulsar aquí</a></div>
+<div>'.$evento['ID_Evento'].'</div>
+    <div>'.$evento['Artista_Autor'].'</div>
+    <div>'.$evento['f_borrado'].'</div>
+    <div>'.$evento['hora_borrado'].'</div>
+    <div><a href="#" class="hover:text-blue-400 font-bold">Pulsar aquí</a></div>';
+  }
+    }
+  ?>
 </div>
 
 
