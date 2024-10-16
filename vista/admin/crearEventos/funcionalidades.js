@@ -1,5 +1,7 @@
 let ultimoId = 0;
 
+let estadoMostrarHistorial = false;
+
 let verificadorEventoDesplegado = false;
 
 let estados_descripcion = [];
@@ -71,14 +73,14 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
     <!---->
 
 <!--CHECK SWITCH-->
-<div class="toggle mr-4">
-  <input type="checkbox" id="btn${ultimoId}">
-  <label for="btn${ultimoId}">
-    <span class="on">Público</span>
-    <span class="off">Privado</span>
-    <div class="slider"></div> <!-- El círculo que se desliza -->
-  </label>
-</div>
+ <div class="switch-container mr-3">
+    <label class="switch" style="cursor:pointer;">
+      <input type="checkbox" id="toggleSwitch">
+      <span class="slider"></span>
+    </label>
+    <span id="switchLabel">Privado</span>
+  </div>
+
 
     <!--ID-->
     <div class="mt-1 flex mr-4"><p class="font-bold mr-1">ID</p><p>${ultimoId}</p></div>
@@ -236,6 +238,14 @@ document.getElementById("categoria_entrada").addEventListener('click',(event)=>{
   if (event.target.id == "categoria_entrada") {
     console.log("LLEGAMOS ACA 2")
     document.getElementById("categoria_entrada").style.display="none"; 
+    //Acá vamos a cerrar el modal y vamos a formatear todos los campos
+    for (let indice = 1; indice <= 10; indice++) {
+      document.getElementById("cat-venta-"+indice).value= "";
+      document.getElementById("cat-preventa-"+indice).value= "";
+      document.getElementById("cat"+indice).checked = false;
+      document.getElementById("cat-venta-"+indice).style.display="none";
+    document.getElementById("cat-preventa-"+indice).style.display="none";
+    }
   }
   
 })
@@ -275,11 +285,15 @@ function obtenerCategoriasSeleccionadas() {
 
 
 //Eliminar componente
-function eliminarEvento(e){
-  document.getElementById("evento-"+e).remove();
-  alert("Se eliminó el evento de forma exitosa.")
-  verificadorEventoDesplegado = false;
-  document.getElementById("dangerEventoDesplegado_"+(index)).style.display="none";
+function eliminarEvento(event){
+  event.preventDefault();
+  const formulario = event.target.closest('form');
+  if(confirm("¿Deseas eliminar este evento?")){
+    console.log("El evento se eliminó de forma satisfactoria");
+    formulario.submit();
+  }else{
+    console.log("Siga programando")
+  }
 }
  
 function guardarEvento(e) {
@@ -330,7 +344,6 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
   console.log(e, "->ID DEL EVENTO")
 
 
-// Enviar el POST usando fetch
 fetch('../controlador/controladorCrearEvento.php', {
   method: 'POST',
   headers: {
@@ -450,6 +463,45 @@ function guardarEventoCategoria(e){
 }
 
 
-function conseguirEventosAlIniciar(){
+function mostrarHistorial(){
+  if(estadoMostrarHistorial){
+    document.getElementById("tabla-historial").style.display="none";
+    estadoMostrarHistorial=false;
+  }else{
+    document.getElementById("tabla-historial").style.display="block";
+    estadoMostrarHistorial=true;
+  } 
+}
+
+function confirmarDatosAlGuardar(){
+
+}
+
+
+function guardarDatosPreciosCategoria(){
+  let estado = false;
+  let listaPrecios = [];
   
+  for (let index = 1; index <= 10; index++) {
+    if(document.getElementById("cat"+index).checked){
+      
+if(document.getElementById("cat-venta-"+index).value!="" && document.getElementById("cat-preventa-"+index).value!=""){
+let precios = {
+        categoria: document.getElementById("nombre_categoria_evento_"+index).textContent,
+        venta: document.getElementById("cat-venta-"+index).value,
+        preventa: document.getElementById("cat-preventa-"+index).value,
+      }
+      listaPrecios.push(precios) 
+      estado = true;
+}else{
+  estado=false;
+}}}
+
+  if(estado){
+    let preciosJSON = JSON.stringify(listaPrecios);
+  console.log(preciosJSON);
+  }else{
+    alert("Aún no ha completado todos los campos de los precios de las categorías de entrada");   
+  }
+
 }

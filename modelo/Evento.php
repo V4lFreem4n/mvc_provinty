@@ -142,6 +142,28 @@ class Evento {
             echo "Error en la preparación de la consulta: " . mysqli_error($this->connection);
         }
     }
+
+    public function eliminarLogicamenteEvento($id) {
+        $sql = "UPDATE eventos SET estado_publicacion = 'Cancelado' WHERE ID_Evento = ?";
+        $stmt = mysqli_prepare($this->connection, $sql);
+    
+        // Vincula el parámetro id con la consulta
+        mysqli_stmt_bind_param($stmt, "i", $id);
+    
+        // Ejecuta la consulta
+        mysqli_stmt_execute($stmt);
+        
+        // Verifica si se actualizó algún registro
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo "Evento actualizado correctamente.";
+        } else {
+            echo "No se encontró un evento con ese ID o no se realizaron cambios.";
+        }
+    
+        // Cierra la declaración
+        mysqli_stmt_close($stmt);
+    }
+    
     
     
 

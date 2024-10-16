@@ -12,15 +12,52 @@
 <div class="container mx-auto">
 
 
-<div class="flex mb-2 shadow">
+<div class="flex shadow">
   <div class="bg-teal-500 w-full p-1 flex rounded-lg">
-  <form><p onclick="restringirMultiplesEventes(event)" class="shadow pt-3 w-36 bg-white hover:bg-lime-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex" id="crear_evento">
-      <svg class="h-8 w-8 text-slate-900 mb-2 ml-1"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />  <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />  <circle cx="15" cy="9" r="1"  /></svg>
-      <button type="button">Crear evento</button></p></form>
+  <form><p onclick="restringirMultiplesEventes(event)" class="shadow p-2 w-36 bg-teal-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center" id="crear_evento">
+      <svg class="h-8 w-8 text-slate-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />  <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />  <circle cx="15" cy="9" r="1"  /></svg>
+      <button type="button" class="text-slate-800">Crear evento</button></p></form>
 
+
+      <button onclick="mostrarHistorial()" class="ml-5 shadow p-2 w-36 bg-teal-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center">
+      <svg class="h-8 w-8 text-slate-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="12 8 12 12 14 14" />  <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg>  
+      <p class="text-slate-800">Historial</p></button>
       <p class="ml-auto mr-5 mt-3 text-xl font-serif text-gray-300">PROVINTY</p>
   </div>
+  
 </div>  
+
+<div class="bg-slate-200 p-2 mt-1" id="tabla-historial" style="display: none;">
+  <p class="flex justify-center font-bold text-slate-600 mb-2">Eventos eliminados</p>
+
+  <div class="grid grid-cols-6 border-b border-gray-300">
+  <div class="font-bold text-slate-600">Nombre del evento</div>
+  <div class="font-bold text-slate-600">Identificador</div>
+  <div class="font-bold text-slate-600">Promotor</div>
+  <div class="font-bold text-slate-600">Fecha de eliminación</div>
+  <div class="font-bold text-slate-600">Hora de eliminación</div>
+  <div class="font-bold text-slate-600 ">Descargar informes</div>
+</div>
+
+<div class="grid grid-cols-6 border-b border-gray-300 p-1">
+  <div>
+  <div class="flex">
+  <svg class="h-6 w-6 text-slate-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="12.41 6.75 13 2 10.57 4.92" />  <polyline points="18.57 12.91 21 10 15.66 10" />  <polyline points="8 8 3 14 12 14 11 22 16 16" />  <line x1="1" y1="1" x2="23" y2="23" /></svg>
+  <p class="flex font-bold text-slate-500">Día de la canción criolla</p>  
+</div>
+  </div>
+  <div>25</div>
+  <div>Agua Marina</div>
+  <div>16/10/2024</div>
+  <div>16:45</div>
+  <div><a href="#" class="hover:text-blue-400 font-bold">Pulsar aquí</a></div>
+</div>
+
+
+
+
+  
+</div>
 
 
 <ul id="eventos">
@@ -28,7 +65,8 @@
 <?php
 
 foreach($eventos as $evento){
-echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2" atributo-evento-id="'.$evento['ID_Evento'].'" atributo-evento-tipo="evento">
+if($evento['Estado_Publicacion'] !== "Cancelado"){
+  echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2" atributo-evento-id="'.$evento['ID_Evento'].'" atributo-evento-tipo="evento">
 <svg class="h-8 w-8 text-black-400 mt-2"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
   </svg>
@@ -66,16 +104,17 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
     <a class="bg-blue-200 px-2 py-1 hover:bg-blue-300 hover:cursor-pointer rounded-lg hover:rounded-lg" href="./admin-estadisticas-evento.php?id='.$evento['ID_Evento'].'" target="_blank">Estadísticas</a>
     <!---->
     <!--ELIMINAR-->
-    <div class="bg-red-100 mr-2 ml-2 rounded-lg" onclick="eliminarEvento('.$evento['ID_Evento'].')">
-        <svg class="h-8 w-8 text-red-900 hover:bg-red-300 hover:rounded-lg hover:cursor-pointer"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  
+    <form action="../controlador/Evento/controladorEliminarEvento.php" method="post" id="eliminar-'.$evento['ID_Evento'].'"><button class="bg-red-100 mr-2 ml-2 rounded-lg" onclick="eliminarEvento(event)" type="submit">
+    <input name="id_evento" value="'.$evento['ID_Evento'].'" type="hidden">    
+    <svg class="h-8 w-8 text-red-900 hover:bg-red-300 hover:rounded-lg hover:cursor-pointer"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  
             <path stroke="none" d="M0 0h24v24H0z"/>  
-            <line x1="4" y1="7" x2="20" y2="7" />  
+            <line x1="4" y1="7" x2="20" y2="7" />
             <line x1="10" y1="11" x2="10" y2="17" />  
             <line x1="14" y1="11" x2="14" y2="17" />  
             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />  
             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
         </svg>
-    </div>
+    </button></form>
     <!---->
 </div>
 </div>
@@ -164,6 +203,7 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 </div></form>'
 .'</li>';
 }
+}
 
 ?>
 </ul>
@@ -186,9 +226,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
   
   <!-- Fila 1 -->
   <div class="grid grid-cols-3 gap-4 bg-slate-100">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat1" onclick="verificarCheck(1)">
-      SUPER VIP
+      <p id="nombre_categoria_evento_1">SUPER VIP</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-1" style="display: none;">
@@ -200,9 +240,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 2 -->
   <div class="grid grid-cols-3 gap-4">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat2" onclick="verificarCheck(2)">
-      VIP
+      <p id="nombre_categoria_evento_2">VIP</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-2" style="display: none;">
@@ -214,9 +254,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 3 -->
   <div class="grid grid-cols-3 gap-4 bg-slate-100">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat3" onclick="verificarCheck(3)">
-      PALCO VIP
+      <p id="nombre_categoria_evento_3">PALCO VIP</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-3" style="display: none;">
@@ -228,9 +268,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 4 -->
   <div class="grid grid-cols-3 gap-4">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat4" onclick="verificarCheck(4)">
-      GENERAL
+      <p id="nombre_categoria_evento_4">GENERAL</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-4" style="display: none;">
@@ -242,9 +282,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 5 -->
   <div class="grid grid-cols-3 gap-4 bg-slate-100">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat5" onclick="verificarCheck(5)">
-      PALCO GENERAL
+      <p id="nombre_categoria_evento_5">PALCO GENERAL</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-5" style="display: none;">
@@ -255,9 +295,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
   </div>
   <!-- Fila 6 -->
   <div class="grid grid-cols-3 gap-4">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat6" onclick="verificarCheck(6)">
-      NIÑOS SUPERVIP
+      <p id="nombre_categoria_evento_6">NIÑOS SUPERVIP</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-6" style="display: none;">
@@ -269,9 +309,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 7 -->
   <div class="grid grid-cols-3 gap-4 bg-slate-100">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat7" onclick="verificarCheck(7)">
-      NIÑOS VIP
+      <p id="nombre_categoria_evento_7">NIÑOS VIP</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-7" style="display: none;">
@@ -283,9 +323,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 8 -->
   <div class="grid grid-cols-3 gap-4">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat8" onclick="verificarCheck(8)">
-      NIÑOS PALCO VIP
+      <p id="nombre_categoria_evento_8">NIÑOS PALCO VIP</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-8" style="display: none;">
@@ -297,9 +337,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 9 -->
   <div class="grid grid-cols-3 gap-4 bg-slate-100">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat9" onclick="verificarCheck(9)">
-      NIÑOS GENERAL
+      <p id="nombre_categoria_evento_9">NIÑOS GENERAL</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-9" style="display: none;">
@@ -311,9 +351,9 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 
   <!-- Fila 10 -->
   <div class="grid grid-cols-3 gap-4">
-    <div>
+    <div class="flex">
       <input type="checkbox" class="mr-2" id="cat10" onclick="verificarCheck(10)">
-      NIÑOS PALCO GENERAL
+      <p id="nombre_categoria_evento_10">NIÑOS PALCO GENERAL</p>
     </div>
     <div>
       <input class="border-2 border-slate-300" type="number" id="cat-venta-10" style="display: none;">
@@ -325,7 +365,7 @@ echo '<li id="'.$evento['ID_Evento'].'"><div class="bg-white py-2 flex px-2 my-2
 </div>
 
  <div class="flex">
-  <div class="bg-slate-300 ml-auto cursor-pointer hover:bg-slate-400 p-2 rounded">GUARDAR</div>
+  <div class="bg-slate-300 ml-auto cursor-pointer hover:bg-slate-400 p-2 rounded" onclick="guardarDatosPreciosCategoria()">GUARDAR</div>
  </div>
 </div>
 
@@ -410,75 +450,55 @@ new Chart(graph, config);
     }
 
 
-
-
-    .toggle {
+    .switch-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+}
+
+.switch {
   position: relative;
-  width: 90px;
-  height: 30px;
-  background-color: #44a2be;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-.toggle input {
-  display: none; /* Escondemos el checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.toggle label {
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  padding: 0 5px;
-  z-index: 1;
-}
-
-.toggle .slider {
+.slider {
   position: absolute;
-  left: 2.5px;
-  top: 2.5px;
-  width: 25px;
-  height: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
   background-color: white;
+  transition: 0.4s;
   border-radius: 50%;
-  transition: transform 0.3s ease;
-  z-index: 2;
 }
 
-.toggle input:checked + label .slider {
-  transform: translateX(60px); /* Mueve la bola de un lado al otro */
+input:checked + .slider {
+  background-color: #4CAF50;
 }
 
-.toggle input:checked ~ .toggle {
-  background-color: #44a2be; /* Cambia el fondo al estar activado */
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
-
-.toggle label .on,
-.toggle label .off {
-  font-size: 12px;
-  color: white;
-}
-
-.toggle label .on {
-  color: #44a2be;
-}
-
-.toggle input:checked + label .on {
-  color: white;
-}
-
-.toggle input:checked + label .off {
-  color: #44a2be;
-}
-
 
   </style>
 </html>
