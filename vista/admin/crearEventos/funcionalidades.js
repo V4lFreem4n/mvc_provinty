@@ -343,7 +343,7 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
   // Actualizar el título del evento si es necesario
  
 
-fetch('../controlador/controladorCrearEvento.php', {
+fetch('../controlador/Evento/controladorCrearEvento.php', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json' // Enviar como JSON
@@ -427,7 +427,7 @@ function restringirMultiplesEventes(){
 
 
 
-const url = '../controlador/controladorEvento.php';
+const url = '../controlador/Evento/controladorEvento.php';
 
 // Los datos que quieres enviar
 const data = {

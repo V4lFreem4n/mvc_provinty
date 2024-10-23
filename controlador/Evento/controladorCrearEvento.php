@@ -1,5 +1,5 @@
 <?php
-include_once '../autoload.php';
+include_once '../../autoload.php';
 
 $input = file_get_contents('php://input');
 $datosEvento = json_decode($input, true);

@@ -1,5 +1,5 @@
 <?php
-include_once '../autoload.php';
+include_once '../../autoload.php';
 
 
 $jsonData = file_get_contents('php://input');
@@ -9,7 +9,6 @@ $data = json_decode($jsonData, true);
 $conn = new Database();
 
 $crear = $data['crear']; //Trabajamos con esta variable
-
 
 
 if($crear){
