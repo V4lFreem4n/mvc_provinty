@@ -22,7 +22,7 @@
       <button onclick="mostrarHistorial()" class="ml-5 shadow p-2 w-36 bg-emerald-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center">
       <svg class="h-8 w-8 text-slate-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="12 8 12 12 14 14" />  <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg>  
       <p class="text-slate-800">Historial</p></button>
-      <p class="ml-auto mr-5 mt-3 text-xl font-serif text-gray-300">PROVINTY</p>
+      <img class="ml-auto" src="../vista/admin/crearEventos/logo.jpeg" width="100px">
   </div>
   
 </div>  
