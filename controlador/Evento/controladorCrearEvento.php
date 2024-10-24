@@ -22,18 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imagen = $_POST['imagen'];
 
     // Comprobar si todos los datos requeridos están presentes
-    if ($id && $nombre && $fecha && $categoria && $ubicacion && $horaInicio && $horaFin && $capacidad && $organizador && $contactoOrganizador && $descripcion && $imagen) {
+    //if ($id && $nombre && $fecha && $categoria && $ubicacion && $horaInicio && $horaFin && $capacidad && $organizador && $contactoOrganizador && $descripcion && $imagen) {
         // Aquí iría la lógica para procesar los datos
         
         $evento->crearEvento($nombre,$capacidad,404,404,$imagen,$descripcion,$organizador,$fecha,$fecha,"Publicado");
 
         header("Location: ../../public/admin-crear-evento.php");
         exit();
-    } else {
-        echo "Faltan algunos campos requeridos.";
-        header("Location: ../../public/admin-crear-evento.php");
-        exit();
-    }
+    //}
 } else {
     echo "Método no permitido.";
     header("Location: ../../public/admin-crear-evento.php");
