@@ -1,34 +1,43 @@
 <?php
-include_once '../../autoload.php';
-
-$input = file_get_contents('php://input');
-$datosEvento = json_decode($input, true);
-
+require_once "../../autoload.php";
 $conn = new Database();
 $evento = new Evento($conn->connect());
 
 
-if ($datosEvento) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validar y limpiar los datos del formulario
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $fecha = $_POST['fecha'];
+    $categoria = $_POST['categoria'];
+    $ubicacion = $_POST['ubicacion'];
+    $horaInicio = $_POST['horaInicio'];
+    $horaFin = $_POST['horaFin'];
+    $capacidad = $_POST['capacidad'];
+    $organizador = $_POST['organizador'];
+    $contactoOrganizador = $_POST['contactoOrganizador'];
+    $redes = $_POST['redes'];
+    $politicaCancelacion = $_POST['politicaCancelacion'];
+    $descripcion = $_POST['descripcion'];
+    $imagen = $_POST['imagen'];
 
-    $id = $datosEvento['id'];
-    $nombre = $datosEvento['nombre'];
-    $fecha = $datosEvento['fecha'];
-    $categoria = $datosEvento['categoria'];
-    $ubicacion = $datosEvento['ubicacion'];
-    $horaInicio = $datosEvento['horaInicio'];
-    $horaFin = $datosEvento['horaFin'];
-    $capacidad = $datosEvento['capacidad'];
-    $organizador = $datosEvento['organizador'];
-    $contactoOrganizador = $datosEvento['contactoOrganizador'];
-    $redes = $datosEvento['redes'];
-    $politicaCancelacion = $datosEvento['politicaCancelacion'];
-    $descripcion = $datosEvento['descripcion'];
-    $imagen = $datosEvento['imagen'];
+    // Comprobar si todos los datos requeridos están presentes
+    if ($id && $nombre && $fecha && $categoria && $ubicacion && $horaInicio && $horaFin && $capacidad && $organizador && $contactoOrganizador && $descripcion && $imagen) {
+        // Aquí iría la lógica para procesar los datos
+        
+        $evento->crearEvento($nombre,$capacidad,404,404,$imagen,$descripcion,$organizador,$fecha,$fecha,"Publicado");
 
-    $evento->crearEvento($nombre,$capacidad,10,100,"imagen",$descripcion,$organizador,$fecha,$fecha,"Borrador");
-
-    echo json_encode(["status" => "success", "message" => "Se creó el evento"]);
+        header("Location: ../../public/admin-crear-evento.php");
+        exit();
+    } else {
+        echo "Faltan algunos campos requeridos.";
+        header("Location: ../../public/admin-crear-evento.php");
+        exit();
+    }
 } else {
-    echo json_encode(["status" => "error", "message" => "Error al recibir los datos."]);
+    echo "Método no permitido.";
+    header("Location: ../../public/admin-crear-evento.php");
+        exit();
 }
+
 ?>

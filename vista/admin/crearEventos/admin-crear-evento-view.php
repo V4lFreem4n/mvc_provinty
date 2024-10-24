@@ -8,18 +8,18 @@
   <script async src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
 </head>
 <body>
-<section class="bg-slate-300 w-screen h-screen px-0 py-10" id="allScreen">
+<section class="bg-gray-300 w-screen h-screen px-0 py-10" id="allScreen">
 <div class="container mx-auto">
 
 
 <div class="flex shadow">
-  <div class="bg-teal-500 w-full p-1 flex rounded-lg">
-  <form><p onclick="restringirMultiplesEventes(event)" class="shadow p-2 w-36 bg-teal-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center" id="crear_evento">
+  <div class="bg-slate-800 w-full p-1 flex rounded-lg">
+  <form><p onclick="restringirMultiplesEventes(event)" class="shadow p-2 w-36 bg-emerald-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center" id="crear_evento">
       <svg class="h-8 w-8 text-slate-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />  <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />  <circle cx="15" cy="9" r="1"  /></svg>
       <button type="button" class="text-slate-800">Crear evento</button></p></form>
 
 
-      <button onclick="mostrarHistorial()" class="ml-5 shadow p-2 w-36 bg-teal-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center">
+      <button onclick="mostrarHistorial()" class="ml-5 shadow p-2 w-36 bg-emerald-300 hover:bg-teal-400 hover:cursor-pointer rounded-lg mr-auto font-bold flex justify-center items-center">
       <svg class="h-8 w-8 text-slate-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="12 8 12 12 14 14" />  <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg>  
       <p class="text-slate-800">Historial</p></button>
       <p class="ml-auto mr-5 mt-3 text-xl font-serif text-gray-300">PROVINTY</p>
@@ -102,7 +102,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     <div class="mt-1 flex mr-4"><p class="font-bold mr-1">ID</p><p>'.$evento['ID_Evento'].'</p></div>
     <!---->
     <!--MODIFICAR-->
-    <p onclick="visiblePanelModificar('.$evento['ID_Evento'].')" class="bg-green-200 px-2 py-1 ml-2 mr-2 hover:bg-green-300 hover:cursor-pointer rounded-lg hover:rounded-lg disabled:pointer-events-none transition-all" id="collapse-'.$evento['ID_Evento'].'">Editar</p>
+    <p onclick="visiblePanelModificar('.$evento['ID_Evento'].')" class="bg-green-200 px-2 py-1 ml-2 mr-2 hover:bg-green-300 hover:cursor-pointer rounded-lg hover:rounded-lg disabled:pointer-events-none transition-all" id="collapse-'.$evento['ID_Evento'].'">Ver detalles</p>
     <!---->
     <!--ESTADISTICAS-->
     <a class="bg-blue-200 px-2 py-1 hover:bg-blue-300 hover:cursor-pointer rounded-lg hover:rounded-lg" href="./admin-estadisticas-evento.php?id='.$evento['ID_Evento'].'" target="_blank">Estadísticas</a>
@@ -123,23 +123,36 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
 </div>
 </div>
 '.'<!--Panel de descripción-->
-<form><div id="collapse-panel-'.$evento['ID_Evento'].'" style="display:none">
+<div id="collapse-panel-'.$evento['ID_Evento'].'" style="display:none">
   <div class="bg-green-200 p-1"></div>
 <div class="bg-slate-200 p-5 grid grid-cols-3">
   <div>
     <div class="ml-2">
-      <input id="input-evento-nombre-'.$evento['ID_Evento'].'" value="'.$evento['Titulo'].'" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
+
+      <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+      <p>'.$evento['Titulo'].'</p>
+      </div>
+
       <p class="text-xs ml-1">Nombre del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-fecha-'.$evento['ID_Evento'].'" value="'.date('Y-m-d', strtotime($evento['Fecha_Creacion'])).'" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+    <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+    <p>'.date('Y-m-d', strtotime($evento['Fecha_Creacion'])).'</p>
+      </div>
+      
       <p class="text-xs ml-1">Fecha del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-ubicacion-'.$evento['ID_Evento'].'" value="Ubicación" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
-      <p class="text-xs ml-1">Ubicación del evento*</p>
+    <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+    <p>Ubicacion</p>  
+      </div>
+    
+    <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
@@ -149,43 +162,64 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
 
     <div class="ml-2 my-1">
       <div class="flex">
-      <input onclick="validarHora('.$evento['ID_Evento'].')"  type="time" id="input-evento-hora-inicio-'.$evento['ID_Evento'].'" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <input disabled type="time" id="input-evento-hora-fin-'.$evento['ID_Evento'].'" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      
+      <p class="p-1 bg-stone-100 rounded flex">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <line x1="10" y1="16" x2="14" y2="16" />  <line x1="12" y1="14" x2="12" y2="18" /></svg>
+      11:10
+      </p>
+      <p class="ml-2 p-1 bg-stone-100 rounded flex">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <rect x="8" y="15" width="2" height="2" /></svg>
+      14:30
+      </p>
       </div>
       <p class="text-xs ml-1">Hora de inicio y fin del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input type="number" id="input-evento-capacidad-'.$evento['ID_Evento'].'" value="'.$evento['Aforo'].'" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <p class="text-xs ml-1">Capacidad del evento*</p>
+    <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+      <p>'.$evento['Aforo'].'</p> 
+      </div>
+   
+     <p class="text-xs ml-1">Capacidad del evento*</p>
     </div>
 
   </div>
 
   <div>
 <div class="ml-2 my-1">
-      <input id="input-evento-organizador-'.$evento['ID_Evento'].'" value="'.$evento['Artista_Autor'].'" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <p class="text-xs ml-1">Organizador del evento*</p>
+<div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+    <p>'.$evento['Artista_Autor'].'</p>     
+      </div>
+ 
+    <p class="text-xs ml-1">Organizador del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-contacto-organizador-'.$evento['ID_Evento'].'" value="contacto" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <p class="text-xs ml-1">Contacto del organizador del evento*</p>
+    <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+    <p>Contacto</p> 
+      </div>
+     
+    <p class="text-xs ml-1">Contacto del organizador del evento*</p>
     </div>
 
  <div class="ml-2 my-1">
-      <input id="input-evento-redes-'.$evento['ID_Evento'].'" value="redes" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <p class="text-xs ml-1">Redes sociales del evento*</p>
+ <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
+      <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
+    <p>Redes</p>  
+      </div>
+    
+ <p class="text-xs ml-1">Redes sociales del evento*</p>
     </div>
 
 <div class="ml-2 my-1">
-      <input type="file" id="input-evento-cancelacion-'.$evento['ID_Evento'].'" required >
+  <a href="#" class="hover:text-blue-600">Pulsar aquí para descargar</a>
       <p class="text-xs ml-1 text-red-900">Política de cancelación del evento*</p>
     </div>
 
     <div>
-    <textarea id="input-evento-descripcion-'.$evento['ID_Evento'].'" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required >'.$evento['Descripcion'].'</textarea>
+    <textarea disabled style="width:250px" class="bg-stone-100 ml-2">'.$evento['Descripcion'].'</textarea>
     <p class="text-xs ml-1">Descripción del evento*</p>
     </div>
   </div>
@@ -197,14 +231,10 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
  
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
-    <input id="input-evento-imagen-'.$evento['ID_Evento'].'" type="file" class="ml-5" onchange="subirImagen(this,`imagen_evento_'.$evento['ID_Evento'].'`)" accept=".jpg, .jpeg, .png">
-    <div class="flex">
-      <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento('.$evento['ID_Evento'].')">GUARDAR</button>
-    </div>
   </div>
 
 </div>
-</div></form>'
+</div>'
 .'</li>';
 }
 }

@@ -50,8 +50,6 @@ let categorias = {
 
 function crearEvento(){
 
-
-  
 let evento = document.createElement("li");
 evento.id = "evento-"+ultimoId;
 evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
@@ -107,22 +105,22 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 </div>
 
 <!--Panel de descripción-->
-<form><div id="collapse-panel-${ultimoId}" style="display:block">
+<form action="../controlador/Evento/controladorCrearEvento.php" method="post" id="formulario"><div id="collapse-panel-${ultimoId}" style="display:block">
   <div class="bg-green-200 p-1"></div>
 <div class="bg-slate-200 p-5 grid grid-cols-3">
   <div>
     <div class="ml-2">
-      <input id="input-evento-nombre-${ultimoId}" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
+      <input id="input-evento-nombre-${ultimoId}" name="nombre" placeholder="Nombre del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " required >
       <p class="text-xs ml-1">Nombre del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-fecha-${ultimoId}" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-fecha-${ultimoId}" name="fecha" type="date" placeholder="Fecha del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Fecha del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-ubicacion-${ultimoId}" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
+      <input id="input-evento-ubicacion-${ultimoId}" name="ubicacion" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none " placeholder="Ubicación del evento">
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
@@ -133,15 +131,15 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
     <div class="ml-2 my-1">
       <div class="flex">
-      <input onclick="validarHora(${ultimoId})" type="time" id="input-evento-hora-inicio-${ultimoId}" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
-      <input disabled type="time" id="input-evento-hora-fin-${ultimoId}" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input onclick="validarHora(${ultimoId})" name="horaInicio" type="time" id="input-evento-hora-inicio-${ultimoId}" placeholder="Hora del evento" style="width: 100px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input disabled type="time" name="horaFin" id="input-evento-hora-fin-${ultimoId}" placeholder="Hora del evento" style="width: 100px;" class="ml-3 p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       
       </div>
       <p class="text-xs ml-1">Hora de inicio y fin del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input type="number" id="input-evento-capacidad-${ultimoId}" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input type="number" name="capacidad" id="input-evento-capacidad-${ultimoId}" placeholder="Capacidad del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Capacidad del evento*</p>
     </div>
 
@@ -149,27 +147,27 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 
   <div>
 <div class="ml-2 my-1">
-      <input id="input-evento-organizador-${ultimoId}" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-organizador-${ultimoId}" name="organizador" placeholder="Organizador evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Organizador del evento*</p>
     </div>
 
     <div class="ml-2 my-1">
-      <input id="input-evento-contacto-organizador-${ultimoId}" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-contacto-organizador-${ultimoId}" name="contactoOrganizador" placeholder="Contacto del organizador del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Contacto del organizador del evento*</p>
     </div>
 
  <div class="ml-2 my-1">
-      <input id="input-evento-redes-${ultimoId}" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
+      <input id="input-evento-redes-${ultimoId}" name="redes" placeholder="Redes sociales del evento" style="width: 300px;" class="p-2 text-gray-900 rounded-lg bg-gray-50 focus:outline-none" required >
       <p class="text-xs ml-1">Redes sociales del evento*</p>
     </div>
 
 <div class="ml-2 my-1">
-      <input type="file" id="input-evento-cancelacion-${ultimoId}" required >
+      <input type="file" id="input-evento-cancelacion-${ultimoId}" name="politicaCancelacion" required >
       <p class="text-xs ml-1 text-red-900">Política de cancelación del evento*</p>
     </div>
 
     <div>
-    <textarea id="input-evento-descripcion-${ultimoId}" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
+    <textarea id="input-evento-descripcion-${ultimoId}" name="descripcion" placeholder="Describe el evento..." class="w-full focus:outline-none p-2" required ></textarea>
     <p class="text-xs ml-1">Descripción del evento*</p>
     </div>
   </div>
@@ -181,7 +179,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
  
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
-    <input id="input-evento-imagen-${ultimoId}" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId}')" accept=".jpg, .jpeg, .png">
+    <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId}')" accept=".jpg, .jpeg, .png">
     <div class="flex">
       <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${ultimoId})">GUARDAR</button>
     </div>
@@ -296,7 +294,12 @@ function eliminarEvento(event){
   }
 }
  
+
 function guardarEvento(e) {
+
+let formularioCrear = document.getElementById("formulario");  
+ 
+
 console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
   let nombreE = document.getElementById("input-evento-nombre-" + e).value;
   console.log("EL NOMBREEEEEEEEEE ES ;", nombreE)
@@ -315,12 +318,16 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
 
   // Valida si hay campos vacíos
   
+  
   if (!nombreE || !fechaE || !categoriaE || !ubicacionE || !horaInicioE || !horaFinE || !capacidadE || 
       !organizadorE || !contactoOrganizadorE || !redesE || !politicaCancelacionE || !descripcionE || !imagenE) {
     alert("Faltan datos");
     return;
   }
+ 
 
+
+/*
   let datosEvento = {
     id: e,
     nombre: nombreE,
@@ -337,30 +344,14 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
     descripcion: descripcionE,
     imagen: imagenE.name // Solo guardamos el nombre del archivo
   };
-
-  listaEventos.push(datosEvento);  // Guarda el evento en la lista
+*/
+  //listaEventos.push(datosEvento);  // Guarda el evento en la lista
 
   // Actualizar el título del evento si es necesario
  
 
-fetch('../controlador/Evento/controladorCrearEvento.php', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json' // Enviar como JSON
-  },
-  body: JSON.stringify(datosEvento) // Convertir el objeto a JSON
-})
-.then(response => response.json()) // Convertir la respuesta a JSON
-.then(data => {
-  console.log('Success:', data); // Ver la respuesta del servidor
-    alert("Evento guardado con éxito");
-})
-.catch((error) => {
-  //alert("Sucedió un error al subir los datos :" + error)
-  console.error('Error:', error.message); // Muestra el mensaje de error
-  console.error('Nombre del error:', error.name); // Muestra el tipo de error
-  console.error('Stack trace:', error.stack); // Muestra el stack trace del error
-});
+  formularioCrear.submit();
+
   verificadorEventoDesplegado = false; 
   document.getElementById("dangerEventoDesplegado_"+(ultimoId)).style.display="none";
 }
