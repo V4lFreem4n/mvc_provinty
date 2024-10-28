@@ -156,7 +156,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     </div>
 
     <div class="ml-2 my-1">
-      <a id="input-evento-categoria-'.$evento['ID_Evento'].'" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas('.$evento['ID_Evento'].')">Categorías de entrada</a>
+      <a id="input-evento-categoria-'.$evento['ID_Evento'].'" style="width: 300px;" class="hover:text-green-400 font-bold" href="#" onclick="visibleModalCategoriaEntradas('.$evento['ID_Evento'].')">Categorías de entrada</a>
       <p class="text-xs ml-1">Categorías de la entrada*</p>
     </div>
 
@@ -397,7 +397,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     </div>
   </div>
 </div>
-
+<div id="json_precios_categorias"></div>
  <div class="flex">
   <div class="bg-slate-300 ml-auto cursor-pointer hover:bg-slate-400 p-2 rounded" onclick="guardarDatosPreciosCategoria()">GUARDAR</div>
  </div>

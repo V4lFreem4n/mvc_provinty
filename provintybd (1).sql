@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2024 a las 22:59:03
+-- Tiempo de generación: 28-10-2024 a las 23:04:16
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `provintybd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria_evento`
+--
+
+CREATE TABLE `categoria_evento` (
+  `id` int(11) NOT NULL,
+  `nombre_categoria_evento` varchar(100) NOT NULL,
+  `precio_venta` decimal(10,2) NOT NULL,
+  `precio_preventa` decimal(10,2) NOT NULL,
+  `ID_Evento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -90,15 +104,6 @@ CREATE TABLE `eventos` (
   `f_borrado` date DEFAULT NULL,
   `hora_borrado` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `eventos`
---
-
-INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Precio_Entrada`, `Precio_Preventa`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`) VALUES
-(6, 'Casa', 123, 10.00, 100.00, 'imagen', 'descreipcion', 'Beneficiosa', '2024-10-10 00:00:00', '2024-10-10 00:00:00', 'Publicado', 'Público', NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'caassa', 444, 10.00, 100.00, 'imagen', 'descripcion', 'grupo 5', '2024-10-04 00:00:00', '2024-10-04 00:00:00', 'Cancelado', 'Público', NULL, NULL, NULL, NULL, '2024-10-16', '22:56:10'),
-(8, 'casitaaaa', 44, 10.00, 100.00, 'imagen', 'TTTTT', 'GFGF', '2024-10-03 00:00:00', '2024-10-03 00:00:00', 'Publicado', 'Público', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,6 +200,13 @@ INSERT INTO `usuarios` (`ID_Usuario`, `Nombre`, `Apellido`, `Rol`, `Contraseña`
 --
 
 --
+-- Indices de la tabla `categoria_evento`
+--
+ALTER TABLE `categoria_evento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ID_Evento` (`ID_Evento`);
+
+--
 -- Indices de la tabla `compras`
 --
 ALTER TABLE `compras`
@@ -261,6 +273,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categoria_evento`
+--
+ALTER TABLE `categoria_evento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
@@ -282,7 +300,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -330,6 +348,12 @@ ALTER TABLE `detallecompra`
 --
 ALTER TABLE `estadisticas_eventos`
   ADD CONSTRAINT `estadisticas_eventos_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`);
+
+--
+-- Filtros para la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `categoria_evento` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `roles_permisos`

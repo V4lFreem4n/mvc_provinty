@@ -1,5 +1,7 @@
 let ultimoId = 0;
 
+let estado_establecido_categoria_entrada = false;
+
 let estadoMostrarHistorial = false;
 
 let verificadorEventoDesplegado = false;
@@ -180,6 +182,9 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
     <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId}')" accept=".jpg, .jpeg, .png">
+    
+    <div id="json_precios_categorias"></div>
+    
     <div class="flex">
       <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${ultimoId})">GUARDAR</button>
     </div>
@@ -325,7 +330,10 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
     return;
   }
  
-
+  if(!estado_establecido_categoria_entrada){
+     alert("Aún no ha establecido las entradas en diversas categorías.");
+     return;
+  }
 
 /*
   let datosEvento = {
@@ -483,18 +491,31 @@ let precios = {
       }
       listaPrecios.push(precios) 
       estado = true;
+      estado_establecido_categoria_entrada = true;
+      
 }else{
   estado=false;
 }}}
 
   if(estado){
     let preciosJSON = JSON.stringify(listaPrecios);
+    insertarJsonCategoriasEntrada(preciosJSON);
   console.log(preciosJSON);
   }else{
     alert("Aún no ha completado todos los campos de los precios de las categorías de entrada");   
   }
 
 }
+
+function insertarJsonCategoriasEntrada(json){
+document.getElementById("json_precios_categorias").innerHTML = '';
+let input = document.createElement("input");
+input.type="hidden";
+input.value = json;
+input.name="json";
+document.getElementById("json_precios_categorias").appendChild(input);
+}
+
 
 
 const toggleSwitch = document.getElementById('toggleSwitch');

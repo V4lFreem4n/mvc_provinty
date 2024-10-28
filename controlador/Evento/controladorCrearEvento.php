@@ -20,12 +20,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $politicaCancelacion = $_POST['politicaCancelacion'];
     $descripcion = $_POST['descripcion'];
     $imagen = $_POST['imagen'];
+    $jsonCategoriaEntrada = $_POST['json'];
 
+    $array = json_decode($jsonCategoriaEntrada, true);
+
+    
+    
     // Comprobar si todos los datos requeridos están presentes
     //if ($id && $nombre && $fecha && $categoria && $ubicacion && $horaInicio && $horaFin && $capacidad && $organizador && $contactoOrganizador && $descripcion && $imagen) {
         // Aquí iría la lógica para procesar los datos
         
         $evento->crearEvento($nombre,$capacidad,404,404,$imagen,$descripcion,$organizador,$fecha,$fecha,"Publicado");
+
+        
+
 
         header("Location: ../../public/admin-crear-evento.php");
         exit();
