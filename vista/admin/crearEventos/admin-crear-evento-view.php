@@ -397,7 +397,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     </div>
   </div>
 </div>
-<div id="json_precios_categorias"></div>
+
  <div class="flex">
   <div class="bg-slate-300 ml-auto cursor-pointer hover:bg-slate-400 p-2 rounded" onclick="guardarDatosPreciosCategoria()">GUARDAR</div>
  </div>

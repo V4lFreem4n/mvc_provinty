@@ -2,14 +2,14 @@
 require_once "../../autoload.php";
 $conn = new Database();
 $evento = new Evento($conn->connect());
-
+$categoria_evento = new Categoria_evento($conn->connect());
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar y limpiar los datos del formulario
-    $id = $_POST['id'];
+    //$id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $fecha = $_POST['fecha'];
-    $categoria = $_POST['categoria'];
+    //$categoria = $_POST['json'];
     $ubicacion = $_POST['ubicacion'];
     $horaInicio = $_POST['horaInicio'];
     $horaFin = $_POST['horaFin'];
@@ -31,9 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Aquí iría la lógica para procesar los datos
         
         $evento->crearEvento($nombre,$capacidad,404,404,$imagen,$descripcion,$organizador,$fecha,$fecha,"Publicado");
+        $id_evento_ultimo = $evento->idMoreLarge();
 
-        
-
+        foreach($array as $elemento){
+            $categoria_evento->crearCategoriaEvento($elemento['categoria'], $elemento['venta'], $elemento['preventa'], $id_evento_ultimo);
+        }
 
         header("Location: ../../public/admin-crear-evento.php");
         exit();

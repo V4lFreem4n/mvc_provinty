@@ -242,6 +242,19 @@ class Evento {
         // Cierra la declaración
         mysqli_stmt_close($stmt);
     }
+
+    public function idMoreLarge(){
+        $sql = "SELECT MAX(ID_Evento) AS max_id FROM eventos";
+        $result = mysqli_query($this->connection, $sql);
+        
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $max_id = $row['max_id'];
+            return $max_id;
+        } else {
+            return 0;
+        }
+    }
     
 
 

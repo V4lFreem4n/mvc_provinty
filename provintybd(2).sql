@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2024 a las 23:04:16
+-- Tiempo de generación: 30-10-2024 a las 22:08:01
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,6 +34,14 @@ CREATE TABLE `categoria_evento` (
   `precio_preventa` decimal(10,2) NOT NULL,
   `ID_Evento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria_evento`
+--
+
+INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`, `precio_preventa`, `ID_Evento`) VALUES
+(3, 'SUPER VIP', 1.00, 11.00, 14),
+(4, 'PALCO VIP', 2.00, 22.00, 14);
 
 -- --------------------------------------------------------
 
@@ -104,6 +112,13 @@ CREATE TABLE `eventos` (
   `f_borrado` date DEFAULT NULL,
   `hora_borrado` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Precio_Entrada`, `Precio_Preventa`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`) VALUES
+(14, 'Purizaca', 444, 404.00, 404.00, 'mecanico.jpg', 'hhhh', 'fsdasd', '2024-10-03 00:00:00', '2024-10-03 00:00:00', 'Publicado', 'Privado', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,7 +291,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria_evento`
 --
 ALTER TABLE `categoria_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -300,7 +315,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -331,6 +346,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `categoria_evento`
+--
+ALTER TABLE `categoria_evento`
+  ADD CONSTRAINT `llaveForarena1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `compras`
 --
 ALTER TABLE `compras`
@@ -348,12 +369,6 @@ ALTER TABLE `detallecompra`
 --
 ALTER TABLE `estadisticas_eventos`
   ADD CONSTRAINT `estadisticas_eventos_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`);
-
---
--- Filtros para la tabla `eventos`
---
-ALTER TABLE `eventos`
-  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `categoria_evento` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `roles_permisos`
