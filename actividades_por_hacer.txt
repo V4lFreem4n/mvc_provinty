@@ -1,0 +1,11 @@
+LISTA DE TAREAS EN INTEGRADOR
+
+//Contacto del evento.
+
+-> Completar datos del evento
+-> Crear la interfaz de usuario.
+-> Integrar lo de Yamill.
+-> Política de cancelación del evento.
+-> Imágenes de eventos.
+-> Activo o pospuesto.
+-> Crear el Panel de administrador que contenga lo de Víctor, etc.

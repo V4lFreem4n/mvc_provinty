@@ -9,17 +9,17 @@ class Usuario {
      $this->connection = $bd;   
     }
 
-    public function crearUsuario($Nombre, $Apellido, $Rol, $Contraseña, $DNI, $Fecha_Creacion_Cuenta) {
+    public function crearUsuario($Nombre,$username , $Apellido, $Rol, $Contraseña, $DNI, $Fecha_Creacion_Cuenta) {
         // Supongamos que $this->conexion es tu conexión a la base de datos
-        $sql = "INSERT INTO usuarios (Nombre, Apellido, Rol, Contraseña, DNI, Fecha_Creacion_Cuenta) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO usuarios (Nombre,username, Apellido, Rol, Contraseña, DNI, Fecha_Creacion_Cuenta) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
     
         // Prepara la declaración
         $stmt = mysqli_prepare($this->connection, $sql);
     
         if ($stmt) {
             // Vincula los parámetros
-            mysqli_stmt_bind_param($stmt, "ssssis", $Nombre, $Apellido, $Rol, $Contraseña, $DNI, $Fecha_Creacion_Cuenta);
+            mysqli_stmt_bind_param($stmt, "sssssis", $Nombre, $username, $Apellido, $Rol, $Contraseña, $DNI, $Fecha_Creacion_Cuenta);
     
             // Ejecuta la declaración
             mysqli_stmt_execute($stmt);
@@ -51,6 +51,40 @@ class Usuario {
     
         return $usuarios; // Devuelve un array de usuarios
     }
+
+    public function getUser($username) {
+        // Usamos una declaración preparada para evitar inyección SQL
+        $sql = "SELECT * FROM usuarios WHERE username = ?";
+        $stmt = mysqli_prepare($this->connection, $sql);
+    
+        if ($stmt) {
+            // Vincula el parámetro, indicando que es una cadena (s)
+            mysqli_stmt_bind_param($stmt, "s", $username);
+    
+            // Ejecuta la declaración
+            mysqli_stmt_execute($stmt);
+    
+            // Obtener el resultado de la consulta
+            $result = mysqli_stmt_get_result($stmt);
+            $usuarios = [];
+    
+            // Verificar y procesar los resultados
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $usuarios[] = $row; // Agregar cada fila al array
+                }
+            }
+    
+            // Cierra la declaración
+            mysqli_stmt_close($stmt);
+    
+            return $usuarios; // Devuelve el array con los usuarios
+        } else {
+            echo "Error en la consulta: " . mysqli_error($this->connection);
+            return null; // En caso de error, devolvemos null
+        }
+    }
+    
     
 
     public function contarUsuarioCreados(){
@@ -130,6 +164,47 @@ class Usuario {
             echo "Error en la preparación de la consulta: " . mysqli_error($this->connection);
         }
     }
+
+    public function verificarUsuario($usuario, $contraseña) {
+        // Consulta SQL para verificar si el usuario y la contraseña coinciden
+        $sql = "SELECT * FROM usuarios WHERE username = ?"; // Asumimos que el usuario se identifica por DNI
+        
+        // Prepara la declaración
+        $stmt = mysqli_prepare($this->connection, $sql);
+        
+        if ($stmt) {
+            // Vincula el parámetro (DNI del usuario)
+            mysqli_stmt_bind_param($stmt, "s", $usuario); // 's' indica que el parámetro es una cadena de texto
+            
+            // Ejecuta la declaración
+            mysqli_stmt_execute($stmt);
+            
+            // Obtén el resultado
+            $result = mysqli_stmt_get_result($stmt);
+            
+            // Verifica si se encontró algún registro
+            if ($row = mysqli_fetch_assoc($result)) {
+                // Si la contraseña está en texto plano (aunque no es recomendado), compara directamente:
+                if ($row['Contraseña'] === $contraseña) {
+                    // Usuario y contraseña coinciden
+                    return true;
+                }
+                // Si la contraseña está almacenada como hash, usa password_verify
+                // if (password_verify($contraseña, $row['Contraseña'])) {
+                //     return true;
+                // }
+            }
+            
+            // Cierra la declaración
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error en la preparación de la consulta: " . mysqli_error($this->connection);
+        }
+        
+        // Si no hay coincidencia, devuelve false
+        return false;
+    }
+    
     
     
 

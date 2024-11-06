@@ -149,7 +149,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     <div class="ml-2 my-1">
     <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
       <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
-    <p>Ubicacion</p>  
+    <p>'.$evento['ubicacion'].'</p>  
       </div>
     
     <p class="text-xs ml-1">Ubicación del evento*</p>
@@ -164,11 +164,11 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
       <div class="flex">
       <p class="p-1 bg-stone-100 rounded flex">
       <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <line x1="10" y1="16" x2="14" y2="16" />  <line x1="12" y1="14" x2="12" y2="18" /></svg>
-      11:10
+      '.$evento['horaInicioEvento'].'
       </p>
       <p class="ml-2 p-1 bg-stone-100 rounded flex">
       <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <rect x="8" y="15" width="2" height="2" /></svg>
-      14:30
+      '.$evento['horaFinEvento'].'
       </p>
       </div>
       <p class="text-xs ml-1">Hora de inicio y fin del evento*</p>
@@ -189,7 +189,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
 <div class="ml-2 my-1">
 <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
       <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
-    <p>'.$evento['Artista_Autor'].'</p>     
+    <p>'.$evento['organizador'].'</p>     
       </div>
  
     <p class="text-xs ml-1">Organizador del evento*</p>
@@ -198,7 +198,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     <div class="ml-2 my-1">
     <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
       <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
-    <p>Contacto</p> 
+    <p>'.$evento['contacto_organizador'].'</p> 
       </div>
      
     <p class="text-xs ml-1">Contacto del organizador del evento*</p>
@@ -207,7 +207,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
  <div class="ml-2 my-1">
  <div class="flex p-1 bg-stone-100 rounded divide-slate-200">
       <svg class="h-8 w-8 text-slate-300"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="5" y="11" width="14" height="10" rx="2" />  <circle cx="12" cy="16" r="1" />  <path d="M8 11v-4a4 4 0 0 1 8 0v4" /></svg>
-    <p>Redes</p>  
+    <p>'.$evento['redes'].'</p>
       </div>
     
  <p class="text-xs ml-1">Redes sociales del evento*</p>

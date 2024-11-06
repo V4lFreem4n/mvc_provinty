@@ -368,20 +368,19 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
 //SCRIPTS DE VERIFICACIÓN DE LA HORA
 
 
-function validarHora(e){
-  console.log("Se llegó a la hora inicio",e)
-  let horaInicioInput = document.getElementById('input-evento-hora-inicio-'+e);
-  let horaFinInput = document.getElementById('input-evento-hora-fin-'+e);
+function validarHora(e) {
+  console.log("Se llegó a la hora inicio", e);
+  let horaInicioInput = document.getElementById('input-evento-hora-inicio-' + e);
+  let horaFinInput = document.getElementById('input-evento-hora-fin-' + e);
+
   // Deshabilitar el input de hora de fin hasta que se ingrese una hora en el de inicio
   horaInicioInput.addEventListener('input', function() {
-    console.log("LLegamos a esta parte de la hora")
     if (horaInicioInput.value) {
-      console.log("Se habilitó para cambiar de hora")
+      console.log("Se habilitó para cambiar de hora");
       // Habilitar el input de hora de fin cuando se ingrese una hora de inicio
       horaFinInput.disabled = false;
-      console.log("INPUT DE HORA FIN")
     } else {
-      console.log("Se deshabilitó para cambiar de hora")
+      console.log("Se deshabilitó para cambiar de hora");
       // Volver a deshabilitar el input si se borra la hora de inicio
       horaFinInput.disabled = true;
       horaFinInput.value = ''; // Limpiar el valor de la hora de fin
@@ -393,12 +392,22 @@ function validarHora(e){
     const horaInicio = horaInicioInput.value;
     const horaFin = horaFinInput.value;
 
-    if (horaInicio && horaFin && horaFin <= horaInicio) {
-      console.log('La hora de fin debe ser posterior a la hora de inicio.');
-      alert('La hora de fin debe ser posterior a la hora de inicio.');
+    if (horaInicio && horaFin) {
+      // Convertir las horas a objetos Date para compararlas
+      const [horaI, minutoI] = horaInicio.split(':');
+      const [horaF, minutoF] = horaFin.split(':');
+      const fechaInicio = new Date(0, 0, 0, horaI, minutoI);
+      const fechaFin = new Date(0, 0, 0, horaF, minutoF);
+
+      if (fechaFin <= fechaInicio) {
+        console.log('La hora de fin debe ser posterior a la hora de inicio.');
+        alert('La hora de fin debe ser posterior a la hora de inicio.');
+        horaFinInput.value = ""; // Limpiar la hora de fin si no es válida
+      }
     }
   });
 }
+
 
 function subirImagen(input, imgId) {
   const file = input.files[0]; // Obtener el archivo seleccionado

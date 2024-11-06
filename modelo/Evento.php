@@ -9,37 +9,39 @@ class Evento {
      $this->connection = $bd;   
     }
 
-    public function crearEvento($titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion) {
-        
-        $visibilidad = 'Privado';
-
-        // Supongamos que $this->conexion es tu conexión a la base de datos
-        $sql = "INSERT INTO eventos (Titulo, Aforo, Precio_Entrada, Precio_Preventa, Foto, Descripcion, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, visibilidad) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public function crearEvento($titulo, $aforo, $foto, $descripcion, $artista, $fecha_evento, $fecha_creacion, $estado_publicacion, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes) {
     
+        $visibilidad = 'Privado';
+    
+        // Consulta SQL actualizada para incluir los nuevos campos
+        $sql = "INSERT INTO eventos (Titulo, Aforo, Foto, Descripcion, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, Visibilidad, Organizador, Contacto_Organizador, ubicacion, horaInicioEvento	, horaFinEvento, redes) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
         // Prepara la declaración
         $stmt = mysqli_prepare($this->connection, $sql);
-    
+        
         if ($stmt) {
             // Vincula los parámetros
-            mysqli_stmt_bind_param($stmt, "siiisssssss", $titulo, $aforo, $precio_entrada, $precio_preventa, $foto, $descripcion, $artista,$fecha_evento, $fecha_creacion, $estado_publicacion,$visibilidad);
-    
+            mysqli_stmt_bind_param($stmt, "sisssssssssssss", $titulo, $aforo, $foto, $descripcion, $artista, $fecha_evento,
+             $fecha_creacion, $estado_publicacion, $visibilidad, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes);
+        
             // Ejecuta la declaración
             mysqli_stmt_execute($stmt);
-    
+        
             // Verifica si la inserción fue exitosa
             if (mysqli_stmt_affected_rows($stmt) > 0) {
                 echo "Evento creado correctamente.";
             } else {
                 echo "Error al crear el evento.";
             }
-    
+        
             // Cierra la declaración
             mysqli_stmt_close($stmt);
         } else {
             echo "Error en la preparación de la consulta: " . mysqli_error($this->connection);
         }
     }
+    
     
     public function mostrarEventos() {
         $sql = "SELECT * FROM eventos";

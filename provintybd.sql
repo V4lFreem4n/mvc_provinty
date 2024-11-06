@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2024 a las 22:08:01
+-- Tiempo de generación: 07-11-2024 a las 00:14:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,8 +40,7 @@ CREATE TABLE `categoria_evento` (
 --
 
 INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`, `precio_preventa`, `ID_Evento`) VALUES
-(3, 'SUPER VIP', 1.00, 11.00, 14),
-(4, 'PALCO VIP', 2.00, 22.00, 14);
+(5, 'SUPER VIP', 5.00, 88.00, 15);
 
 -- --------------------------------------------------------
 
@@ -96,8 +95,6 @@ CREATE TABLE `eventos` (
   `ID_Evento` int(11) NOT NULL,
   `Titulo` varchar(100) NOT NULL,
   `Aforo` int(11) DEFAULT NULL,
-  `Precio_Entrada` decimal(10,2) DEFAULT NULL,
-  `Precio_Preventa` decimal(10,2) DEFAULT NULL,
   `Foto` varchar(255) DEFAULT NULL,
   `Descripcion` text DEFAULT NULL,
   `Artista_Autor` varchar(100) DEFAULT NULL,
@@ -110,15 +107,20 @@ CREATE TABLE `eventos` (
   `politica_cancelacion` text DEFAULT NULL,
   `f_actualizacion` date DEFAULT NULL,
   `f_borrado` date DEFAULT NULL,
-  `hora_borrado` time DEFAULT NULL
+  `hora_borrado` time DEFAULT NULL,
+  `ubicacion` varchar(100) DEFAULT NULL,
+  `activoPospuesto` varchar(20) DEFAULT NULL,
+  `horaInicioEvento` time DEFAULT NULL,
+  `horaFinEvento` time DEFAULT NULL,
+  `redes` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Precio_Entrada`, `Precio_Preventa`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`) VALUES
-(14, 'Purizaca', 444, 404.00, 404.00, 'mecanico.jpg', 'hhhh', 'fsdasd', '2024-10-03 00:00:00', '2024-10-03 00:00:00', 'Publicado', 'Privado', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`) VALUES
+(15, 'Purizaca Pérez', 5555, 'fondo.jpg', 'jjjnn', '', '2024-11-15 00:00:00', '2024-11-06 00:00:00', 'Publicado', 'Privado', 'sadasd', '12asd', NULL, NULL, NULL, NULL, '434', NULL, '14:05:00', '17:05:00', '31234');
 
 -- --------------------------------------------------------
 
@@ -192,6 +194,7 @@ CREATE TABLE `tickets` (
 
 CREATE TABLE `usuarios` (
   `ID_Usuario` int(11) NOT NULL,
+  `username` varchar(40) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Apellido` varchar(50) NOT NULL,
   `Rol` int(11) DEFAULT NULL,
@@ -204,11 +207,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`ID_Usuario`, `Nombre`, `Apellido`, `Rol`, `Contraseña`, `DNI`, `Fecha_Creacion_Cuenta`) VALUES
-(1, 'Víctor', 'Purizaca', 1, 'victor123victor123**', '72423362', '2024-10-16 11:12:12'),
-(2, 'Alejandro', 'Alejandro', 1, '$2y$10$o3l8WHmeUNAGccV4jmpwJuxkPBW0zvIPZML1G0DFqU7eDqZBuh9T.', '32413123', '0000-00-00 00:00:00'),
-(3, 'sadasd', 'sadasd', 1, '$2y$10$WABBTd5SAssuyAy/trPLHOlKN5XkCiRTY9QSGifihOXLKhtFWzlSm', '32413123', '0000-00-00 00:00:00'),
-(4, 'Víctor Alejandro', 'Víctor Alejandro', 1, '$2y$10$5H6mKVOWrWaLNmDyV2UFXu4WzruxSiPUIIZvfdMJyBUquMiIypFha', '72424233', '0000-00-00 00:00:00');
+INSERT INTO `usuarios` (`ID_Usuario`, `username`, `Nombre`, `Apellido`, `Rol`, `Contraseña`, `DNI`, `Fecha_Creacion_Cuenta`) VALUES
+(1, 'victor1', 'victor', 'perez', 1, 'victor1', '323232', '2024-11-21 14:50:00');
 
 --
 -- Índices para tablas volcadas
@@ -291,7 +291,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria_evento`
 --
 ALTER TABLE `categoria_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -315,7 +315,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
