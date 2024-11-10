@@ -4,7 +4,6 @@ require_once '../autoload.php';
 session_start();
 if (isset($_SESSION['user_id']) && isset($_SESSION['rol']) && $_SESSION['rol'] === 1 && $_SESSION['tipoInterfaz'] == "admin") {
     
-    echo "Bienvenido, administrador.";
    
 } else {
    

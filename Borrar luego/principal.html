@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provinti-Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-teal-900">
+    <!-- Encabezado -->
+    <header class="bg-teal-800 p-4">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="img/logo_provint.png" alt="Logo" class="h-20 w-auto ml-6">
+                <!-- <span class="text-xl text-white">Provinti</span> -->
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#" class="text-white hover:text-teal-200">Inicio</a>
+                <a href="#" class="text-white hover:text-teal-200">Eventos</a>
+                <a href="#" class="text-white hover:text-teal-200">Boletos</a>
+                <a href="index.html" class="text-white hover:text-teal-200">Usuarios</a>
+                <a href="#" class="text-white hover:text-teal-200">Informes</a>
+                <!-- Barra de búsqueda -->
+                <div class="relative">
+                    <input type="search" class="bg-teal-700 text-white rounded-full py-1 px-4 focus:outline-none focus:ring-2 focus:ring-teal-300 w-48" placeholder="Buscar...">
+                </div>
+                <!-- Icono de notificación -->
+                <button class="text-white hover:text-teal-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                    </svg>
+                </button>
+                <!-- Icono de usuario -->
+                <button class="text-white hover:text-teal-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tarjeta de resumen -->
+            <div class="bg-teal-700 rounded-lg p-6 col-span-1 row-span-2">
+                <div class="h-full flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4">RESUMEN</h2>
+                        <p class="text-teal-100 mb-4">
+                            Obtén una visión general de los eventos, usuarios y más con estadísticas en la bitácora digital.
+                        </p>
+                    </div>
+                    <button class="bg-white text-teal-700 px-6 py-2 rounded-full w-max hover:bg-teal-50 transition-colors">
+                        Acceder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tarjeta de informes -->
+            <div class="bg-teal-50 rounded-lg p-6 col-span-1 md:col-span-2">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-2xl font-bold text-teal-800 mb-4">INFORMES</h2>
+                        <p class="text-teal-700 mb-4">
+                            Accede a información detallada sobre el rendimiento de tus eventos, ingresos por ventas y análisis de datos.
+                        </p>
+                    </div>
+                    <button class="bg-white text-teal-700 px-6 py-2 rounded-full border border-teal-700 hover:bg-teal-700 hover:text-white transition-colors">
+                        Acceder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tarjeta de eventos -->
+            <div class="bg-teal-600 rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-white mb-4">EVENTOS</h2>
+                <p class="text-teal-100 mb-4">
+                    Gestiona todos los aspectos relacionados con los eventos: descripción, precios de boletos y más.
+                </p>
+                <button class="bg-white text-teal-700 px-6 py-2 rounded-full hover:bg-teal-50 transition-colors">
+                    Acceder
+                </button>
+            </div>
+
+            <!-- Tarjeta de usuarios -->
+            <div class="bg-teal-50 rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-teal-800 mb-4">USUARIOS</h2>
+                <p class="text-teal-700 mb-4">
+                    Administra las cuentas de los usuarios, incluyendo clientes, organizadores de eventos y personal administrativo.
+                </p>
+                <button class="bg-white text-teal-700 px-6 py-2 rounded-full border border-teal-700 hover:bg-teal-700 hover:text-white transition-colors">
+                    Acceder
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección de bienvenida -->
+        <div class="mt-8 text-center text-white">
+            <h3 class="text-xl mb-2">¡Te damos la bienvenida, [nombre de usuario]!</h3>
+            <p class="text-teal-100 mb-4">
+                Aquí podrás gestionar tus eventos, revisar informes y controlar las ventas de manera eficiente.
+            </p>
+            <button class="bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-400 transition-colors flex items-center mx-auto">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                Empieza aquí
+            </button>
+        </div>
+    </main>
+</body>
+</html>
