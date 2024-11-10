@@ -1,7 +1,8 @@
 <?php
 require_once '../autoload.php';
 
-session_start();
+/*
+ session_start();
 if (isset($_SESSION['user_id']) && isset($_SESSION['rol']) && $_SESSION['rol'] === 1 && $_SESSION['tipoInterfaz'] == "admin") {
     
    
@@ -10,6 +11,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['rol']) && $_SESSION['rol'] =
     header("Location: ./login-admin.php"); 
     exit();
 }
+ */
 
 //Acá le tenemos que pasar todas las variables que se necesitan, okey?
 $conexion = new Database();

@@ -13,7 +13,7 @@
     <header class="bg-slate-800 py-4">
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-4">
-                <img src="img/logo_provint.png" alt="Logo" class="h-20 w-auto ml-6">
+                <img src="../vista/admin/gestionUsuarios/img/logo_provint.png" alt="Logo" class="h-20 w-auto ml-6">
                 <h1 class="text-3xl font-bold text-white">Gestión de Usuarios</h1>
             </div>
         </div>
@@ -112,7 +112,7 @@
             </div>
         </div>
     </div>
-    <script src="scripts.js" defer></script> <!-- Tu archivo JavaScript -->
+    <script src="../vista/admin/gestionUsuarios/scripts.js" defer></script> <!-- Tu archivo JavaScript -->
 </body>
 </html>
 

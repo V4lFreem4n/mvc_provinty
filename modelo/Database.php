@@ -8,6 +8,7 @@ class Database {
     private $password = DB_PASS;
     public $conn;
 
+    // Método para conectarse a la base de datos
     public function connect() {
         $this->conn = null;
 
@@ -21,6 +22,29 @@ class Database {
         }
 
         return $this->conn;
+    }
+
+    // Función para ejecutar consultas SQL
+    public function ejecutarConsulta($sql) {
+        if (!$this->conn) {
+            echo "No hay conexión a la base de datos.";
+            return null;
+        }
+        
+        $resultado = $this->conn->query($sql);
+        
+        if (!$resultado) {
+            echo "1Error: " . $this->conn->error;
+        }
+        
+        return $resultado;
+    }
+
+    // Función para cerrar la conexión
+    public function cerrarConexion() {
+        if ($this->conn) {
+            $this->conn->close();
+        }
     }
 }
 ?>
