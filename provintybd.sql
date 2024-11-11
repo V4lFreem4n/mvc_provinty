@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2024 a las 00:14:06
+-- Tiempo de generación: 11-11-2024 a las 23:44:09
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -125,6 +125,19 @@ INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `A
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `log_acciones`
+--
+
+CREATE TABLE `log_acciones` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `accion` enum('activado','desactivado') NOT NULL,
+  `fecha_accion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `permisos`
 --
 
@@ -193,22 +206,38 @@ CREATE TABLE `tickets` (
 --
 
 CREATE TABLE `usuarios` (
-  `ID_Usuario` int(11) NOT NULL,
-  `username` varchar(40) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Apellido` varchar(50) NOT NULL,
-  `Rol` int(11) DEFAULT NULL,
-  `Contraseña` varchar(255) NOT NULL,
-  `DNI` varchar(20) NOT NULL,
-  `Fecha_Creacion_Cuenta` datetime DEFAULT current_timestamp()
+  `id` int(11) NOT NULL,
+  `nombre_usuario` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `rol` int(11) NOT NULL,
+  `dni` char(8) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `numero_telefono` char(9) NOT NULL,
+  `foto_url` varchar(255) DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT 1,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`ID_Usuario`, `username`, `Nombre`, `Apellido`, `Rol`, `Contraseña`, `DNI`, `Fecha_Creacion_Cuenta`) VALUES
-(1, 'victor1', 'victor', 'perez', 1, 'victor1', '323232', '2024-11-21 14:50:00');
+INSERT INTO `usuarios` (`id`, `nombre_usuario`, `password`, `rol`, `dni`, `correo`, `numero_telefono`, `foto_url`, `activo`, `fecha_creacion`) VALUES
+(51, 'victor', '$2y$10$nF9ysh86oBb1DzIzKvVydOzzodokSE6xOMkvnPL0KfHlqW3w0Zok6', 1, '12333333', 'correo@correo', '931231231', NULL, 1, '2024-11-11 21:43:53'),
+(52, 'Alejandro', '$2y$10$YJGA9FE1woffZvO5KqNjfe14Rtg93y4oB17vdwbmjuGaXlB.OfUwy', 2, '23333333', 'victor@victor', '999999966', NULL, 1, '2024-11-11 21:45:07');
+
+--
+-- Disparadores `usuarios`
+--
+DELIMITER $$
+CREATE TRIGGER `trigger_activacion_usuario` AFTER UPDATE ON `usuarios` FOR EACH ROW BEGIN
+    IF NEW.activo != OLD.activo THEN
+        INSERT INTO log_acciones (usuario_id, accion)
+        VALUES (NEW.id, IF(NEW.activo, 'activado', 'desactivado'));
+    END IF;
+END
+$$
+DELIMITER ;
 
 --
 -- Índices para tablas volcadas
@@ -250,6 +279,13 @@ ALTER TABLE `eventos`
   ADD PRIMARY KEY (`ID_Evento`);
 
 --
+-- Indices de la tabla `log_acciones`
+--
+ALTER TABLE `log_acciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
 -- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
@@ -280,8 +316,12 @@ ALTER TABLE `tickets`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`ID_Usuario`),
-  ADD KEY `Rol` (`Rol`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`),
+  ADD UNIQUE KEY `dni` (`dni`),
+  ADD UNIQUE KEY `correo` (`correo`),
+  ADD UNIQUE KEY `numero_telefono` (`numero_telefono`),
+  ADD KEY `rol` (`rol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -318,6 +358,12 @@ ALTER TABLE `eventos`
   MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT de la tabla `log_acciones`
+--
+ALTER TABLE `log_acciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
+--
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
@@ -339,7 +385,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Restricciones para tablas volcadas
@@ -350,12 +396,6 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `categoria_evento`
   ADD CONSTRAINT `llaveForarena1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `compras`
---
-ALTER TABLE `compras`
-  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID_Usuario`);
 
 --
 -- Filtros para la tabla `detallecompra`
@@ -371,6 +411,12 @@ ALTER TABLE `estadisticas_eventos`
   ADD CONSTRAINT `estadisticas_eventos_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`);
 
 --
+-- Filtros para la tabla `log_acciones`
+--
+ALTER TABLE `log_acciones`
+  ADD CONSTRAINT `log_acciones_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `roles_permisos`
 --
 ALTER TABLE `roles_permisos`
@@ -381,14 +427,7 @@ ALTER TABLE `roles_permisos`
 -- Filtros para la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID_Usuario`);
-
---
--- Filtros para la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`Rol`) REFERENCES `roles` (`ID_Rol`);
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
