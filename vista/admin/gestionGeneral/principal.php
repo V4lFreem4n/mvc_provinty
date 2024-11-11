@@ -1,19 +1,22 @@
 <?php
-session_start();
+ 
+  // Imprime la información de la sesión para ver si contiene los datos esperados.
+ 
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login_trabajadores.php");
+    header("Location: login-trabajadores.php");
+    //header("Location: X");
     exit();
 }
 
 // Conexión a la base de datos
-$conexion = new mysqli("localhost", "victor", "victor", "provintybd");
+//$conexion = new mysqli("localhost", "victor", "victor", "provintybd");
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
-
+//if ($conexion->connect_error) {
+    //die("Error de conexión: " . $conexion->connect_error);
+//}
+/*
 // Obtener información del usuario
 $usuario_id = $_SESSION['usuario_id'];
 $query = "SELECT nombre_usuario, rol, foto_url FROM usuarios WHERE id = ?";
@@ -22,15 +25,16 @@ $stmt->bind_param("i", $usuario_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $usuario = $result->fetch_assoc();
+*/
 
 // Definir acceso según rol
 $accesos = [
-    'superadministrador' => ['resumen', 'informes', 'eventos', 'usuarios'],
-    'administrador' => ['resumen', 'informes', 'eventos'],
-    'promotor' => ['eventos']
+    'superadministrador' => ['resumen', 'informes', 'eventos', 'usuarios'],//'superadministrador'
+    'administrador' => ['resumen', 'informes', 'eventos'], //'administrador'
+    'promotor' => ['eventos'] //'promotor'
 ];
 
-$menu_items = $accesos[$usuario['rol']];
+$menu_items = $accesos[$_SESSION['rol']];
 ?>
 
 <!DOCTYPE html>
@@ -97,24 +101,24 @@ $menu_items = $accesos[$usuario['rol']];
                 <!-- Icono de usuario con dropdown -->
                 <div class="relative">
                     <button id="userDropdown" class="text-white hover:text-teal-200 flex items-center space-x-2">
-                        <?php if ($usuario['foto_url']): ?>
-                            <img src="<?php echo htmlspecialchars($usuario['foto_url']); ?>" alt="Perfil" class="w-8 h-8 rounded-full">
-                        <?php else: ?>
+                        <?php //if ($usuario['foto_url']): ?>
+                            <img src="<?php //echo htmlspecialchars($usuario['foto_url']); ?>" alt="Perfil" class="w-8 h-8 rounded-full">
+                        <?php //else: ?>
                             <i class="fas fa-user-circle text-2xl"></i>
-                        <?php endif; ?>
+                        <?php //endif; ?>
                     </button>
                     
                     <!-- Dropdown menu -->
-                    <div id="userMenu" class="dropdown bg-white rounded-lg shadow-xl p-4">
+                    <div id="userMenu" class="dropdown bg-white rounded-lg shadow-xl p-4" style="z-index: 100;">
                         <div class="flex items-center space-x-3 border-b pb-3">
-                            <?php if ($usuario['foto_url']): ?>
-                                <img src="<?php echo htmlspecialchars($usuario['foto_url']); ?>" alt="Perfil" class="w-12 h-12 rounded-full">
-                            <?php else: ?>
+                            <?php //if ($usuario['foto_url']): ?>
+                                <img src="<?php //echo htmlspecialchars($usuario['foto_url']); ?>" alt="Perfil" class="w-12 h-12 rounded-full">
+                            <?php //else: ?>
                                 <i class="fas fa-user-circle text-4xl text-teal-700"></i>
-                            <?php endif; ?>
+                            <?php //endif; ?>
                             <div>
-                                <p class="font-semibold text-gray-800"><?php echo htmlspecialchars($usuario['nombre_usuario']); ?></p>
-                                <p class="text-sm text-gray-600"><?php echo ucfirst($usuario['rol']); ?></p>
+                                <p class="font-semibold text-gray-800"><?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
+                                <p class="text-sm text-gray-600"><?php echo ucfirst($_SESSION['rol']); ?></p>
                             </div>
                         </div>
                         <div class="mt-3 space-y-2">
@@ -127,7 +131,7 @@ $menu_items = $accesos[$usuario['rol']];
                                 <span>Configuración</span>
                             </a>
                             <hr class="my-2">
-                            <a href="logout.php" class="flex items-center space-x-2 text-red-600 hover:text-red-700 py-2">
+                            <a href="../controlador/Usuario/logout.php" class="flex items-center space-x-2 text-red-600 hover:text-red-700 py-2">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Cerrar Sesión</span>
                             </a>
@@ -220,7 +224,7 @@ $menu_items = $accesos[$usuario['rol']];
 
         <!-- Sección de bienvenida -->
         <div class="mt-8 text-center text-white">
-            <h3 class="text-xl mb-2">¡Te damos la bienvenida, <?php echo htmlspecialchars($usuario['nombre_usuario']); ?>!</h3>
+            <h3 class="text-xl mb-2">¡Te damos la bienvenida, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h3>
             <p class="text-teal-100 mb-4">
                 Aquí podrás gestionar tus eventos, revisar informes y controlar las ventas de manera eficiente.
             </p>

@@ -1,10 +1,6 @@
 <?php
 session_start();
 // Si ya hay una sesión activa, redirigir a principal.html
-if(isset($_SESSION['user_id'])) {
-    header("Location: principal.php");
-    exit();
-}
 
 // Manejo de errores
 $error = '';

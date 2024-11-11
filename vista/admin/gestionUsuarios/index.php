@@ -68,9 +68,9 @@
                         <div>
                             <label for="rol" class="block text-gray-700 font-bold">Rol</label>
                             <select id="rol" class="w-full border rounded py-2 px-3 text-gray-900" required>
-                                <option value="Superadministrador">Superadministrador</option>
-                                <option value="Administrador">Administrador</option>
-                                <option value="Promotor">Promotor</option>                                
+                                <option value="0">Superadministrador</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Promotor</option>                                
                             </select>
                         </div>
                         <div>

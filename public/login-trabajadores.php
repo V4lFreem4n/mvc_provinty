@@ -1,18 +1,10 @@
 <?php
-session_start();
-// Si ya hay una sesión activa, redirigir a principal.html
-if(isset($_SESSION['user_id'])) {
-    header("Location: principal.php");
-    exit();
-}
+ 
+$error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
+?> 
 
-// Manejo de errores
-$error = '';
-if(isset($_SESSION['error'])) {
-    $error = $_SESSION['error'];
-    unset($_SESSION['error']);
-}
-?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,15 +87,19 @@ if(isset($_SESSION['error'])) {
             </div>
         </div>
 
+
+        <?php if ($error): ?>
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+            <p><?php echo $error; ?></p>
+        </div>
+    <?php endif; ?>
+
+
         <!-- Login Form -->
         <div class="px-8 pb-8">
-            <?php if($error): ?>
-                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-                    <p><?php echo htmlspecialchars($error); ?></p>
-                </div>
-            <?php endif; ?>
+            
 
-            <form action="validar_login.php" method="POST">
+            <form action="../controlador/Usuario/login/validar_login.php" method="POST">
                 <div class="mb-6">
                     <label for="email" class="block text-gray-700 font-bold mb-2">
                         <i class="fas fa-envelope mr-2 text-blue-600"></i>Credencial
@@ -124,9 +120,7 @@ if(isset($_SESSION['error'])) {
 
                 <div class="flex items-center justify-between mb-6">
                     <div class="flex items-center">
-                        <input type="checkbox" id="remember" name="remember"
-                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember" class="ml-2 text-gray-700">Recuérdame</label>
+                         
                     </div>
                     <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-300">
                         ¿Olvidó su contraseña?
