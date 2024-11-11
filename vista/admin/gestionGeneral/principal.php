@@ -78,7 +78,7 @@ $menu_items = $accesos[$_SESSION['rol']];
     <header class="bg-teal-800 p-4 shadow-lg">
         <nav class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <img src="img/logo_provint.png" alt="Logo" class="h-20 w-auto ml-6">
+                <img src="../vista/admin/gestionUsuarios/img/logo_provint.png" alt="Logo" class="h-20 w-auto ml-6">
             </div>
             <div class="flex items-center space-x-6">
                 <?php foreach ($menu_items as $item): ?>
@@ -198,7 +198,7 @@ $menu_items = $accesos[$_SESSION['rol']];
                     Gestiona todos los aspectos relacionados con los eventos: descripción, precios de boletos y más.
                 </p>
                 <button class="bg-white text-teal-700 px-6 py-2 rounded-full hover:bg-teal-50 transition-colors flex items-center space-x-2">
-                    <span>Acceder</span>
+                    <span><a href="./admin-crear-evento.php">Acceder</a></span>
                     <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
