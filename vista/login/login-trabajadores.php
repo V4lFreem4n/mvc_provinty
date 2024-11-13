@@ -1,14 +1,18 @@
 <?php
-session_start();
-// Si ya hay una sesión activa, redirigir a principal.html
+session_start(); // Asegúrate de iniciar la sesión al inicio
 
-// Manejo de errores
-$error = '';
-if(isset($_SESSION['error'])) {
-    $error = $_SESSION['error'];
-    unset($_SESSION['error']);
+// Verificar si la variable de error está definida en la sesión
+if (isset($_SESSION['error'])) {
+    // Muestra el valor de la variable 'error' en la sesión
+    var_dump($_SESSION['error']);
+} else {
+    // Si no existe la variable 'error', muestra un mensaje
+    echo "No hay error en la sesión.";
 }
+
+die; // Detiene la ejecución del script aquí
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,11 +97,13 @@ if(isset($_SESSION['error'])) {
 
         <!-- Login Form -->
         <div class="px-8 pb-8">
-            <?php if($error): ?>
-                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-                    <p><?php echo htmlspecialchars($error); ?></p>
-                </div>
-            <?php endif; ?>
+        <?php if(isset($_SESSION['error'])): ?>
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+            <p><?php echo htmlspecialchars($_SESSION['error']); ?></p>
+            
+        </div>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 
             <form action="validar_login.php" method="POST">
                 <div class="mb-6">
@@ -152,5 +158,7 @@ if(isset($_SESSION['error'])) {
             }, 1000);
         });
     </script>
+  
+  
 </body>
 </html>

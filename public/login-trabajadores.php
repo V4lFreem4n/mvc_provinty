@@ -1,6 +1,7 @@
 <?php
  
 $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
+
 ?> 
 
 
@@ -79,7 +80,7 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
         <div class="header-bg p-6 mb-8 relative">
             <div class="flex items-center justify-between">
                 <div class="logo-container">
-                    <img src="img/logo_provint.png" alt="Company Logo" class="h-12 w-auto"/>
+                    <img src="../vista/admin/gestionUsuarios/img/logo_provint.png" alt="Company Logo" class="h-12 w-auto"/>
                 </div>
                 <h1 class="text-2xl font-bold text-white tracking-wider transform hover:scale-105 transition-transform duration-300 sm:text-3xl">
                     INICIAR SESIÓN
@@ -90,6 +91,7 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 
         <?php if ($error): ?>
         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+
             <p><?php echo $error; ?></p>
         </div>
     <?php endif; ?>

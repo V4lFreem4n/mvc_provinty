@@ -1,0 +1,291 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eedada;
+}
+ 
+
+.header {
+    background-color: #eedada; 
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0 auto;
+    margin-bottom: 5px; 
+}
+
+.zona-eventos{
+ display: grid !important;
+  grid-template-columns: repeat(3, 1fr); /* Máximo de 3 columnas */
+  gap: 10px; /* Espacio entre columnas */
+  justify-content: center; /* Centra los elementos si hay menos de 3 */
+}
+
+.card{
+    text-align: center;
+}
+
+.card-text{
+    color: #000000;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header .login {
+    display: flex;
+    align-items: center;
+}
+
+.header .login .search-icon {
+    margin-right: 10px; 
+}
+
+.header .login a {
+    margin-left: 15px; 
+}
+
+.header .login a.login-button { 
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    background: linear-gradient(to right, rgba(37, 34, 34, 0.8), rgba(156, 138, 138, 0.3)); 
+    padding: 10px 15px; 
+    border-radius: 25px; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.header .login a.login-button:hover {
+    background: rgba(255, 255, 255, 0.5); 
+    color: #0056b3; 
+}
+
+.search-icon {
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 0; 
+    margin-right: 10px; 
+    color: rgba(37, 34, 34, 0.8); 
+    font-size: 20px; 
+}
+
+.search-icon:hover {
+    color: #ffffff; 
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto; 
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.932);
+    height: auto; 
+    padding: 20px;
+    color: rgb(255, 255, 255);
+}
+
+
+.left-section {
+    flex: 60%;
+}
+
+.festival-info h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #ffffff ;
+}
+
+.festival-info p {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.festival-info button {
+    background-color: transparent; 
+    color: #ffffff; 
+    border: 2px solid #ffffff; 
+    padding: 10px 20px;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+.festival-info button:hover {
+    background-color: #312f2f ; 
+    color: white; /
+}
+
+
+.countdown {
+    width: 100%; 
+    max-width: 200px; 
+    height: 60px; 
+    background: linear-gradient(to bottom, rgba(230, 222, 222, 0.596), rgba(233, 226, 226, 0.801)); 
+    padding: 10px; 
+    display: flex; 
+    align-items: center; 
+    margin-top: 140px; 
+    color: #000000; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    font-weight: 1000; 
+}
+
+.countdown-image {
+    width: 60px;  
+    height: 60px; 
+    margin-right: 10px; 
+    border-radius: 10px; 
+    object-fit: cover;
+}
+
+
+
+
+
+
+
+.right-section {
+    flex: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-details {
+    background-color: rgba(70, 69, 59, 0.8); 
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.068);
+    max-width: 400px;
+    margin-top: 10px;
+}
+.large-white-text {
+    font-size: 24px; 
+    color: white; 
+}
+
+.large-white-text i {
+    margin-left: 8px; 
+    color: white; 
+}
+
+.event-details h3 {
+    font-size: 24px;
+    color: #007BFF;
+    margin-bottom: 5px;
+}
+
+.event-details p {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 5px 0;
+    font-size: 24px;  
+    font-weight: bold; 
+    text-align: center; 
+}
+
+
+.event-image img {
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.map-container {
+    text-align: center;
+}
+
+.map-container h3 {
+    margin-bottom: 15px;
+}
+
+.map-container img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.event-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.event-buttons button {
+    margin: 0 10px;
+    color: rgb(51, 45, 45);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s; 
+}
+
+.event-buttons button:hover {
+    color: rgba(250, 250, 250, 0.692);
+    background-color: #312f2f;
+}
+
+.non-clickable-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+    margin-bottom: 15px;
+}
+
+.fake-button {
+    background-color: rgba(45, 68, 67, 0.5); 
+    color: white;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    pointer-events: none; 
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(248, 245, 245, 0.2); 
+    text-align: center;
+}
+
+.fake-button:hover {
+    background-color: rgba(0, 123, 255, 0.7); 
+}
+
+.fade {
+    animation: fade 10s infinite;
+    color: #332f2f; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    font-weight: 1000; 
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0; 
+    }
+    50% {
+        opacity: 1; 
+    }
+    100% {
+        opacity: 0; 
+    }
+}
+.custom-link {
+    color: #050505b7; 
+    text-decoration: none; 
+    font-weight: 600; 
+}
+
+.custom-link:hover {
+    color: #ffffff; 
+}
+

@@ -1,7 +1,7 @@
 <?php
 session_start();
  
-include_once '../../../autoload.php';
+include_once '../../autoload.php';
 
 
 
@@ -11,7 +11,7 @@ $db = $conn->connect();
 
 if (!$db) {
     $_SESSION['error'] = "No se pudo conectar a la base de datos.";
-    header("Location: ../../../public/login-trabajadores.php");
+    header("Location: ../../public/login-trabajadores.php");
     //header("Location: A");
     exit();
 }
@@ -24,7 +24,7 @@ if (empty($email) || empty($password)) {
      
     // Ejemplo de redirección con un mensaje de error
     $_SESSION['error'] =  "Por favor, complete todos los campos.";; // Definir el mensaje de error
-    header("Location: ../../../public/login-trabajadores.php");
+    header("Location: ../../public/login-trabajadores.php");
     //header("Location: B");
     exit();
     
@@ -40,7 +40,7 @@ if ($resultado && $resultado->num_rows === 1) {
     // Verificar si el usuario está activo
     if ($user['activo'] != 1) {
         $_SESSION['error'] = "Esta cuenta está desactivada. Por favor contacte al administrador.";
-        header("Location: ../../../public/login-trabajadores.php");
+        header("Location: ../../public/login-trabajadores.php");
         //header("Location: C");
         exit();
     }
@@ -65,17 +65,17 @@ if ($resultado && $resultado->num_rows === 1) {
         unset($_SESSION['error']);
         // Redirigir a la página principal
         $_SESSION['error'] = "Login no válido"; // Define el mensaje de error
-        header("Location: ../../../public/admin-general.php");
+        header("Location: ../../public/admin-general.php");
         //header("Location: ../../../vista/admin/gestionGeneral/sepudo.php");
         //exit();
     } else {
         $_SESSION['error'] = "Credenciales incorrectas.";
-        header("Location: ../../../public/login-trabajadores.php");
+        header("Location: ../../public/login-trabajadores.php");
         exit();
     }
 } else {
     $_SESSION['error'] = "Credenciales incorrectas.";
-    header("Location: ../../../public/login-trabajadores.php");
+    header("Location: ../../public/login-trabajadores.php");
 exit();
 }
 
