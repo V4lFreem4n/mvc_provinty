@@ -3,17 +3,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #eedada;
+    background-color: #b7eeea !important;
 }
  
 
 .header {
-    background-color: #eedada; 
+    background-color: #97cfcb;
     padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; 
+    max-width: auto; 
     margin: 0 auto;
     margin-bottom: 5px; 
 }
@@ -79,14 +79,14 @@ body {
     color: #ffffff; 
 }
 
-.container {
+.contenedor {
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto; 
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(255, 255, 255, 0.932);
-    height: auto; 
+    height: 390px; 
     padding: 20px;
     color: rgb(255, 255, 255);
 }

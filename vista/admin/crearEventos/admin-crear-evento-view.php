@@ -417,7 +417,19 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
 
 </section> 
 
+<section id="terminos_condiciones" class="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-60 z-50 flex" style="display: flex;">
 
+<section class="rounded  my-auto mx-auto bg-white p-5 w-3/4 max-w-2xl">
+<div class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+
+<div>
+ <div class="flex mb-2"><p class="text-lg">Términos y Condiciones</p> <button class="p-2 bg-teal-400 text-white rounded-lg ml-auto" onclick="agregarTerminoCondiciones()">Añadir</button></div>
+ <div id="section-terminos-condiciones"></div>
+ <div class="mt-2 flex"><button class="p-2 bg-emerald-600 text-white rounded-lg ml-auto" onclick="guardarTerminos()">Guardar</button></div>
+ 
+</div>
+
+</div></section></section>
 
 
 
@@ -532,6 +544,14 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+.terminosCondiciones{
+cursor: pointer;
+}
+
+.terminosCondiciones:hover{
+  color:#4CAF50;
 }
 
   </style>

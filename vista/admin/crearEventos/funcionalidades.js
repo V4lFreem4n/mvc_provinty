@@ -127,7 +127,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
     </div>
 
     <div class="ml-2 my-1">
-      <a id="input-evento-ubicacion-${ultimoId}" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas(${ultimoId})">Categorías de entrada</a>
+      <a id="input-evento-ubicacion-${ultimoId}" style="width: 300px;" class="hover:text-green-400" href="#" onclick="visibleModalCategoriaEntradas(${ultimoId})"><strong>Categorías de entrada</strong></a>
       <p class="text-xs ml-1">Ubicación del evento*</p>
     </div>
 
@@ -184,7 +184,10 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
     <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId}')" accept=".jpg, .jpeg, .png">
     
     <div id="json_precios_categorias"></div>
+    <div id="json_terminos_condiciones"></div>
     
+  <div class="ml-5 mt-2"><p style=""><strong class="terminosCondiciones" onclick="terminosCondiciones()">Términos y condiciones</strong></p></div>
+
     <div class="flex">
       <button class="p-2 bg-green-300 hover:bg-green-400 rounded mt-2 ml-auto rounded" type="button" onclick="guardarEvento(${ultimoId})">GUARDAR</button>
     </div>
@@ -606,8 +609,68 @@ function visibilizarEvento(e){
       }
   })}
 
+  function terminosCondiciones(){
+    document.getElementById("terminos_condiciones").style.display="flex";
 
+  }
 
- 
+  document.getElementById("terminos_condiciones").addEventListener('click',(event)=>{
+    console.log("SI LLEGAMOS")
+    if (event.target.id == "terminos_condiciones") {
+      console.log("NO LLEGAMOS")
+      document.getElementById("terminos_condiciones").style.display="none"; 
+      //Acá vamos a cerrar el modal y vamos a formatear todos los campos
+      /**
+       * for (let indice = 1; indice <= 10; indice++) {
+        document.getElementById("cat-venta-"+indice).value= "";
+        document.getElementById("cat-preventa-"+indice).value= "";
+        document.getElementById("cat"+indice).checked = false;
+        document.getElementById("cat-venta-"+indice).style.display="none";
+      document.getElementById("cat-preventa-"+indice).style.display="none";
+      }
+       */
+    }
+    
+  })
 
+  let contador = 0;
+
+  // Agregar un nuevo término dinámicamente
+  function agregarTerminoCondiciones() {
+    contador++;
+    let condicion = document.createElement("div");
+    condicion.innerHTML = `
+      <div class="mb-2">
+        <input id="termino_${contador}" 
+               class="border border-gray-300 rounded-lg p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" 
+               placeholder="Término y Condición ${contador}">
+      </div>`;
+    document.getElementById("section-terminos-condiciones").appendChild(condicion);
+  }
+
+  // Guardar los valores de los inputs dinámicos
+  function guardarTerminos() {
+    const contenedor = document.getElementById('section-terminos-condiciones');
+
+    // Seleccionar todos los inputs con IDs que comiencen con "termino_"
+    const inputs = contenedor.querySelectorAll('[id^="termino_"]');
+
+    // Crear un array para almacenar los valores
+    const valores = Array.from(inputs).map(input => input.value);
+
+    // Mostrar los valores en la consola o usarlos como necesites
+    console.log('Valores guardados:', valores);
+
+    // Si necesitas guardar en una variable global, simplemente haz:
+    // window.valoresGuardados = valores;
+  }
+
+function insertarJsonCategoriasEntrada(arry){
+document.getElementById("json_terminos_condiciones").innerHTML = '';
+let input = document.createElement("input");
+input.type="hidden";
+input.value = json;
+input.name="json_terminos_condiciones";
+document.getElementById("json_terminos_condiciones").appendChild(input);
+}
 

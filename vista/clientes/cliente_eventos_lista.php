@@ -18,13 +18,43 @@
         <h1 class="fade">PROVINTI</h1>
 
         <div class="login">
-            <button class="search-icon">
-                <i class="fas fa-search"></i> 
-            </button>
             <a href="./registro-cliente.php" class="custom-link">Registrarse</a>
             <a href="#" class="login-button">Login</a>
         </div>
     </div>
+
+  <section>
+  <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div id="carouselExampleIndicators" class="carousel slide d-flex" data-ride="carousel">
+    <div class="carousel-inner mx-auto" style="justify-content: center;">
+      <div class="carousel-item active">
+        <img class="d-block" src="./images/fondo.webp" width="auto" height="500px" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block" src="./images/fondo_carro_1.webp" width="auto" height="500px" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block" src="./images/tercer_fondo.webp" width="auto" height="500px" alt="Third slide">
+      </div>
+    </div>
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+  </section>
+
 </div>
     <div class="event-buttons">
         <button>Todos</button>
@@ -36,18 +66,50 @@
         <button>Otros</button>
     </div>
 
-<section class="container zona-eventos" style="background-color: #293a81;">
+    <div class="container d-flex my-4">
+      <div class="d-flex"><p class="my-auto mr-5">Encuentra eventos en tu región</p></div>
+    <select name="regiones" id="regiones" class="form-select">
+  <option value="Amazonas">Amazonas</option>
+  <option value="Áncash">Áncash</option>
+  <option value="Apurímac">Apurímac</option>
+  <option value="Arequipa">Arequipa</option>
+  <option value="Ayacucho">Ayacucho</option>
+  <option value="Cajamarca">Cajamarca</option>
+  <option value="Callao">Callao</option>
+  <option value="Cusco">Cusco</option>
+  <option value="Huancavelica">Huancavelica</option>
+  <option value="Huánuco">Huánuco</option>
+  <option value="Ica">Ica</option>
+  <option value="Junín">Junín</option>
+  <option value="La Libertad">La Libertad</option>
+  <option value="Lambayeque">Lambayeque</option>
+  <option value="Lima">Lima</option>
+  <option value="Loreto">Loreto</option>
+  <option value="Madre de Dios">Madre de Dios</option>
+  <option value="Moquegua">Moquegua</option>
+  <option value="Pasco">Pasco</option>
+  <option value="Piura">Piura</option>
+  <option value="Puno">Puno</option>
+  <option value="San Martín">San Martín</option>
+  <option value="Tacna">Tacna</option>
+  <option value="Tumbes">Tumbes</option>
+  <option value="Ucayali">Ucayali</option>
+</select>
+<button class="btn btn-primary ml-4">Buscar</button>
+    </div>
+
+<section class="container zona-eventos mb-5" >
   
 
 <?php
 foreach($eventos as $evento){
   if($evento['Estado_Publicacion'] !== "Cancelado"){
 echo "<div class='card' style='width: 18rem;'>
-  <img class='card-img-top' src='...' alt='Card image cap'>
+  <img class='card-img-top' src='./images/tercer_fondo.webp' alt='Card image cap'>
   <div class='card-body'>
     <h5 class='card-title' style='color:black'>". htmlspecialchars($evento['Titulo'])."</h5>
-    <p class='card-text'>". htmlspecialchars($evento['Descripcion']) . "</p>
-    <a href='#' class='btn btn-primary'>Ver Evento</a>
+    <p class='card-text' style='font-weight: 500'>".$evento['Descripcion']. "</p>
+    <a href='./cliente-evento.php?id=".$evento['ID_Evento']."' class='btn btn-primary'>Ver Evento</a>
   </div>
 </div>
 ";

@@ -19,17 +19,17 @@
                 <i class="fas fa-search"></i> 
             </button>
             <a href="./registro-cliente.php" class="custom-link">Registrarse</a>
-            <a href="#" class="login-button">Login</a>
+            <a href="./login-clientes.php" class="login-button">Login</a>
         </div>
     </div>
 
-    <div class="container" style="background-image: url('../vista/clientes/img/fondo.jpg'); background-size: cover; background-position: center;">
+    <div class="contenedor" style="background-image: url('../vista/clientes/img/fondo.jpg'); background-size: cover; background-position: center;">
         <div class="left-section">
             <div class="festival-info">
                 <h2>FESTIVAL KAVIPOR</h2>
                 <p>31 de agosto de 2024</p>
                 <p>1:00 pm</p>
-                <button>Ver más</button>
+                <button><a href="./cliente-general-eventos.php" class="h-100 w-100" style="color: wheat;text-decoration:none">Ver más</a></button>
             </div>
            
                 
