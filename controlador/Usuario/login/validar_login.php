@@ -65,6 +65,37 @@ if ($resultado && $resultado->num_rows === 1) {
         unset($_SESSION['error']);
         // Redirigir a la página principal
         
+
+       /*
+         $sql = "SELECT id FROM cliente WHERE nombre_usuario = ? AND correo = ? AND password = ?";
+        $stmt = mysqli_prepare($db, $sql);
+    
+        if ($stmt) {
+            // Vincular los parámetros a la consulta
+            mysqli_stmt_bind_param($stmt, "sss", $nombreUsuario, $correo, $contrasena);
+    
+            // Ejecutar la consulta
+            mysqli_stmt_execute($stmt);
+    
+            // Obtener el resultado
+            mysqli_stmt_bind_result($stmt, $id);
+            mysqli_stmt_fetch($stmt);
+    
+            // Cerrar el statement
+            mysqli_stmt_close($stmt);
+    
+            // Retornar el ID si se encontró
+            if ($id) {
+                return $id;
+            }
+        }
+    
+        // Retornar null si no se encuentra
+        return false;
+
+        */
+
+
         header("Location: ../../../public/admin-general.php");
         //header("Location: ../../../vista/admin/gestionGeneral/sepudo.php");
         //exit();

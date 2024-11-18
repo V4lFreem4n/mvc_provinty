@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2024 a las 19:22:12
+-- Tiempo de generación: 18-11-2024 a las 23:02:05
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,10 +40,11 @@ CREATE TABLE `categoria_evento` (
 --
 
 INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`, `precio_preventa`, `ID_Evento`) VALUES
-(10, 'SUPER VIP', 111.00, 11.00, 20),
-(11, 'PALCO VIP', 111.00, 1111.00, 21),
-(12, 'GENERAL', 222.00, 222222.00, 21),
-(13, 'NIÑOS GENERAL', 333.00, 4433.00, 21);
+(14, 'SUPER VIP', 11.00, 111.00, 23),
+(15, 'VIP', 22.00, 222.00, 23),
+(16, 'PALCO VIP', 33.00, 333.00, 23),
+(17, 'SUPER VIP', 112.00, 223.00, 24),
+(18, 'VIP', 133.00, 333.00, 24);
 
 -- --------------------------------------------------------
 
@@ -139,16 +140,17 @@ CREATE TABLE `eventos` (
   `activoPospuesto` varchar(20) DEFAULT NULL,
   `horaInicioEvento` time DEFAULT NULL,
   `horaFinEvento` time DEFAULT NULL,
-  `redes` varchar(150) DEFAULT NULL
+  `redes` varchar(150) DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`) VALUES
-(20, 'Purizaca Pérez', 555, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'ggggggg', '[\"erererer\",\"ytytyt\"]', '', '2024-11-02 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', 'ffff', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '01:17:00', '03:17:00', 'gdfdf'),
-(21, 'Lili', 65656, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'hhhhhhh', '[\"Sin perros\",\"Sin bebidas alcoh\\u00f3licas\",\"Sin armas\"]', '', '2024-11-06 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'ghfggg', 'vxv', NULL, NULL, NULL, NULL, 'gdfgdg', NULL, '01:28:00', '04:28:00', 'dgdfgdf');
+INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`, `id_usuario`) VALUES
+(23, 'Purizaca Pérez', 4444, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'ffffff', '[\"xxxxxxxxxxx\",\"yyyyy yyyyyyy\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'sadasd', 'asdasd', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '18:16:00', '19:16:00', '4444', 51),
+(24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54);
 
 -- --------------------------------------------------------
 
@@ -252,7 +254,10 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `password`, `rol`, `dni`, `correo`, `numero_telefono`, `foto_url`, `activo`, `fecha_creacion`) VALUES
 (51, 'victor', '$2y$10$nF9ysh86oBb1DzIzKvVydOzzodokSE6xOMkvnPL0KfHlqW3w0Zok6', 1, '12333333', 'correo@correo', '931231231', NULL, 1, '2024-11-11 21:43:53'),
-(52, 'Alejandro', '$2y$10$YJGA9FE1woffZvO5KqNjfe14Rtg93y4oB17vdwbmjuGaXlB.OfUwy', 2, '23333333', 'victor@victor', '999999966', NULL, 1, '2024-11-11 21:45:07');
+(52, 'Alejandro', '$2y$10$YJGA9FE1woffZvO5KqNjfe14Rtg93y4oB17vdwbmjuGaXlB.OfUwy', 2, '23333333', 'victor@victor', '999999966', NULL, 1, '2024-11-11 21:45:07'),
+(53, 'admin', '$2y$10$UoudodYYrt0X9ohkn4gEFO7c1i/XyJOTiQxWaHPhOTUGouzBa12My', 0, '72423362', 'admin@admin', '789456123', 'admin.png', 1, '2024-11-18 21:24:58'),
+(54, 'Alonso', '$2y$10$omgsR1dMlqN8xIHtcXDSI.YlZ3kLPULOmnIbqnW0pGodpDXRWeOEe', 2, '13333335', 'alonso@alonso', '983654321', NULL, 1, '2024-11-18 21:47:48'),
+(55, 'Yamill', '$2y$10$e43MeLNSoxvUgKoHczOInuraxHEFN/5vIT9otD15k79JmhXQ6WJK.', 1, '12423123', 'yamill@yamill', '941111111', NULL, 1, '2024-11-18 21:49:06');
 
 --
 -- Disparadores `usuarios`
@@ -310,7 +315,8 @@ ALTER TABLE `estadisticas_eventos`
 -- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  ADD PRIMARY KEY (`ID_Evento`);
+  ADD PRIMARY KEY (`ID_Evento`),
+  ADD KEY `id` (`id_usuario`);
 
 --
 -- Indices de la tabla `log_acciones`
@@ -365,7 +371,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria_evento`
 --
 ALTER TABLE `categoria_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -395,7 +401,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `log_acciones`
@@ -425,7 +431,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Restricciones para tablas volcadas
@@ -449,6 +455,12 @@ ALTER TABLE `detallecompra`
 --
 ALTER TABLE `estadisticas_eventos`
   ADD CONSTRAINT `estadisticas_eventos_ibfk_1` FOREIGN KEY (`ID_Evento`) REFERENCES `eventos` (`ID_Evento`);
+
+--
+-- Filtros para la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD CONSTRAINT `relacion_usuario_evento` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `log_acciones`

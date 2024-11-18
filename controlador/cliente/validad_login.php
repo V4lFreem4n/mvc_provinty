@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['nombre'] = $cliente_individual['nombre'];
         $_SESSION['apellido'] = $cliente_individual['apellido'];
         $_SESSION['correo'] = $cliente_individual['correo'];
+        //Necesito conseguir el id de éste cliente
+
 
         header("Location: ../../public/cliente-general.php");
         exit();

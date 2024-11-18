@@ -9,21 +9,21 @@ class Evento {
      $this->connection = $bd;   
     }
 
-    public function crearEvento($titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento, $fecha_creacion, $estado_publicacion, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes) {
+    public function crearEvento($titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento, $fecha_creacion, $estado_publicacion, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes,$id_usuario_pk) {
     
         $visibilidad = 'Privado';
     
         // Consulta SQL actualizada para incluir los nuevos campos
-        $sql = "INSERT INTO eventos (Titulo, Aforo, Foto, Descripcion, terminos_condiciones, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, Visibilidad, Organizador, Contacto_Organizador, ubicacion, horaInicioEvento	, horaFinEvento, redes) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO eventos (Titulo, Aforo, Foto, Descripcion, terminos_condiciones, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, Visibilidad, Organizador, Contacto_Organizador, ubicacion, horaInicioEvento	, horaFinEvento, redes, id_usuario) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Prepara la declaración
         $stmt = mysqli_prepare($this->connection, $sql);
         
         if ($stmt) {
             // Vincula los parámetros
-            mysqli_stmt_bind_param($stmt, "sissssssssssssss", $titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento,
-             $fecha_creacion, $estado_publicacion, $visibilidad, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes);
+            mysqli_stmt_bind_param($stmt, "sissssssssssssssi", $titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento,
+             $fecha_creacion, $estado_publicacion, $visibilidad, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes, $id_usuario_pk);
         
             // Ejecuta la declaración
             mysqli_stmt_execute($stmt);
@@ -40,6 +40,41 @@ class Evento {
         } else {
             echo "Error en la preparación de la consulta: " . mysqli_error($this->connection);
         }
+    }
+    
+    public function obtenerUsuarioPorIdEvento($idUsuario) {
+        // Consulta SQL con INNER JOIN
+        $sql = "
+            SELECT usuarios.* 
+            FROM usuarios
+            INNER JOIN eventos ON usuarios.id = eventos.id_usuario
+            WHERE usuarios.id = ?";
+    
+        // Preparar la consulta
+        $stmt = mysqli_prepare($this->connection, $sql);
+    
+        if ($stmt) {
+            // Vincular los parámetros a la consulta
+            mysqli_stmt_bind_param($stmt, "i", $idUsuario);
+    
+            // Ejecutar la consulta
+            mysqli_stmt_execute($stmt);
+    
+            // Obtener el resultado
+            $result = mysqli_stmt_get_result($stmt);
+    
+            // Verificar si hay resultados
+            if ($result && mysqli_num_rows($result) > 0) {
+                // Devolver los datos del usuario como un array asociativo
+                return mysqli_fetch_assoc($result);
+            }
+    
+            // Cerrar el statement
+            mysqli_stmt_close($stmt);
+        }
+    
+        // Retornar null si no se encuentra
+        return null;
     }
     
     

@@ -1,10 +1,15 @@
 <?php
 require_once "../../autoload.php";
+session_start();
+
 $conn = new Database();
 $evento = new Evento($conn->connect());
 $categoria_evento = new Categoria_evento($conn->connect());
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $id_usuario_pk = $_SESSION['usuario_id'];
+
     // Validar y limpiar los datos del formulario
     //$id = $_POST['id'];
     $nombre = $_POST['nombre'];
@@ -41,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //if ($id && $nombre && $fecha && $categoria && $ubicacion && $horaInicio && $horaFin && $capacidad && $organizador && $contactoOrganizador && $descripcion && $imagen) {
         // Aquí iría la lógica para procesar los datos
         
-        $evento->crearEvento($nombre,$capacidad,$imagen,$descripcion,$terminos_condiciones_json,"",$fecha,$fechaCreacion,"Publicado",$organizador,$contactoOrganizador,$ubicacion,$horaInicio, $horaFin, $redes);
+        $evento->crearEvento($nombre,$capacidad,$imagen,$descripcion,$terminos_condiciones_json,"",$fecha,$fechaCreacion,"Publicado",$organizador,$contactoOrganizador,$ubicacion,$horaInicio, $horaFin, $redes, $id_usuario_pk);
         $id_evento_ultimo = $evento->idMoreLarge();
 
         foreach($array as $elemento){

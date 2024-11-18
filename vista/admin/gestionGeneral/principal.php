@@ -215,7 +215,7 @@ $menu_items = $accesos[$_SESSION['rol']];
                     Administra las cuentas de los usuarios, incluyendo clientes, organizadores de eventos y personal administrativo.
                 </p>
                 <button class="bg-white text-teal-700 px-6 py-2 rounded-full border border-teal-700 hover:bg-teal-700 hover:text-white transition-colors flex items-center space-x-2">
-                    <span>Acceder</span>
+                    <span><a href="./gestion-usuarios.php">Acceder</a></span>
                     <i class="fas fa-arrow-right"></i>
                 </button>
             </div>

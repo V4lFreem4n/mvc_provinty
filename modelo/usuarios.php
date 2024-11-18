@@ -145,6 +145,37 @@ function eliminarUsuario() {
     }
 }
 
+ function conseguirIdUsuario($nombreUsuario , $correo, $contrasena) {
+    global $conexion;
+    // Consulta SQL para buscar el ID del usuario
+    $sql = "SELECT id FROM cliente WHERE nombre_usuario = ? AND correo = ? AND password = ?";
+    $stmt = mysqli_prepare($conexion->connect(), $sql);
+
+    if ($stmt) {
+        // Vincular los parámetros a la consulta
+        mysqli_stmt_bind_param($stmt, "sss", $nombreUsuario, $correo, $contrasena);
+
+        // Ejecutar la consulta
+        mysqli_stmt_execute($stmt);
+
+        // Obtener el resultado
+        mysqli_stmt_bind_result($stmt, $id);
+        mysqli_stmt_fetch($stmt);
+
+        // Cerrar el statement
+        mysqli_stmt_close($stmt);
+
+        // Retornar el ID si se encontró
+        if ($id) {
+            return $id;
+        }
+    }
+
+    // Retornar null si no se encuentra
+    return false;
+}
+
+
 function activarDesactivarUsuario() {
     global $conexion;
     $id = $_POST['id'];
