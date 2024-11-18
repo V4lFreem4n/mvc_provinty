@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,10 +21,21 @@
     <div class="header"> 
         <h1 class="fade">PROVINTI</h1>
 
-        <div class="login">
-            <a href="./registro-cliente.php" class="custom-link">Registrarse</a>
-            <a href="#" class="login-button">Login</a>
-        </div>
+        <?php
+
+if (isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente") {
+    echo '<div><p>Hola! ' . $_SESSION['nombre'] . '</p></div>
+          <div class="login">
+            <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>
+        </div>';
+} else {
+    echo '<div class="login">
+            <a href="./login-clientes.php" class="login-button">Login</a>
+        </div>';
+}
+?>
+
+        
     </div>
 
   <section>

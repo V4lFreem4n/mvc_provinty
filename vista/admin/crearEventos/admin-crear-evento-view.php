@@ -417,7 +417,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
 
 </section> 
 
-<section id="terminos_condiciones" class="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-60 z-50 flex" style="display: flex;">
+<section id="terminos_condiciones" class="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-60 z-50 flex" style="display: none;">
 
 <section class="rounded  my-auto mx-auto bg-white p-5 w-3/4 max-w-2xl">
 <div class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

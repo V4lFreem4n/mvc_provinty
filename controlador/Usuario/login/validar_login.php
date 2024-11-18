@@ -64,7 +64,7 @@ if ($resultado && $resultado->num_rows === 1) {
     
         unset($_SESSION['error']);
         // Redirigir a la página principal
-        $_SESSION['error'] = "Login no válido"; // Define el mensaje de error
+        
         header("Location: ../../../public/admin-general.php");
         //header("Location: ../../../vista/admin/gestionGeneral/sepudo.php");
         //exit();

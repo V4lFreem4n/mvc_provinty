@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,9 +19,22 @@
     <div class="mr-auto">
         <img src="../vista/clientes/img/logo_provint.png" width="100px">   
     </div>
-        <div class="d-flex" style="cursor: pointer;">
-            <p class="my-auto font-bold iniciarSesion"><strong>Iniciar Sesión</strong></p>
-        </div>
+
+    <?php
+
+if(isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente"){
+  echo '<div><p>Hola! '.$_SESSION['nombre'].'</p></div>
+  <div class="login">
+    <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>
+</div>';
+}else{
+  echo '<div class="d-flex" style="cursor: pointer;">
+            <p class="my-auto font-bold iniciarSesion"><strong><a href="./login-clientes.php">Iniciar Sesión</a></strong></p>
+        </div>';
+}
+?>
+
+        
     </nav>
 
   <section class="fondo-evento bg-success" style="height: 500px;">
@@ -52,17 +68,18 @@
     <?php
 $contador = 1;
     foreach($categoriasEvento as $categoria){
-
-    }
-
-    echo '<tr>
+      echo '<tr>
       <th scope="row">'.$contador.'</th>
       <td>'.$categoria['nombre_categoria_evento'].'</td>
       <td>36</td>
       <td>S/. '.$categoria['precio_venta'].'</td>
     </tr>';
-
     $contador++; 
+    }
+
+    
+
+    
     ?>
   </tbody>
 </table>
@@ -71,13 +88,26 @@ $contador = 1;
 <section class="container mt-5">
 <p class="h4">Términos y condiciones</p>
 <ul>
-    <li>El evento será el día 12/12/12 a las 13:00 horas y tendrá una duración de XX tiempo</li>
-    <li>No se permitirán mascotas</li>
-    <li>No estará permitido llevar bebidas alcohólicas</li>
+<?php
+
+//Acá vamos a mostrar los términos y condiciones
+foreach($eventos as $evento){
+if($evento['ID_Evento']==$id){
+  //conseguimos los términos
+  $terminos_condiciones_json_string = $evento['terminos_condiciones'];
+  $array_terminos = json_decode($terminos_condiciones_json_string, true); // Decodificar el JSON a un array de PHP
+  foreach($array_terminos as $termino){
+    echo "<li>".$termino."</li>";
+  }
+}
+}
+?>
 </ul>
 </section>
 
-<section class="container my-5">
+<?php
+if(isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente"){
+  echo '<section class="container my-5">
 <p class="h4">¿Qué te pareció?</p>
 <textarea class="form-control my-3" placeholder="Envíanos tus reseñas"></textarea>
 <button class="btn btn-primary" type="button">Enviar</button>
@@ -99,7 +129,11 @@ $contador = 1;
     --><label for="radio5">★</label>
   </p>
 </form>
-</section>
+</section>';
+}
+?>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

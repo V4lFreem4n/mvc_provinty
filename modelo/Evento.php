@@ -9,20 +9,20 @@ class Evento {
      $this->connection = $bd;   
     }
 
-    public function crearEvento($titulo, $aforo, $foto, $descripcion, $artista, $fecha_evento, $fecha_creacion, $estado_publicacion, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes) {
+    public function crearEvento($titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento, $fecha_creacion, $estado_publicacion, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes) {
     
         $visibilidad = 'Privado';
     
         // Consulta SQL actualizada para incluir los nuevos campos
-        $sql = "INSERT INTO eventos (Titulo, Aforo, Foto, Descripcion, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, Visibilidad, Organizador, Contacto_Organizador, ubicacion, horaInicioEvento	, horaFinEvento, redes) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO eventos (Titulo, Aforo, Foto, Descripcion, terminos_condiciones, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, Visibilidad, Organizador, Contacto_Organizador, ubicacion, horaInicioEvento	, horaFinEvento, redes) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Prepara la declaración
         $stmt = mysqli_prepare($this->connection, $sql);
         
         if ($stmt) {
             // Vincula los parámetros
-            mysqli_stmt_bind_param($stmt, "sisssssssssssss", $titulo, $aforo, $foto, $descripcion, $artista, $fecha_evento,
+            mysqli_stmt_bind_param($stmt, "sissssssssssssss", $titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento,
              $fecha_creacion, $estado_publicacion, $visibilidad, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes);
         
             // Ejecuta la declaración

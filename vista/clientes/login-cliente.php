@@ -93,7 +93,7 @@
     <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
 
-            <form action="validar_login.php" method="POST">
+            <form action="../controlador/cliente/validad_login.php" method="POST">
                 <div class="mb-6">
                     <label for="email" class="block text-gray-700 font-bold mb-2">
                         <i class="fas fa-envelope mr-2 text-blue-600"></i>Credencial
@@ -114,8 +114,11 @@
 
                 <div class="flex items-center justify-between mb-6">
                      
-                    <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-300">
+        <!--<a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-300">
                         ¿Olvidó su contraseña?
+                    </a>-->
+                    <a href="./registro-cliente.php" class="ms-auto text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-300">
+                        ¿No está registrado?
                     </a>
                 </div>
 

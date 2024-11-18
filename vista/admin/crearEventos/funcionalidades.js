@@ -338,28 +338,12 @@ console.log("EL ID AL CREAR EL NUEVO EVENTO ES :",e)
      return;
   }
 
-/*
-  let datosEvento = {
-    id: e,
-    nombre: nombreE,
-    fecha: fechaE,
-    categoria: categoriaE,
-    ubicacion: ubicacionE,
-    horaInicio: horaInicioE,
-    horaFin: horaFinE,
-    capacidad: capacidadE,
-    organizador: organizadorE,
-    contactoOrganizador: contactoOrganizadorE,
-    redes: redesE,
-    politicaCancelacion: politicaCancelacionE.name, // Si deseas almacenar solo el nombre del archivo
-    descripcion: descripcionE,
-    imagen: imagenE.name // Solo guardamos el nombre del archivo
-  };
-*/
-  //listaEventos.push(datosEvento);  // Guarda el evento en la lista
+  if (typeof document.getElementById("jsonTerminosCondiciones").value === 'undefined' || !document.getElementById("jsonTerminosCondiciones").value || document.getElementById("jsonTerminosCondiciones")=== null) {
+    alert("Aún no ha establecido los términos y condiciones.");
+    return;
+}
 
-  // Actualizar el título del evento si es necesario
- 
+
 
   formularioCrear.submit();
 
@@ -619,18 +603,17 @@ function visibilizarEvento(e){
     if (event.target.id == "terminos_condiciones") {
       console.log("NO LLEGAMOS")
       document.getElementById("terminos_condiciones").style.display="none"; 
-      //Acá vamos a cerrar el modal y vamos a formatear todos los campos
-      /**
-       * for (let indice = 1; indice <= 10; indice++) {
-        document.getElementById("cat-venta-"+indice).value= "";
-        document.getElementById("cat-preventa-"+indice).value= "";
-        document.getElementById("cat"+indice).checked = false;
-        document.getElementById("cat-venta-"+indice).style.display="none";
-      document.getElementById("cat-preventa-"+indice).style.display="none";
+
+      const contenedor = document.getElementById('section-terminos-condiciones');
+      const inputs = contenedor.querySelectorAll('[id^="termino_"]');
+      const valores = Array.from(inputs).map(input => input.value);
+      //console.log("VALORRRS: " + valores.length)
+      //Acá formateamos los valores de los inputs en la sección de Términos y condiciones
+    for (let indice = 1; indice <= valores.length; indice++) {
+        document.getElementById("termino_"+indice).value= "";
       }
-       */
-    }
-    
+      document.getElementById("section-terminos-condiciones").innerHTML = "";      
+    }    
   })
 
   let contador = 0;
@@ -652,24 +635,22 @@ function visibilizarEvento(e){
   function guardarTerminos() {
     const contenedor = document.getElementById('section-terminos-condiciones');
 
-    // Seleccionar todos los inputs con IDs que comiencen con "termino_"
+ 
     const inputs = contenedor.querySelectorAll('[id^="termino_"]');
 
-    // Crear un array para almacenar los valores
+ 
     const valores = Array.from(inputs).map(input => input.value);
 
-    // Mostrar los valores en la consola o usarlos como necesites
     console.log('Valores guardados:', valores);
-
-    // Si necesitas guardar en una variable global, simplemente haz:
-    // window.valoresGuardados = valores;
+    insertarJsonTerminosCondiciones(valores);
   }
 
-function insertarJsonCategoriasEntrada(arry){
+function insertarJsonTerminosCondiciones(array){
 document.getElementById("json_terminos_condiciones").innerHTML = '';
 let input = document.createElement("input");
+input.id="jsonTerminosCondiciones";
 input.type="hidden";
-input.value = json;
+input.value = JSON.stringify(array);
 input.name="json_terminos_condiciones";
 document.getElementById("json_terminos_condiciones").appendChild(input);
 }

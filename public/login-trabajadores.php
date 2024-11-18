@@ -11,7 +11,7 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Trabajadores</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
     <style>
@@ -124,9 +124,9 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
                     <div class="flex items-center">
                          
                     </div>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-300">
+                    <!--<a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-300">
                         ¿Olvidó su contraseña?
-                    </a>
+                    </a>-->
                 </div>
 
                 <button type="submit"

@@ -22,6 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $politicaCancelacion = $_POST['politicaCancelacion'];
    
+    //Acá vamos a recibir los términos y condiciones
+   // Obtener el valor del campo y decodificar las entidades HTML
+    $JSON_terminos_condiciones = html_entity_decode($_POST['json_terminos_condiciones']);
+    $terminos_condiciones_array = json_decode($JSON_terminos_condiciones, true);
+    $terminos_condiciones_json = json_encode($terminos_condiciones_array);
     
     $jsonCategoriaEntrada = $_POST['json'];
 
@@ -36,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //if ($id && $nombre && $fecha && $categoria && $ubicacion && $horaInicio && $horaFin && $capacidad && $organizador && $contactoOrganizador && $descripcion && $imagen) {
         // Aquí iría la lógica para procesar los datos
         
-        $evento->crearEvento($nombre,$capacidad,$imagen,$descripcion,"",$fecha,$fechaCreacion,"Publicado",$organizador,$contactoOrganizador,$ubicacion,$horaInicio, $horaFin, $redes);
+        $evento->crearEvento($nombre,$capacidad,$imagen,$descripcion,$terminos_condiciones_json,"",$fecha,$fechaCreacion,"Publicado",$organizador,$contactoOrganizador,$ubicacion,$horaInicio, $horaFin, $redes);
         $id_evento_ultimo = $evento->idMoreLarge();
 
         foreach($array as $elemento){

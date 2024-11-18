@@ -17,7 +17,7 @@
                     <p class="text-gray-600 mt-2">Únete a nuestra comunidad</p>
                 </div>
 
-                <form id="registroForm" action="procesar_registro.php" method="POST" class="space-y-6">
+                <form id="registroForm" action="../controlador/cliente/registrar_cliente.php" method="POST" class="space-y-6">
                     <!-- Nombres y Apellidos -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -43,13 +43,28 @@
                     <div>
                         <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
                         <select id="pais" name="pais" required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500">
-                            <option value="">Selecciona un país</option>
-                            <option value="Peru">Perú</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="Chile">Chile</option>
-                            <option value="Argentina">Argentina</option>
-                        </select>
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+    <option value="">Selecciona un país</option>
+    <option value="Argentina">Argentina</option>
+    <option value="Bolivia">Bolivia</option>
+    <option value="Chile">Chile</option>
+    <option value="Colombia">Colombia</option>
+    <option value="Costa Rica">Costa Rica</option>
+    <option value="Cuba">Cuba</option>
+    <option value="Ecuador">Ecuador</option>
+    <option value="El Salvador">El Salvador</option>
+    <option value="Guatemala">Guatemala</option>
+    <option value="Honduras">Honduras</option>
+    <option value="México">México</option>
+    <option value="Nicaragua">Nicaragua</option>
+    <option value="Panamá">Panamá</option>
+    <option value="Paraguay">Paraguay</option>
+    <option value="Perú">Perú</option>
+    <option value="República Dominicana">República Dominicana</option>
+    <option value="Uruguay">Uruguay</option>
+    <option value="Venezuela">Venezuela</option>
+</select>
+
                     </div>
 
                     <!-- Tipo de Documento -->
@@ -122,5 +137,33 @@
     </div>
 
     <script src="validacion.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const paisSelect = document.getElementById("pais");
+        const dniRadio = document.getElementById("dni");
+        const carnetRadio = document.getElementById("carnet");
+
+        paisSelect.addEventListener("change", function () {
+            if (this.value === "Perú") {
+                dniRadio.disabled = false;
+                carnetRadio.disabled = true;
+                dniRadio.checked = true; // Selecciona DNI automáticamente
+            } else if (this.value !== "") {
+                dniRadio.disabled = true;
+                carnetRadio.disabled = false;
+                carnetRadio.checked = true; // Selecciona Carnet de Extranjería automáticamente
+            } else {
+                dniRadio.disabled = true;
+                carnetRadio.disabled = true;
+                dniRadio.checked = false;
+                carnetRadio.checked = false;
+            }
+        });
+
+        // Inicializar estado (opcional, para evitar errores en recarga de página)
+        paisSelect.dispatchEvent(new Event("change"));
+    });
+</script>
+
 </body>
 </html>

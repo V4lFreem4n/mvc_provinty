@@ -1,86 +1,42 @@
 <?php
 session_start();
- 
 include_once '../../autoload.php';
 
-
-
-// Crear una instancia de la conexión a la base de datos y conectarse
 $conn = new Database();
 $db = $conn->connect();
+$cliente = new Cliente($db);
 
-if (!$db) {
-    $_SESSION['error'] = "No se pudo conectar a la base de datos.";
-    header("Location: ../../public/login-trabajadores.php");
-    //header("Location: A");
-    exit();
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los datos del formulario
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
 
-// Obtener datos del formulario
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
+    //echo $email ." -> ".$password;
+    //die;
 
-if (empty($email) || empty($password)) {
-     
-    // Ejemplo de redirección con un mensaje de error
-    $_SESSION['error'] =  "Por favor, complete todos los campos.";; // Definir el mensaje de error
-    header("Location: ../../public/login-trabajadores.php");
-    //header("Location: B");
-    exit();
-    
-}
-
-// Preparar la consulta SQL para verificar el usuario
-$sql = "SELECT id, nombre_usuario, rol, password, activo FROM usuarios WHERE correo = '$email'";
-$resultado = $conn->ejecutarConsulta($sql);
-
-if ($resultado && $resultado->num_rows === 1) { 
-    $user = $resultado->fetch_assoc();
-    
-    // Verificar si el usuario está activo
-    if ($user['activo'] != 1) {
-        $_SESSION['error'] = "Esta cuenta está desactivada. Por favor contacte al administrador.";
-        header("Location: ../../public/login-trabajadores.php");
-        //header("Location: C");
+    // Validar que los campos no estén vacíos
+    if (!$email || !$password) {
+        $_SESSION['error'] = "Por favor, completa todos los campos.";   
+        header("Location: ../../public/login-clientes.php");
         exit();
     }
-    
-    // Verificar la contraseña
-    if (password_verify($password, $user['password'])) {
-        // Login exitoso
-     
-        $_SESSION['usuario_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['nombre_usuario'];
-        
-        if($user['rol']==0){
-            $_SESSION['rol']='superadministrador';   
-        }
-        if($user['rol']==1){
-            $_SESSION['rol']='administrador'; 
-        }
-        if($user['rol']==2){
-            $_SESSION['rol']='promotor';   
-        }
-    
+
+    // Verificar si el correo existe
+    if($cliente->verificarCredenciales($email,$password)){
         unset($_SESSION['error']);
-        // Redirigir a la página principal
-        $_SESSION['error'] = "Login no válido"; // Define el mensaje de error
-        header("Location: ../../public/admin-general.php");
-        //header("Location: ../../../vista/admin/gestionGeneral/sepudo.php");
-        //exit();
-    } else {
-        $_SESSION['error'] = "Credenciales incorrectas.";
-        header("Location: ../../public/login-trabajadores.php");
+
+        $cliente_individual = $cliente->mostrarClientesByEmail($email);
+        $_SESSION['rol'] = "cliente";
+        $_SESSION['nombre'] = $cliente_individual['nombre'];
+        $_SESSION['apellido'] = $cliente_individual['apellido'];
+        $_SESSION['correo'] = $cliente_individual['correo'];
+
+        header("Location: ../../public/cliente-general.php");
+        exit();
+    }else{
+        $_SESSION['error'] = "El correo o la contraseña no son válidas.";
+        header("Location: ../../public/login-clientes.php");
         exit();
     }
-} else {
-    $_SESSION['error'] = "Credenciales incorrectas.";
-    header("Location: ../../public/login-trabajadores.php");
-exit();
 }
-
-// Cerrar la conexión
-$conn->cerrarConexion();
-
-//header("Location: ../../../public/login-trabajadores.php");
- 
+?>

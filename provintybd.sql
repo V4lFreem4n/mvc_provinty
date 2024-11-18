@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2024 a las 23:44:09
+-- Tiempo de generación: 18-11-2024 a las 19:22:12
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,7 +40,33 @@ CREATE TABLE `categoria_evento` (
 --
 
 INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`, `precio_preventa`, `ID_Evento`) VALUES
-(5, 'SUPER VIP', 5.00, 88.00, 15);
+(10, 'SUPER VIP', 111.00, 11.00, 20),
+(11, 'PALCO VIP', 111.00, 1111.00, 21),
+(12, 'GENERAL', 222.00, 222222.00, 21),
+(13, 'NIÑOS GENERAL', 333.00, 4433.00, 21);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `documento_identidad` int(50) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `contrasena` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `documento_identidad`, `fecha_nacimiento`, `correo`, `contrasena`) VALUES
+(1, 'Alejandro', 'Pérez', 72423362, '2002-08-13', 'alejandro@alejandro', 'victor12345**');
 
 -- --------------------------------------------------------
 
@@ -97,6 +123,7 @@ CREATE TABLE `eventos` (
   `Aforo` int(11) DEFAULT NULL,
   `Foto` varchar(255) DEFAULT NULL,
   `Descripcion` text DEFAULT NULL,
+  `terminos_condiciones` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `Artista_Autor` varchar(100) DEFAULT NULL,
   `Fecha_Evento` datetime DEFAULT NULL,
   `Fecha_Creacion` datetime DEFAULT current_timestamp(),
@@ -119,8 +146,9 @@ CREATE TABLE `eventos` (
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`) VALUES
-(15, 'Purizaca Pérez', 5555, 'fondo.jpg', 'jjjnn', '', '2024-11-15 00:00:00', '2024-11-06 00:00:00', 'Publicado', 'Privado', 'sadasd', '12asd', NULL, NULL, NULL, NULL, '434', NULL, '14:05:00', '17:05:00', '31234');
+INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`) VALUES
+(20, 'Purizaca Pérez', 555, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'ggggggg', '[\"erererer\",\"ytytyt\"]', '', '2024-11-02 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', 'ffff', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '01:17:00', '03:17:00', 'gdfdf'),
+(21, 'Lili', 65656, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'hhhhhhh', '[\"Sin perros\",\"Sin bebidas alcoh\\u00f3licas\",\"Sin armas\"]', '', '2024-11-06 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'ghfggg', 'vxv', NULL, NULL, NULL, NULL, 'gdfgdg', NULL, '01:28:00', '04:28:00', 'dgdfgdf');
 
 -- --------------------------------------------------------
 
@@ -251,6 +279,12 @@ ALTER TABLE `categoria_evento`
   ADD KEY `ID_Evento` (`ID_Evento`);
 
 --
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `compras`
 --
 ALTER TABLE `compras`
@@ -331,7 +365,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria_evento`
 --
 ALTER TABLE `categoria_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -355,7 +395,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `log_acciones`
