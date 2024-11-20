@@ -23,7 +23,7 @@ session_start();
 
         <?php
 
-if (isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente") {
+if (isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente") {
     echo '<div><p>Hola! ' . $_SESSION['nombre'] . '</p></div>
           <div class="login">
             <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>

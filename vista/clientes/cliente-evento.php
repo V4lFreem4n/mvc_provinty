@@ -22,7 +22,7 @@ session_start();
 
     <?php
 
-if(isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente"){
+if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
   echo '<div><p>Hola! '.$_SESSION['nombre'].'</p></div>
   <div class="login">
     <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>
@@ -68,13 +68,15 @@ if(isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente"){
     <?php
 $contador = 1;
     foreach($categoriasEvento as $categoria){
-      echo '<tr>
+      if($categoria['ID_Evento']==$id){
+        echo '<tr>
       <th scope="row">'.$contador.'</th>
       <td>'.$categoria['nombre_categoria_evento'].'</td>
       <td>36</td>
       <td>S/. '.$categoria['precio_venta'].'</td>
     </tr>';
-    $contador++; 
+    $contador++;
+      } 
     }
 
     
@@ -106,7 +108,7 @@ if($evento['ID_Evento']==$id){
 </section>
 
 <?php
-if(isset($_SESSION['rol']) && $_SESSION['rol'] == "cliente"){
+if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
   echo '<section class="container my-5">
 <p class="h4">¿Qué te pareció?</p>
 <textarea class="form-control my-3" placeholder="Envíanos tus reseñas"></textarea>

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unset($_SESSION['error']);
 
         $cliente_individual = $cliente->mostrarClientesByEmail($email);
-        $_SESSION['rol'] = "cliente";
+        $_SESSION['roles'] = "cliente";
         $_SESSION['nombre'] = $cliente_individual['nombre'];
         $_SESSION['apellido'] = $cliente_individual['apellido'];
         $_SESSION['correo'] = $cliente_individual['correo'];

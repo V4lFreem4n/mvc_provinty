@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2024 a las 23:02:05
+-- Tiempo de generación: 20-11-2024 a las 23:11:32
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -151,6 +151,20 @@ CREATE TABLE `eventos` (
 INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`, `id_usuario`) VALUES
 (23, 'Purizaca Pérez', 4444, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'ffffff', '[\"xxxxxxxxxxx\",\"yyyyy yyyyyyy\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'sadasd', 'asdasd', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '18:16:00', '19:16:00', '4444', 51),
 (24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `interacciones`
+--
+
+CREATE TABLE `interacciones` (
+  `id` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL,
+  `valoracion` int(11) NOT NULL,
+  `comentario` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -319,6 +333,14 @@ ALTER TABLE `eventos`
   ADD KEY `id` (`id_usuario`);
 
 --
+-- Indices de la tabla `interacciones`
+--
+ALTER TABLE `interacciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_evento` (`id_evento`);
+
+--
 -- Indices de la tabla `log_acciones`
 --
 ALTER TABLE `log_acciones`
@@ -461,6 +483,13 @@ ALTER TABLE `estadisticas_eventos`
 --
 ALTER TABLE `eventos`
   ADD CONSTRAINT `relacion_usuario_evento` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `interacciones`
+--
+ALTER TABLE `interacciones`
+  ADD CONSTRAINT `relacion_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relacion_evento` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `log_acciones`
