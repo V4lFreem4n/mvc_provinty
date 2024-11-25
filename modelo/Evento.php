@@ -12,7 +12,9 @@ class Evento {
     public function crearEvento($titulo, $aforo, $foto, $descripcion, $artista, $terminosCondiciones, $fecha_evento, $fecha_creacion, $estado_publicacion, $organizador, $contactoOrganizador, $ubicacion, $horaInicioEvento, $horaFinEvento, $redes,$id_usuario_pk) {
     
         $visibilidad = 'Privado';
+
     
+
         // Consulta SQL actualizada para incluir los nuevos campos
         $sql = "INSERT INTO eventos (Titulo, Aforo, Foto, Descripcion, terminos_condiciones, Artista_Autor, Fecha_Evento, Fecha_Creacion, Estado_Publicacion, Visibilidad, Organizador, Contacto_Organizador, ubicacion, horaInicioEvento	, horaFinEvento, redes, id_usuario) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

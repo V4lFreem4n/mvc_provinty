@@ -107,7 +107,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
 </div>
 
 <!--Panel de descripción-->
-<form action="../controlador/Evento/controladorCrearEvento.php" method="post" id="formulario"><div id="collapse-panel-${ultimoId}" style="display:block">
+<form action="../controlador/Evento/controladorCrearEvento.php" method="post" id="formulario" enctype="multipart/form-data"><div id="collapse-panel-${ultimoId}" style="display:block">
   <div class="bg-green-200 p-1"></div>
 <div class="bg-slate-200 p-5 grid grid-cols-3">
   <div>
@@ -181,7 +181,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
  
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
-    <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" onchange="subirImagen(this,'imagen_evento_${ultimoId}')" accept=".jpg, .jpeg, .png">
+    <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" accept=".jpg, .jpeg, .png">
     
     <div id="json_precios_categorias"></div>
     <div id="json_terminos_condiciones"></div>
