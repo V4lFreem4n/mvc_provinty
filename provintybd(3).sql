@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2024 a las 00:54:21
+-- Tiempo de generación: 25-11-2024 a las 07:08:05
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -67,7 +67,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `documento_identidad`, `fecha_nacimiento`, `correo`, `contrasena`) VALUES
-(1, 'Alejandro', 'Pérez', 72423362, '2002-08-13', 'alejandro@alejandro', 'victor12345**');
+(3, 'victorr', 'Pérez', 72423362, '2024-11-07', 'correo@correo', '$2y$10$GMy3pGjOMqLpLliSizOj/OEjG0fsEG6ksP9ZqVJwT36xyEWJR1jD.');
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,7 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`, `id_usuario`) VALUES
-(23, 'Purizaca Pérez', 4444, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'ffffff', '[\"xxxxxxxxxxx\",\"yyyyy yyyyyyy\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'sadasd', 'asdasd', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '18:16:00', '19:16:00', '4444', 51),
+(23, 'Purizaca Pérez', 4444, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'El concierto ofreció una experiencia vibrante y enérgica, con una impecable mezcla de luces, sonido y emociones que hicieron vibrar a la audiencia. Los artistas, entregados completamente al escenario, interpretaron una variedad de canciones icónicas y nuevas, conectando profundamente con los asistentes. La escenografía deslumbrante y el entusiasmo del público crearon una atmósfera inolvidable, donde cada nota y cada coro resonaban como una celebración de la música en su máxima expresión.', '[\"xxxxxxxxxxx\",\"yyyyy yyyyyyy\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'sadasd', 'asdasd', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '18:16:00', '19:16:00', '4444', 51),
 (24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54);
 
 -- --------------------------------------------------------
@@ -165,6 +165,13 @@ CREATE TABLE `interacciones_estrellas` (
   `id_evento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `interacciones_estrellas`
+--
+
+INSERT INTO `interacciones_estrellas` (`id`, `estrellas`, `id_cliente`, `id_evento`) VALUES
+(0, 5, 3, 24);
+
 -- --------------------------------------------------------
 
 --
@@ -177,6 +184,14 @@ CREATE TABLE `interaccion_comentarios` (
   `id_cliente` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `interaccion_comentarios`
+--
+
+INSERT INTO `interaccion_comentarios` (`id`, `comentario`, `id_cliente`, `id_evento`) VALUES
+(1, 'Muy chévere', 3, 24),
+(2, 'estuvo muuuy bueno', 3, 23);
 
 -- --------------------------------------------------------
 
@@ -419,7 +434,7 @@ ALTER TABLE `categoria_evento`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -444,6 +459,12 @@ ALTER TABLE `estadisticas_eventos`
 --
 ALTER TABLE `eventos`
   MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `interaccion_comentarios`
+--
+ALTER TABLE `interaccion_comentarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `log_acciones`

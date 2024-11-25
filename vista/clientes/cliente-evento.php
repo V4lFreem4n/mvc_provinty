@@ -124,11 +124,13 @@ if($evento['ID_Evento']==$id){
 
 <?php
 if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
-  echo '
-  <section class="container my-5">
+  echo '<section class="container my-5">
     <p class="h4">¿Qué te pareció?</p>
-    <textarea class="form-control my-3" placeholder="Envíanos tus reseñas"></textarea>
-    <button class="btn btn-primary" type="button">Enviar</button>
+    <form method="post" action="../controlador/cliente/controlador_valorar_comentario.php">
+    <input type="hidden" value="'.$id.'" name="id_evento">
+    <textarea class="form-control my-3" placeholder="Envíanos tus reseñas" name="comentario"></textarea>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
   </section>
   
   <section class="container my-5">
