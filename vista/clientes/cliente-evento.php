@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,6 +24,7 @@ session_start();
     <?php
 
 if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
+
   echo '<div><p>Hola! '.$_SESSION['nombre'].'</p></div>
   <div class="login">
     <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>
@@ -38,13 +40,26 @@ if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
     </nav>
 
   <section class="fondo-evento bg-success" style="height: 500px;">
-    classico
+   
   </section>
 
   <section class="container d-flex">
     <button class="bg-primary p-3 mt-2 mx-auto border-none" style="cursor :pointer; border:none; border-radius:5px;">
-        <strong style="color:bisque">COMPRAR ENTRADAS</strong>
+        <strong style="color:bisque">Ver entradas</strong>
     </button>
+  </section>
+
+  <section class="container mt-5">
+  <p class="h4">Descripcion</p>
+  
+<?php
+foreach($eventos as $evento){
+  if($evento['ID_Evento']==$id){
+    
+      echo "<p class='descripcion'>".$evento['Descripcion']."</p>";
+  }
+  }
+?>
   </section>
 
   <section class="container p-3">
@@ -109,29 +124,30 @@ if($evento['ID_Evento']==$id){
 
 <?php
 if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
-  echo '<section class="container my-5">
-<p class="h4">¿Qué te pareció?</p>
-<textarea class="form-control my-3" placeholder="Envíanos tus reseñas"></textarea>
-<button class="btn btn-primary" type="button">Enviar</button>
-</section>
-
-<section class="container my-5">
-<div class="d-flex"><div class="mx-auto"><p class="h4">Califícanos ;)</p></div>    </div>
-<form id="form">
-  <p class="clasificacion">
-    <input id="radio1" type="radio" name="estrellas" value="5"><!--
-    --><label for="radio1">★</label><!--
-    --><input id="radio2" type="radio" name="estrellas" value="4"><!--
-    --><label for="radio2">★</label><!--
-    --><input id="radio3" type="radio" name="estrellas" value="3"><!--
-    --><label for="radio3">★</label><!--
-    --><input id="radio4" type="radio" name="estrellas" value="2"><!--
-    --><label for="radio4">★</label><!--
-    --><input id="radio5" type="radio" name="estrellas" value="1"><!--
-    --><label for="radio5">★</label>
-  </p>
-</form>
-</section>';
+  echo '
+  <section class="container my-5">
+    <p class="h4">¿Qué te pareció?</p>
+    <textarea class="form-control my-3" placeholder="Envíanos tus reseñas"></textarea>
+    <button class="btn btn-primary" type="button">Enviar</button>
+  </section>
+  
+  <section class="container my-5">
+    <div class="d-flex"><div class="mx-auto"><p class="h4">Califícanos ;)</p></div></div>
+    <form id="form">
+      <p class="clasificacion">
+        <input class="star-calify" id="radio1" type="radio" name="estrellas" value="5" onclick="valorarEstrellas(\'radio1\')">
+        <label for="radio1">★</label>
+        <input class="star-calify" id="radio2" type="radio" name="estrellas" value="4" onclick="valorarEstrellas(\'radio2\')">
+        <label for="radio2">★</label>
+        <input class="star-calify" id="radio3" type="radio" name="estrellas" value="3" onclick="valorarEstrellas(\'radio3\')">
+        <label for="radio3">★</label>
+        <input class="star-calify" id="radio4" type="radio" name="estrellas" value="2" onclick="valorarEstrellas(\'radio4\')">
+        <label for="radio4">★</label>
+        <input class="star-calify" id="radio5" type="radio" name="estrellas" value="1" onclick="valorarEstrellas(\'radio5\')">
+        <label for="radio5">★</label>
+      </p>
+    </form>
+  </section>';
 }
 ?>
 
@@ -193,4 +209,89 @@ input[type="radio"]:checked ~ label {
   color: orange;
 }
   </style>
+
+<script>
+  //Hacemos la función que reciba los ids si es que son pulsados
+  
+  async function valorarEstrellas(id) {
+
+    let numId;
+
+switch (id) {
+    case "radio1":
+        numId = 5;
+        break;
+    case "radio2":
+        numId = 4;
+        break;
+    case "radio3":
+        numId = 3;
+        break;
+    case "radio4":
+        numId = 2;
+        break;
+    case "radio5":
+        numId = 1;
+        break;
+}
+
+console.log("El valor de numId es:", numId);
+
+
+    // Muestra el ID seleccionado
+    console.log("El ID elegido es: ", id);
+
+    let data = {
+    estrellas: numId,
+    id_cliente: <?php echo json_encode($_SESSION['idCliente']); ?>, // Aseguramos que sea JSON válido
+    id_evento: <?php echo json_encode($id); ?> // También aseguramos que sea JSON válido
+};
+    // Lógica para enviar el ID a la API
+    const url = "../controlador/cliente/controlador_valorar_estrellas.php"; // URL de ejemplo
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Éxito:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+ 
+
+
+  /** FUNCIÓN AUTOEJECUTABLE
+   * (async () => {
+  const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+  const postData = {
+    title: "Mi nuevo post",
+    body: "Este es el contenido del post.",
+    userId: 1,
+  };
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  const response = await fetchData(apiUrl, options);
+  console.log("Respuesta del POST:", response);
+})();
+
+   */
+
+</script>
+
+
 </html>

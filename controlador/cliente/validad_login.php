@@ -24,16 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar si el correo existe
     if($cliente->verificarCredenciales($email,$password)){
         unset($_SESSION['error']);
-
-        $cliente_individual = $cliente->mostrarClientesByEmail($email);
+        
+        $cliente_individual = $cliente->obtenerClientePorCorreoYContrasena($email,$password);
         $_SESSION['roles'] = "cliente";
         $_SESSION['nombre'] = $cliente_individual['nombre'];
         $_SESSION['apellido'] = $cliente_individual['apellido'];
         $_SESSION['correo'] = $cliente_individual['correo'];
+        $_SESSION['idCliente'] = $cliente_individual['id'];
+        
+        
         //Necesito conseguir el id de éste cliente
 
 
-        header("Location: ../../public/cliente-general.php");
+        header("Location: ../../public/cliente-general-eventos.php");
         exit();
     }else{
         $_SESSION['error'] = "El correo o la contraseña no son válidas.";

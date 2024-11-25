@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $cliente->crearCliente($nombres,$apellidos,$numero_documento,$fecha_nacimiento,$email,$contraseña);
+    $cliente->crearCliente($nombres,$apellidos,$numero_documento,$fecha_nacimiento,$email,password_hash($contraseña, PASSWORD_DEFAULT));
     //Falta establece la sesión
     unset($_SESSION['error']);
     header("Location: ../../public/login-clientes.php");

@@ -1,141 +1,279 @@
 <?php
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../vista/clientes/css/style.css"> <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #004f63;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 32px;
+            margin: 0;
+        }
+        .header .login a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .header .login a:hover {
+            text-decoration: underline;
+        }
+        .carousel-container {
+            margin: auto;
+            max-width: 90%;
+        }
+        .carousel-inner img {
+            height: 500px;
+            object-fit: cover;
+            width: 100%;
+            border: 8px solid #004f63; /* Bordes en las imágenes */
+            border-radius: 15px;
+        }
+        .carousel-caption-left {
+            position: absolute;
+            top: 40%;
+            left: 5%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            width: 350px; /* Más ancho */
+        }
+        .carousel-caption-left h3 {
+            margin-bottom: 15px;
+            font-size: 28px; /* Más grande */
+            font-weight: bold;
+        }
+        .carousel-caption-left p {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        .date-boxes {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .date-box {
+            background-color: #004f63;
+            color: white;
+            padding: 20px; /* Tamaño aumentado */
+            border-radius: 10px;
+            margin: 0 10px; /* Espaciado entre cuadros */
+            text-align: center;
+            font-size: 22px; /* Texto más grande */
+            font-weight: bold;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .event-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .event-buttons button {
+            background-color: #004f63;
+            color: white;
+            border: none;
+            margin: 0 5px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .event-buttons button:hover {
+            background-color: #007b93;
+        }
+
+
+    .zona-eventos {
+        margin-top: 60px;
+        background-color: #f9f9f9;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .evento-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .evento-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+    .card-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .card-text {
+        font-size: 16px;
+        color: #555;
+    }
+    .btn-primary {
+        background-color: #004f63;
+        border: none;
+        font-weight: bold;
+    }
+    .btn-primary:hover {
+        background-color: #007b93;
+    }
+    @media (max-width: 768px) {
+        .evento-card {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+    
 </head>
-
-<body style="background-color: #eedada;">
-
+<body>
+    <!-- Header -->
     <div class="header"> 
-        <h1 class="fade">PROVINTI</h1>
-
-        <?php
-
-if (isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente") {
-    echo '<div><p>Hola! ' . $_SESSION['nombre'] . '</p></div>
-          <div class="login">
-            <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>
-        </div>';
+    <img src="../vista/clientes/img/logo_provint.png" width="100px">
+    <?php
+if (isset($_SESSION['roles'])) {
+    echo '<div class="d-flex">
+            ' . htmlspecialchars($_SESSION['nombre'], ENT_QUOTES, 'UTF-8') . '
+            <a href="../controlador/cliente/logout.php" class="login-button ml-2">Cerrar Sesión</a>
+          </div>';
 } else {
     echo '<div class="login">
-            <a href="./login-clientes.php" class="login-button">Login</a>
-        </div>';
+            <a href="./registro-cliente.php">Registrarse</a>
+            <a href="./login-clientes.php">Login</a>
+          </div>';
 }
 ?>
 
-        
     </div>
 
-  <section>
-  <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-  <div id="carouselExampleIndicators" class="carousel slide d-flex" data-ride="carousel">
-    <div class="carousel-inner mx-auto" style="justify-content: center;">
-      <div class="carousel-item active">
-        <img class="d-block" src="./images/fondo.webp" width="auto" height="500px" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block" src="./images/fondo_carro_1.webp" width="auto" height="500px" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block" src="./images/tercer_fondo.webp" width="auto" height="500px" alt="Third slide">
-      </div>
-    </div>
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
 
-  </section>
-
-</div>
-    <div class="event-buttons">
-        <button>Todos</button>
-        <button>Conciertos</button>
-        <button>Teatro</button>
-        <button>Cursos</button>
-        <button>Entretenimiento</button>
-        <button>Deportes</button>
-        <button>Otros</button>
-    </div>
-
-    <div class="container d-flex my-4">
-      <div class="d-flex"><p class="my-auto mr-5">Encuentra eventos en tu región</p></div>
-    <select name="regiones" id="regiones" class="form-select">
-  <option value="Amazonas">Amazonas</option>
-  <option value="Áncash">Áncash</option>
-  <option value="Apurímac">Apurímac</option>
-  <option value="Arequipa">Arequipa</option>
-  <option value="Ayacucho">Ayacucho</option>
-  <option value="Cajamarca">Cajamarca</option>
-  <option value="Callao">Callao</option>
-  <option value="Cusco">Cusco</option>
-  <option value="Huancavelica">Huancavelica</option>
-  <option value="Huánuco">Huánuco</option>
-  <option value="Ica">Ica</option>
-  <option value="Junín">Junín</option>
-  <option value="La Libertad">La Libertad</option>
-  <option value="Lambayeque">Lambayeque</option>
-  <option value="Lima">Lima</option>
-  <option value="Loreto">Loreto</option>
-  <option value="Madre de Dios">Madre de Dios</option>
-  <option value="Moquegua">Moquegua</option>
-  <option value="Pasco">Pasco</option>
-  <option value="Piura">Piura</option>
-  <option value="Puno">Puno</option>
-  <option value="San Martín">San Martín</option>
-  <option value="Tacna">Tacna</option>
-  <option value="Tumbes">Tumbes</option>
-  <option value="Ucayali">Ucayali</option>
-</select>
-<button class="btn btn-primary ml-4">Buscar</button>
+     <!-- Carrusel -->
+     <div class="container mt-4 carousel-container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <!-- Primer slide -->
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="./images/fondo.webp" alt="Concierto de Rock">
+                    <div class="carousel-caption-left">
+                        <h3>Concierto de Rock</h3>
+                        <p>Artista: Banda X</p>
+                        <div class="date-boxes">
+                            <div class="date-box">25</div>
+                            <div class="date-box">12</div>
+                            <div class="date-box">2024</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Segundo slide -->
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="./images/fondo_carro_1.webp" alt="Festival de Jazz">
+                    <div class="carousel-caption-left">
+                        <h3>Festival de Jazz</h3>
+                        <p>Artista: Artista Y</p>
+                        <div class="date-boxes">
+                            <div class="date-box">30</div>
+                            <div class="date-box">11</div>
+                            <div class="date-box">2024</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tercer slide -->
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="./images/tercer_fondo.webp" alt="Obra de Teatro">
+                    <div class="carousel-caption-left">
+                        <h3>Obra de Teatro</h3>
+                        <p>Artista: Grupo Z</p>
+                        <div class="date-boxes">
+                            <div class="date-box">15</div>
+                            <div class="date-box">10</div>
+                            <div class="date-box">2024</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
     </div>
 
-<section class="container zona-eventos mb-5" >
-  
-
-<?php
-foreach($eventos as $evento){
-  if($evento['Estado_Publicacion'] !== "Cancelado"){
-echo "<div class='card' style='width: 18rem;'>
-  <img class='card-img-top' src='./images/tercer_fondo.webp' alt='Card image cap'>
-  <div class='card-body'>
-    <h5 class='card-title' style='color:black'>". htmlspecialchars($evento['Titulo'])."</h5>
-    <p class='card-text' style='font-weight: 500'>".$evento['Descripcion']. "</p>
-    <a href='./cliente-evento.php?id=".$evento['ID_Evento']."' class='btn btn-primary'>Ver Evento</a>
-  </div>
-</div>
-";
-  }}
-?>
-
+  <!-- Zona de Eventos -->
+<section class="container zona-eventos mt-5">
+    <h2 class="text-center mb-5" style="font-family: 'Lobster', cursive; color: #004f63;">Próximos Eventos</h2>
+    <div class="row">
+        <?php
+        foreach ($eventos as $evento) {
+            if ($evento['Estado_Publicacion'] !== "Cancelado") {
+                echo "
+                <div class='col-md-4 mb-4'>
+                    <div class='card evento-card'>
+                        <img class='card-img-top' src='./images/tercer_fondo.webp' alt='Imagen del Evento'>
+                        <div class='card-body'>
+                            <h5 class='card-title text-primary font-weight-bold'>". htmlspecialchars($evento['Titulo'])."</h5>
+                            <p class='card-text descripcion'>". htmlspecialchars($evento['Descripcion']). "</p>
+                            <a href='./cliente-evento.php?id=".$evento['ID_Evento']."' class='btn btn-primary btn-block'>Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>";
+            }
+        }
+        ?>
+    </div>
 </section>
 
-    <script src="../vista/clientes/js/script.js"></script> <!-- Enlace al archivo JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+  const maxLength = 100; // Máximo de caracteres
+  const elements = document.querySelectorAll(".descripcion");
+
+  elements.forEach((element) => {
+    if (element.textContent.length > maxLength) {
+      element.textContent = element.textContent.slice(0, maxLength) + "...";
+    }
+  });
+</script>
+
 </body>
 </html>

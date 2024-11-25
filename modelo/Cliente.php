@@ -53,7 +53,7 @@ class Cliente {
     
         return $cliente; // Devuelve un array de clientes
     }
-
+    /* ESTO NO ES PRÁCTICO PARA NADA
     public function mostrarClientesByEmail($correo) {
         $sql = "SELECT * FROM cliente WHERE correo='$correo' LIMIT 1"; // LIMIT 1 asegura que solo devuelvas un resultado
         $result = mysqli_query($this->connection, $sql);
@@ -66,7 +66,50 @@ class Cliente {
         }
     
         return false; // Si no se encontró el cliente, devolver false
+    }*/
+
+
+    public function obtenerClientePorCorreoYContrasena($correo, $contrasena) {
+        // Consulta SQL para obtener toda la fila del cliente
+        $sql = "SELECT * FROM cliente WHERE correo = ? LIMIT 1";
+        
+        // Prepara la declaración
+        $stmt = mysqli_prepare($this->connection, $sql);
+        
+        if ($stmt) {
+            // Vincula los parámetros
+            mysqli_stmt_bind_param($stmt, "s", $correo);
+            
+            // Ejecuta la declaración
+            mysqli_stmt_execute($stmt);
+            
+            // Obtiene el resultado
+            $result = mysqli_stmt_get_result($stmt);
+            
+            if ($result) {
+                // Obtiene la fila como un array asociativo
+                $cliente = mysqli_fetch_assoc($result);
+                
+                // Verifica la contraseña con password_verify
+                if ($cliente && password_verify($contrasena, $cliente['contrasena'])) {
+                    // Cierra la declaración
+                    mysqli_stmt_close($stmt);
+                    return $cliente; // Devuelve la fila del cliente
+                }
+            }
+            
+            // Cierra la declaración si no hay resultado o contraseña inválida
+            mysqli_stmt_close($stmt);
+            return false; // No se encontró el cliente o la contraseña no coincide
+        } else {
+            echo "Error en la preparación de la consulta: " . mysqli_error($this->connection);
+            return false; // Error en la consulta
+        }
     }
+    
+    
+    
+    
     
 
     public function contarClientesCreados(){
@@ -93,14 +136,17 @@ class Cliente {
         $stmt = mysqli_prepare($this->connection, $sql);
     
         if ($stmt) {
+            // Vincula el parámetro de correo
             mysqli_stmt_bind_param($stmt, "s", $email);
             mysqli_stmt_execute($stmt);
+            
+            // Vincula el resultado
             mysqli_stmt_bind_result($stmt, $stored_password);
             mysqli_stmt_fetch($stmt);
             mysqli_stmt_close($stmt);
     
             // Si no se encontró el correo o la contraseña no coincide
-            if (!$stored_password || $stored_password !== $password) {
+            if (!$stored_password || !password_verify($password, $stored_password)) {
                 return false; // Credenciales inválidas
             }
     
@@ -110,6 +156,7 @@ class Cliente {
     
         return false; // Por defecto, credenciales inválidas
     }
+    
     
     
 
