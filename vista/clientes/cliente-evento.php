@@ -13,74 +13,464 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Nombre del evento - Provinty</title>
+
+        <style>
+          .header {
+              background-color: #004f63;
+              color: white;
+              padding: 10px 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          .header img {
+              width: 100px;
+          }
+
+          .user-info {
+              display: flex;
+              align-items: center;
+              background-color: #58bcbb;
+              padding: 8px 12px;
+              border-radius: 25px;
+              color: white;
+              font-weight: bold;
+              font-size: 14px;
+              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+          }
+
+          .user-info i {
+              font-size: 20px;
+              margin-right: 8px;
+              color: #fff;
+          }
+
+          .user-info .username {
+              margin-right: 15px;
+          }
+
+          .user-info a {
+              color: #004f63;
+              background-color: white;
+              padding: 5px 10px;
+              border-radius: 5px;
+              text-decoration: none;
+              font-weight: bold;
+              transition: all 0.3s ease;
+          }
+
+          .user-info a:hover {
+              background-color: #004f63;
+              color: white;
+          }
+
+          .login a {
+              color: white;
+              text-decoration: none;
+              margin-left: 15px;
+              font-weight: bold;
+          }
+
+          .login a:hover {
+              text-decoration: underline;
+          }
+          .event-card {
+            margin-top: 10px; ;
+          position: relative;
+          width: 100%;
+          height: 400px;
+          
+          border-radius: 16px;
+          overflow: hidden;
+          transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+          transform: translateY(-5px);
+        }
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(13, 84, 105, 0.95) 0%,
+    rgba(13, 84, 105, 0.8) 40%,
+    rgba(13, 84, 105, 0.4) 100%
+  );
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.event-content {
+  max-width: 80%;
+}
+
+.event-title {
+  color: white;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.event-artist {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.25rem;
+  margin: 0 0 2rem 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.date-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.date-box {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  min-width: 3.5rem;
+}
+
+.event-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #0d5469;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+
+
+
+/* Contenedor principal para secciones */
+.event-section {
+  padding: 3rem 0;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Encabezados de sección */
+.section-header {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  color: #004f63;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: #58bcbb;
+  border-radius: 2px;
+}
+
+/* Descripción */
+.description-container {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 79, 99, 0.08);
+  margin-bottom: 3rem;
+}
+
+.description-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #2c3e50;
+}
+
+/* Tabla de precios */
+.pricing-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.price-table {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 79, 99, 0.08);
+}
+
+.price-table thead {
+  background: #004f63;
+  color: white;
+}
+
+.price-table th {
+  padding: 1.2rem;
+  font-weight: 600;
+}
+
+.price-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.price-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.price-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #e3f2fd;
+  color: #004f63;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Términos y condiciones */
+.terms-container {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 79, 99, 0.08);
+}
+
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.terms-list li {
+  position: relative;
+  padding: 1rem 0 1rem 2rem;
+  border-bottom: 1px solid #e9ecef;
+  color: #2c3e50;
+}
+
+.terms-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #58bcbb;
+  font-weight: bold;
+}
+
+/* Sección de opiniones */
+.review-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 79, 99, 0.08);
+}
+
+.review-textarea {
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1rem;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+.review-textarea:focus {
+  border-color: #58bcbb;
+  outline: none;
+}
+
+.review-button {
+  background: #004f63;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.review-button:hover {
+  transform: translateY(-2px);
+  background: #003845;
+}
+
+/* Sistema de estrellas mejorado */
+.rating-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.star-rating {
+  direction: rtl;
+  display: inline-block;
+  padding: 20px;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  color: #ddd;
+  font-size: 40px;
+  padding: 0 2px;
+  transition: all 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+/* Guía de compra */
+.purchase-guide {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  height: 100%;
+}
+
+.guide-step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.step-number {
+  background: #58bcbb;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.step-content {
+  font-size: 0.95rem;
+  color: #2c3e50;
+}
+      </style>
+
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg d-flex" style="position:fixed;width:100%">
-    <div class="mr-auto">
-        <img src="../vista/clientes/img/logo_provint.png" width="100px">   
-    </div>
 
+  <div class="header">
+    <img src="../vista/clientes/img/logo_provint.png" alt="Provinti Logo">
+    <?php if (isset($_SESSION['roles'])): ?>
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span class="username">Hola, <?php echo htmlspecialchars($_SESSION['nombre'], ENT_QUOTES, 'UTF-8'); ?></span>
+            <a href="../controlador/cliente/logout.php">Cerrar Sesión</a>
+        </div>
+    <?php else: ?>
+        <div class="login">
+            <a href="./registro-cliente.php">Registrarse</a>
+            <a href="./login-clientes.php">Login</a>
+        </div>
+    <?php endif; ?>
+</div>
+<div class="event-card">
+  <img src="./images/fondo.webp" alt="Teatro event" class="event-image">
+  <div class="event-overlay">
+    <div class="event-content">
     <?php
-
-if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
-
-  echo '<div><p>Hola! '.$_SESSION['nombre'].'</p></div>
-  <div class="login">
-    <a href="../controlador/cliente/logout.php" class="login-button">Cerrar Sesión</a>
-</div>';
-}else{
-  echo '<div class="d-flex" style="cursor: pointer;">
-            <p class="my-auto font-bold iniciarSesion"><strong><a href="./login-clientes.php">Iniciar Sesión</a></strong></p>
-        </div>';
-}
-?>
-
-        
-    </nav>
-
-  <section class="fondo-evento bg-success" style="height: 500px;">
-   
-  </section>
-
-  <section class="container d-flex">
-    <button class="bg-primary p-3 mt-2 mx-auto border-none" style="cursor :pointer; border:none; border-radius:5px;">
-        <strong style="color:bisque">Ver entradas</strong>
-    </button>
-  </section>
-
-  <section class="container mt-5">
-  <p class="h4">Descripcion</p>
+      foreach($eventos as $evento){
+        if($evento['ID_Evento']==$id){
+            echo "<p class='descripcion h1'><strong style='color:white; font-size:50px'>".$evento['Titulo']."</strong></p>";
+        }
+        }
+      ?>
+      
+      <p class="event-artist">Artista: Grupo Z</p>
+      <div class="date-container">
+        <div class="date-box">15</div>
+        <div class="date-box">10</div>
+        <div class="date-box">2024</div>
+      </div>
+    </div>
+  </div>
+  <div class="event-badge">    Detalles   </div>
+</div>
   
-<?php
-foreach($eventos as $evento){
-  if($evento['ID_Evento']==$id){
-    
-      echo "<p class='descripcion'>".$evento['Descripcion']."</p>";
-  }
-  }
-?>
-  </section>
+      <!-- Descripción -->
+
+      
+<section class="event-section">
+  <div class="container">
+    <h2 class="section-header">Descripción</h2>
+    <div class="description-container">
+      <p class="description-text">
+      <?php
+      foreach($eventos as $evento){
+        if($evento['ID_Evento']==$id){
+          
+            echo "<p class='descripcion'>".$evento['Descripcion']."</p>";
+        }
+        }
+      ?>
+      </p>
+    </div>
+ 
+      
 
   <section class="container p-3">
     <div class="mt-3 d-flex">
-        <p>TABLA DE PRECIOS</p>
-        <p class="ml-5">¿CÓMO COMPRAR LAS ENTRADAS?</p>
+    <h2 class="section-header">Tabla Precios</h2>
     </div>
 </section>
-
-<section class="container">
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">SECTOR</th>
-      <th scope="col">CANTIDAD</th>
-      <th scope="col">PRECIO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
+ <!-- Precios y Guía de Compra -->
+ <div class="pricing-section">
+      <div class="price-table">
+        <table class="table mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>SECTOR</th>
+              <th>CANTIDAD</th>
+              <th>PRECIO</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php
 $contador = 1;
     foreach($categoriasEvento as $categoria){
       if($categoria['ID_Evento']==$id){
@@ -93,44 +483,51 @@ $contador = 1;
     $contador++;
       } 
     }
-
-    
-
-    
     ?>
-  </tbody>
-</table>
-</section>
+          </tbody>
+        </table>
+      </div>
 
-<section class="container mt-5">
-<p class="h4">Términos y condiciones</p>
-<ul>
-<?php
+      <div class="purchase-guide">
+    <h3 class="h5 mb-4">Términos y Condiciones</h3>
+    <?php
+    // Mostrar los términos y condiciones dinámicamente
+    foreach ($eventos as $evento) {
+        if ($evento['ID_Evento'] == $id) {
+            // Conseguimos los términos
+            $terminos_condiciones_json_string = $evento['terminos_condiciones'];
+            $array_terminos = json_decode($terminos_condiciones_json_string, true); // Decodificar el JSON a un array de PHP
 
-//Acá vamos a mostrar los términos y condiciones
-foreach($eventos as $evento){
-if($evento['ID_Evento']==$id){
-  //conseguimos los términos
-  $terminos_condiciones_json_string = $evento['terminos_condiciones'];
-  $array_terminos = json_decode($terminos_condiciones_json_string, true); // Decodificar el JSON a un array de PHP
-  foreach($array_terminos as $termino){
-    echo "<li>".$termino."</li>";
-  }
-}
-}
-?>
-</ul>
-</section>
+            // Generar cada paso con los términos
+            $step_number = 1;
+            foreach ($array_terminos as $termino) {
+                echo '<div class="guide-step">';
+                echo '  <div class="step-number">' . $step_number . '</div>';
+                echo '  <div class="step-content">' . htmlspecialchars($termino, ENT_QUOTES, 'UTF-8') . '</div>';
+                echo '</div>';
+                $step_number++;
+            }
+        }
+    }
+    ?>
+</div>
+
+  </div>
 
 <?php
 if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
-  echo '<section class="container my-5">
-    <p class="h4">¿Qué te pareció?</p>
-    <form method="post" action="../controlador/cliente/controlador_valorar_comentario.php">
-    <input type="hidden" value="'.$id.'" name="id_evento">
-    <textarea class="form-control my-3" placeholder="Envíanos tus reseñas" name="comentario"></textarea>
-    <button class="btn btn-primary" type="submit">Enviar</button>
-    </form>
+  echo '
+   <h2 class="section-header">¿Qué te pareció?</h2>
+<div class="review-section">
+  <form method="post" action="../controlador/cliente/controlador_valorar_comentario.php">
+    <textarea class="form-control review-textarea" rows="4" name="comentario" placeholder="Comparte tu experiencia con nosotros..."></textarea>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <input type="hidden" value="39" name="id_evento">
+      <button class="review-button" type="submit">Enviar reseña</button>
+    </div>
+  </form>
+</div>
+
   </section>
   
   <section class="container my-5">
@@ -221,19 +618,19 @@ input[type="radio"]:checked ~ label {
 
 switch (id) {
     case "radio1":
-        numId = 5;
+        numId = 1;
         break;
     case "radio2":
-        numId = 4;
+        numId = 2;
         break;
     case "radio3":
         numId = 3;
         break;
     case "radio4":
-        numId = 2;
+        numId = 4;
         break;
     case "radio5":
-        numId = 1;
+        numId = 5;
         break;
 }
 
@@ -245,9 +642,10 @@ console.log("El valor de numId es:", numId);
 
     let data = {
     estrellas: numId,
-    id_cliente: <?php echo json_encode($_SESSION['idCliente']); ?>, // Aseguramos que sea JSON válido
+    id_cliente: "<?php echo json_encode($_SESSION['idCliente']); ?>", // Aseguramos que sea JSON válido
     id_evento: <?php echo json_encode($id); ?> // También aseguramos que sea JSON válido
 };
+
     // Lógica para enviar el ID a la API
     const url = "../controlador/cliente/controlador_valorar_estrellas.php"; // URL de ejemplo
 
@@ -268,30 +666,6 @@ console.log("El valor de numId es:", numId);
 }
 
  
-
-
-  /** FUNCIÓN AUTOEJECUTABLE
-   * (async () => {
-  const apiUrl = "https://jsonplaceholder.typicode.com/posts";
-  const postData = {
-    title: "Mi nuevo post",
-    body: "Este es el contenido del post.",
-    userId: 1,
-  };
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postData),
-  };
-
-  const response = await fetchData(apiUrl, options);
-  console.log("Respuesta del POST:", response);
-})();
-
-   */
 
 </script>
 

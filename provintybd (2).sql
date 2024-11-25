@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 07:08:05
+-- Tiempo de generación: 26-11-2024 a las 00:15:09
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -44,7 +44,16 @@ INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`,
 (15, 'VIP', 22.00, 222.00, 23),
 (16, 'PALCO VIP', 33.00, 333.00, 23),
 (17, 'SUPER VIP', 112.00, 223.00, 24),
-(18, 'VIP', 133.00, 333.00, 24);
+(18, 'VIP', 133.00, 333.00, 24),
+(31, 'NIÑOS SUPERVIP', 1.00, 22.00, 32),
+(32, 'NIÑOS VIP', 3.00, 44.00, 32),
+(36, 'PALCO VIP', 1.00, 33.00, 34),
+(37, 'GENERAL', 2.00, 44.00, 34),
+(38, 'GENERAL', 1.00, 11.00, 35),
+(39, 'VIP', 1.00, 1.00, 36),
+(40, 'SUPER VIP', 22.00, 22.00, 37),
+(41, 'VIP', 1.00, 333.00, 38),
+(42, 'SUPER VIP', 1.00, 11.00, 39);
 
 -- --------------------------------------------------------
 
@@ -150,7 +159,14 @@ CREATE TABLE `eventos` (
 
 INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`, `id_usuario`) VALUES
 (23, 'Purizaca Pérez', 4444, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'El concierto ofreció una experiencia vibrante y enérgica, con una impecable mezcla de luces, sonido y emociones que hicieron vibrar a la audiencia. Los artistas, entregados completamente al escenario, interpretaron una variedad de canciones icónicas y nuevas, conectando profundamente con los asistentes. La escenografía deslumbrante y el entusiasmo del público crearon una atmósfera inolvidable, donde cada nota y cada coro resonaban como una celebración de la música en su máxima expresión.', '[\"xxxxxxxxxxx\",\"yyyyy yyyyyyy\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'sadasd', 'asdasd', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '18:16:00', '19:16:00', '4444', 51),
-(24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54);
+(24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54),
+(32, 'ggggg', 4444, NULL, 'hhhhhhhh', '[\"333\",\"4444\"]', '', '2024-11-14 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'dsfsdff', '33333', NULL, NULL, '2024-11-25', '16:26:26', 'sdgsdg', NULL, '17:29:00', '20:29:00', 'fsdf', 53),
+(34, 'ONE P', 44, NULL, 'ggggggg', '[\"ffffffffff\"]', '', '2024-11-30 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', 'asdasdas', NULL, NULL, '2024-11-25', '16:26:24', 'Moscú', NULL, '15:38:00', '21:36:00', 'sdd', 53),
+(35, 'foto', 3333, NULL, 'ggggggggg', '[\"fffg fgfg\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', '44444', NULL, NULL, '2024-11-25', '16:26:30', '434', NULL, '20:16:00', '22:16:00', 'rereredes', 53),
+(36, 'Purizaca Pérezssssssss', 23333, NULL, 'gggggggg', '[\"rrrrrrr\"]', '', '2024-11-21 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', 'asdasdas', NULL, NULL, '2024-11-25', '16:26:28', '434', NULL, '20:18:00', '22:18:00', '31234', 53),
+(37, 'ddddddd', 3434, NULL, 'ffffff', '[\"112123sdasd\"]', '', '2024-11-08 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', 'fdf', NULL, NULL, NULL, NULL, '434', NULL, '20:24:00', '22:24:00', 'rereredes', 53),
+(38, 'fadadadsssss', 3333, 'uploads/WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'gggggggg', '[\"ddff dfdf\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', 'fsdasd', NULL, NULL, NULL, NULL, '323', NULL, '21:32:00', '22:32:00', 'rereredes', 53),
+(39, 'chih', 333, 'uploads/WhatsApp Image 2023-07-23 at 11.10.23 PM.jpeg', 'ggggggg', '[\"ffff\"]', '', '2024-11-06 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', '12asd', NULL, NULL, NULL, NULL, 'Moscú', NULL, '19:44:00', '22:44:00', 'gggg', 53);
 
 -- --------------------------------------------------------
 
@@ -170,7 +186,9 @@ CREATE TABLE `interacciones_estrellas` (
 --
 
 INSERT INTO `interacciones_estrellas` (`id`, `estrellas`, `id_cliente`, `id_evento`) VALUES
-(0, 5, 3, 24);
+(1, 5, 3, 24),
+(2, 1, 3, 37),
+(3, 4, 3, 39);
 
 -- --------------------------------------------------------
 
@@ -191,7 +209,8 @@ CREATE TABLE `interaccion_comentarios` (
 
 INSERT INTO `interaccion_comentarios` (`id`, `comentario`, `id_cliente`, `id_evento`) VALUES
 (1, 'Muy chévere', 3, 24),
-(2, 'estuvo muuuy bueno', 3, 23);
+(2, 'estuvo muuuy bueno', 3, 23),
+(3, 'Muyyyy epicoo', 3, 39);
 
 -- --------------------------------------------------------
 
@@ -428,7 +447,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria_evento`
 --
 ALTER TABLE `categoria_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -458,13 +477,19 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT de la tabla `interacciones_estrellas`
+--
+ALTER TABLE `interacciones_estrellas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `interaccion_comentarios`
 --
 ALTER TABLE `interaccion_comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `log_acciones`

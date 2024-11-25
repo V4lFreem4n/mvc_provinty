@@ -1,6 +1,6 @@
 <?php
 
-class InteracconesEstrellas {
+class InteraccionesEstrellas {
 
     private $connection;
 
@@ -56,7 +56,7 @@ class InteracconesEstrellas {
 
     public function actualizarOcrearInteraccion($estrellas, $id_cliente, $id_evento) {
         // Verificar si ya existe una fila con el mismo id
-        $sql = "SELECT * FROM interacciones_estrellas WHERE id_cliente = ? AND id_evento=?";
+        $sql = "SELECT * FROM interacciones_estrellas WHERE id_cliente=? AND id_evento=?";
         $stmt = mysqli_prepare($this->connection, $sql);
         
         if ($stmt) {
