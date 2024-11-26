@@ -181,7 +181,7 @@ evento.innerHTML = ` <div class="bg-white py-2 flex px-2 my-2">
  
     </div>
     <p class="text-xs ml-5 my-1">Imagen del evento*</p>
-    <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" accept=".jpg, .jpeg, .png">
+    <input id="input-evento-imagen-${ultimoId}" name="imagen" type="file" class="ml-5" accept=".png">
     
     <div id="json_precios_categorias"></div>
     <div id="json_terminos_condiciones"></div>

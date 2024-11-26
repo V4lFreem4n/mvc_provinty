@@ -10,6 +10,9 @@ $errores = [];
 $directorioSubida = '../../uploads/';
 $directorioWeb = 'uploads/'; // Ruta para acceder desde el navegador
 
+$id_evento_ultimo = $evento->idMoreLarge() + 1;
+$id_evento_ultimo_menos_uno = $id_evento_ultimo - 1;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verifica si hay sesión activa
@@ -35,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nameImagen = $_FILES['imagen']['name'] ?? '';
     $tmpImagen = $_FILES['imagen']['tmp_name'] ?? '';
     $extImagen = strtolower(pathinfo($nameImagen, PATHINFO_EXTENSION));
-    $urlNueva = $directorioWeb . $nameImagen;
-    $urlRelativa = $directorioSubida . $nameImagen;
-    $extPermitidas = ["png", "gif", "jpg", "jpeg"];
+    $urlNueva = $directorioWeb . $id_evento_ultimo;
+    $urlRelativa = $directorioSubida . $id_evento_ultimo.".png";
+    $extPermitidas = ["png"];
 
     if ($nameImagen) {
         if (is_uploaded_file($tmpImagen)) {
@@ -58,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit("Debe seleccionar una imagen.");
     }
 
+
+
     // Procesar términos y condiciones
     $JSON_terminos_condiciones = html_entity_decode($_POST['json_terminos_condiciones']);
     $terminos_condiciones_array = json_decode($JSON_terminos_condiciones, true);
@@ -73,10 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $redes = $_POST['redes'];
 
     // Crear evento en la base de datos
+   
+
     $evento->crearEvento(
         $nombre,
         $capacidad,
-        $urlNueva,
+        $id_evento_ultimo.".png", //Este será el nombre de la imagen
         $descripcion,
         $terminos_condiciones_json,
         "",
@@ -93,11 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     // Obtener ID del último evento creado
-    $id_evento_ultimo = $evento->idMoreLarge();
+    
 
     // Crear categorías del evento
     foreach ($array as $elemento) {
-        $categoria_evento->crearCategoriaEvento($elemento['categoria'], $elemento['venta'], $elemento['preventa'], $id_evento_ultimo);
+        $categoria_evento->crearCategoriaEvento($elemento['categoria'], $elemento['venta'], $elemento['preventa'], $id_evento_ultimo_menos_uno);
     }
 
     // Redirigir después de la creación exitosa

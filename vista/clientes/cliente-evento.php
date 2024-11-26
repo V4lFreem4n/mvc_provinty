@@ -409,7 +409,7 @@ session_start();
     <?php endif; ?>
 </div>
 <div class="event-card">
-  <img src="./images/fondo.webp" alt="Teatro event" class="event-image">
+  <img src="../uploads/<?php echo $id;?>.png" alt="Teatro event" class="event-image">
   <div class="event-overlay">
     <div class="event-content">
     <?php
