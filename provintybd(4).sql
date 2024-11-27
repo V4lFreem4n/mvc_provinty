@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2024 a las 01:13:22
+-- Tiempo de generación: 27-11-2024 a las 16:50:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -57,7 +57,11 @@ INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`,
 (43, 'SUPER VIP', 11.00, 222.00, 39),
 (44, 'SUPER VIP', 1.00, 11.00, 39),
 (45, 'SUPER VIP', 1.00, 11.00, 39),
-(46, 'VIP', 2.00, 22.00, 39);
+(46, 'VIP', 2.00, 22.00, 39),
+(47, 'SUPER VIP', 1.00, 33.00, 43),
+(48, 'VIP', 2.00, 44.00, 43),
+(49, 'VIP', 1.00, 22.00, 44),
+(50, 'PALCO VIP', 123.00, 444.00, 44);
 
 -- --------------------------------------------------------
 
@@ -169,9 +173,11 @@ INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `t
 (35, 'foto', 3333, NULL, 'ggggggggg', '[\"fffg fgfg\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', '44444', NULL, NULL, '2024-11-25', '16:26:30', '434', NULL, '20:16:00', '22:16:00', 'rereredes', 53),
 (36, 'Purizaca Pérezssssssss', 23333, NULL, 'gggggggg', '[\"rrrrrrr\"]', '', '2024-11-21 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', 'asdasdas', NULL, NULL, '2024-11-25', '16:26:28', '434', NULL, '20:18:00', '22:18:00', '31234', 53),
 (37, 'ddddddd', 3434, NULL, 'ffffff', '[\"112123sdasd\"]', '', '2024-11-08 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', 'fdf', NULL, NULL, NULL, NULL, '434', NULL, '20:24:00', '22:24:00', 'rereredes', 53),
-(38, 'fadadadsssss', 3333, 'uploads/WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'gggggggg', '[\"ddff dfdf\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', 'fsdasd', NULL, NULL, NULL, NULL, '323', NULL, '21:32:00', '22:32:00', 'rereredes', 53),
-(39, 'chih', 333, '39.png', 'ggggggg', '[\"ffff\"]', '', '2024-11-06 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', '12asd', NULL, NULL, NULL, NULL, 'Moscú', NULL, '19:44:00', '22:44:00', 'gggg', 53),
-(42, 'PRESSS', 3333, '40.png', 'FFFFFFFFFF', '[\"2222\"]', '', '2024-10-30 00:00:00', '2024-11-26 00:00:00', 'Publicado', 'Privado', 'UEFA', 'ASDASD', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '20:05:00', '23:05:00', 'SSSS', 53);
+(38, 'fadadadsssss', 3333, 'uploads/WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'gggggggg', '[\"ddff dfdf\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Público', 'UEFA', 'fsdasd', NULL, NULL, NULL, NULL, '323', NULL, '21:32:00', '22:32:00', 'rereredes', 53),
+(39, 'chih', 333, '39.png', 'ggggggg', '[\"ffff\"]', '', '2024-11-06 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Público', 'UEFA', '12asd', NULL, NULL, NULL, NULL, 'Moscú', NULL, '19:44:00', '22:44:00', 'gggg', 53),
+(42, 'PRESSS', 3333, '42.png', 'FFFFFFFFFF', '[\"2222\"]', '', '2024-10-30 00:00:00', '2024-11-26 00:00:00', 'Publicado', 'Público', 'UEFA', 'ASDASD', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '20:05:00', '23:05:00', 'SSSS', 53),
+(43, 'SUEÑO', 3333, '43.png', 'FFFFFFFFF', '[\"NO PERROS\"]', '', '2024-10-30 00:00:00', '2024-11-27 00:00:00', 'Publicado', 'Público', 'UEFA', 'ffff', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '05:10:00', '07:10:00', 'rereredes', 53),
+(44, 'PAZ', 444, '44.png', 'FFFFFF', '[\"NO ALCOHOL\"]', '', '2024-11-08 00:00:00', '2024-11-27 00:00:00', 'Publicado', 'Público', 'SDASD', 'DDDD', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '05:15:00', '08:15:00', 'SDSS', 53);
 
 -- --------------------------------------------------------
 
@@ -452,7 +458,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria_evento`
 --
 ALTER TABLE `categoria_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -482,7 +488,7 @@ ALTER TABLE `estadisticas_eventos`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `interacciones_estrellas`
