@@ -666,6 +666,37 @@ console.log("El valor de numId es:", numId);
 }
 
  
+//Vamos a contar el tiempo transcurrido
+
+(function () {
+
+  let intervalo = setInterval(enviarTiempo, 2000);
+  
+})();
+
+const ruta = "../controlador/cliente/controlador_tiempo_transcurrido.php";
+let datos = {
+  info_tiempo: "Han pasado segundos",
+  id_cliente: "<?php echo json_encode($_SESSION['idCliente']); ?>",
+  id_evento:<?php echo json_encode($id); ?>
+}
+
+function enviarTiempo(){
+  fetch(ruta, {
+    method:'post',
+    header:{
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(datos),
+  }).then(response => response.json())
+    .then(data => {
+        console.log('Éxito:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
 
 </script>
 

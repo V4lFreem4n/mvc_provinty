@@ -7,5 +7,6 @@ require_once 'modelo/Categoria_evento.php';
 require_once 'modelo/Cliente.php';
 require_once 'modelo/Interacciones_estrellas.php';
 require_once 'modelo/Interacciones_comentario.php';
+require_once 'modelo/Interaccion_tiempo.php';
 
  

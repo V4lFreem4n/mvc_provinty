@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2024 a las 16:50:03
+-- Tiempo de generación: 27-11-2024 a las 18:22:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -226,6 +226,28 @@ INSERT INTO `interaccion_comentarios` (`id`, `comentario`, `id_cliente`, `id_eve
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `interaccion_tiempo`
+--
+
+CREATE TABLE `interaccion_tiempo` (
+  `id` int(11) NOT NULL,
+  `tiempo` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `interaccion_tiempo`
+--
+
+INSERT INTO `interaccion_tiempo` (`id`, `tiempo`, `id_cliente`, `id_evento`) VALUES
+(1, 42, 3, 44),
+(2, 136, 3, 43),
+(3, 32, 3, 39);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `log_acciones`
 --
 
@@ -406,6 +428,14 @@ ALTER TABLE `interaccion_comentarios`
   ADD KEY `id_evento` (`id_evento`);
 
 --
+-- Indices de la tabla `interaccion_tiempo`
+--
+ALTER TABLE `interaccion_tiempo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_evento` (`id_evento`);
+
+--
 -- Indices de la tabla `log_acciones`
 --
 ALTER TABLE `log_acciones`
@@ -503,6 +533,12 @@ ALTER TABLE `interaccion_comentarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `interaccion_tiempo`
+--
+ALTER TABLE `interaccion_tiempo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `log_acciones`
 --
 ALTER TABLE `log_acciones`
@@ -574,6 +610,13 @@ ALTER TABLE `interacciones_estrellas`
 ALTER TABLE `interaccion_comentarios`
   ADD CONSTRAINT `relacion_comentarios_clientes` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `relacion_comentarios_eventos` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `interaccion_tiempo`
+--
+ALTER TABLE `interaccion_tiempo`
+  ADD CONSTRAINT `relacion_cliente_tiempo` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relacion_evento_tiempo` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `log_acciones`

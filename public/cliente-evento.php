@@ -30,6 +30,7 @@ if(!$existenciaId){
     exit(); 
 }
 
+//Verificamos si el evento está Público
 foreach($eventos as $evento){
     if($evento['ID_Evento']==$id && $evento['visibilidad']!='Público'){
         header('Location: cliente-general-eventos.php');
