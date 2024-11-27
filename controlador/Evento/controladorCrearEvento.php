@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $evento->crearEvento(
         $nombre,
         $capacidad,
-        $id_evento_ultimo.".png", //Este será el nombre de la imagen
+        $id_evento_proximo.".png", //Este será el nombre de la imagen
         $descripcion,
         $terminos_condiciones_json,
         "",
