@@ -10,8 +10,7 @@ $errores = [];
 $directorioSubida = '../../uploads/';
 $directorioWeb = 'uploads/'; // Ruta para acceder desde el navegador
 
-$id_evento_ultimo = $evento->idMoreLarge() + 1;
-$id_evento_ultimo_menos_uno = $id_evento_ultimo - 1;
+$id_evento_proximo = $evento->proximoId();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -38,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nameImagen = $_FILES['imagen']['name'] ?? '';
     $tmpImagen = $_FILES['imagen']['tmp_name'] ?? '';
     $extImagen = strtolower(pathinfo($nameImagen, PATHINFO_EXTENSION));
-    $urlNueva = $directorioWeb . $id_evento_ultimo;
-    $urlRelativa = $directorioSubida . $id_evento_ultimo.".png";
+    $urlNueva = $directorioWeb . $id_evento_proximo;
+    $urlRelativa = $directorioSubida . $id_evento_proximo.".png";
     $extPermitidas = ["png"];
 
     if ($nameImagen) {
@@ -104,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Crear categorías del evento
     foreach ($array as $elemento) {
-        $categoria_evento->crearCategoriaEvento($elemento['categoria'], $elemento['venta'], $elemento['preventa'], $id_evento_ultimo_menos_uno);
+        $categoria_evento->crearCategoriaEvento($elemento['categoria'], $elemento['venta'], $elemento['preventa'], $id_evento_proximo);
     }
 
     // Redirigir después de la creación exitosa

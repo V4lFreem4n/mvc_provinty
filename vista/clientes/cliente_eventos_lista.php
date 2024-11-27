@@ -184,47 +184,8 @@ if (isset($_SESSION['roles'])) {
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
-                <!-- Primer slide -->
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="./images/fondo.webp" alt="Concierto de Rock">
-                    <div class="carousel-caption-left">
-                        <h3>Concierto de Rock</h3>
-                        <p>Artista: Banda X</p>
-                        <div class="date-boxes">
-                            <div class="date-box">25</div>
-                            <div class="date-box">12</div>
-                            <div class="date-box">2024</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Segundo slide -->
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="./images/fondo_carro_1.webp" alt="Festival de Jazz">
-                    <div class="carousel-caption-left">
-                        <h3>Festival de Jazz</h3>
-                        <p>Artista: Artista Y</p>
-                        <div class="date-boxes">
-                            <div class="date-box">30</div>
-                            <div class="date-box">11</div>
-                            <div class="date-box">2024</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tercer slide -->
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="./images/tercer_fondo.webp" alt="Obra de Teatro">
-                    <div class="carousel-caption-left">
-                        <h3>Obra de Teatro</h3>
-                        <p>Artista: Grupo Z</p>
-                        <div class="date-boxes">
-                            <div class="date-box">15</div>
-                            <div class="date-box">10</div>
-                            <div class="date-box">2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="carousel-inner" id="carousel-inner"></div>
+
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -242,11 +203,11 @@ if (isset($_SESSION['roles'])) {
     <div class="row">
         <?php
         foreach ($eventos as $evento) {
-            if ($evento['Estado_Publicacion'] !== "Cancelado") {
+            if ($evento['Estado_Publicacion'] !== "Cancelado" && $evento['visibilidad']=="Público") {
                 echo "
                 <div class='col-md-4 mb-4'>
                     <div class='card evento-card'>
-                        <img class='card-img-top' src='./images/tercer_fondo.webp' alt='Imagen del Evento'>
+                        <img class='card-img-top' src='../uploads/".$evento['Foto']."' alt='Imagen del Evento'>
                         <div class='card-body'>
                             <h5 class='card-title text-primary font-weight-bold'>". htmlspecialchars($evento['Titulo'])."</h5>
                             <p class='card-text descripcion'>". htmlspecialchars($evento['Descripcion']). "</p>
@@ -273,6 +234,60 @@ if (isset($_SESSION['roles'])) {
       element.textContent = element.textContent.slice(0, maxLength) + "...";
     }
   });
+
+//Carrusel, funcionalidades
+(async ( ) => {
+
+const result = await cargarImagenesCarousel (); //Usaremos API FETCH
+
+}) ()
+
+function cargarImagenesCarousel(){
+    let div_carousel = document.getElementById("carousel-inner");
+
+
+    let url = "../controlador/cliente/controlador_carousel.php";
+    let data = "";
+    fetch(url, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Éxito:', data); //Vamos a usar éstos datos que recibimos y hacer cositas.
+      //Conseguimos el nombre de las imágenes y cargamos el carousel dinámicamente
+        //data = JSON.parse(data);
+        eventos = data.data;
+        eventos.forEach((element, index) => {
+    let fecha = element['fecha'];
+    let [anio, mes, dia] = fecha.split(" ")[0].split("-");
+
+    let div = document.createElement("div");
+    div.className = index === 0 ? "carousel-item active" : "carousel-item"; // Solo el primero tiene "active"
+    div.innerHTML = `
+        <img class="d-block w-100" src="../${element['nombre_imagen']}" alt="Imagen evento">
+        <div class="carousel-caption-left">
+            <h3>${element['nombre_evento']}</h3>
+            <p>${element['artista']}</p>
+            <div class="date-boxes">
+                <div class="date-box">${dia}</div>
+                <div class="date-box">${mes}</div>
+                <div class="date-box">${anio}</div>
+            </div>
+        </div>`;
+    div_carousel.appendChild(div);
+});
+
+
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+}
+
 </script>
 
 </body>
