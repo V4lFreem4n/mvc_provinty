@@ -145,26 +145,30 @@ $menu_items = $accesos[$_SESSION['rol']];
     <!-- Contenido principal -->
     <main class="max-w-7xl mx-auto p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <?php if (in_array('resumen', $menu_items)): ?>
-            <!-- Tarjeta de resumen -->
-            <div class="bg-white bg-opacity-10 rounded-lg p-6 col-span-1 row-span-2 card-hover backdrop-blur-sm">
-                <div class="h-full flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-4">
-                            <i class="fas fa-chart-line text-2xl text-white"></i>
-                            <h2 class="text-2xl font-bold text-white">RESUMEN</h2>
-                        </div>
-                        <p class="text-teal-100 mb-4">
-                            Obtén una visión general de los eventos, usuarios y más con estadísticas en la bitácora digital.
-                        </p>
-                    </div>
-                    <button class="bg-white text-teal-700 px-6 py-2 rounded-full w-max hover:bg-teal-50 transition-colors flex items-center space-x-2">
-                        <span>Acceder</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-            <?php endif; ?>
+           <?php
+           /**
+            *  <?php if (in_array('resumen', $menu_items)): ?>
+            *<!-- Tarjeta de resumen -->
+            *<div class="bg-white bg-opacity-10 rounded-lg p-6 col-span-1 row-span-2 card-hover backdrop-blur-sm">
+                *<div class="h-full flex flex-col justify-between">
+                    *<div>
+                       * <div class="flex items-center space-x-2 mb-4">
+                        *    <i class="fas fa-chart-line text-2xl text-white"></i>
+                         *   <h2 class="text-2xl font-bold text-white">RESUMEN</h2>
+                        *</div>
+                        *<p class="text-teal-100 mb-4">
+                        *    Obtén una visión general de los eventos, usuarios y más con estadísticas en la bitácora digital.
+                        *</p>
+                    *</div>
+                    *<button class="bg-white text-teal-700 px-6 py-2 rounded-full w-max hover:bg-teal-50 transition-colors flex items-center space-x-2">
+                     *   <span>Acceder</span>
+                      *  <i class="fas fa-arrow-right"></i>
+                    *</button>
+                *</div>
+            *</div>
+            *<?php endif; ?>
+            */
+           ?>
 
             <?php if (in_array('informes', $menu_items)): ?>
             <!-- Tarjeta de informes -->
@@ -180,7 +184,7 @@ $menu_items = $accesos[$_SESSION['rol']];
                         </p>
                     </div>
                     <button class="bg-white text-teal-700 px-6 py-2 rounded-full border border-teal-700 hover:bg-teal-700 hover:text-white transition-colors flex items-center space-x-2">
-                        <span>Acceder</span>
+                        <a href="./admin-informes-eventos.php"><span>Acceder</span></a>
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>

@@ -15,7 +15,7 @@ try {
 
         $conn = new Database();
         $db = $conn->connect();
-        $interaccion_estrellas = new InteraccionesEstrellas($db);
+        $interaccion_estrellas = new Interaccion($db);
         $interaccion_estrellas->actualizarOcrearInteraccion($estrellas, $id_cliente, $id_evento);
 
         echo json_encode([

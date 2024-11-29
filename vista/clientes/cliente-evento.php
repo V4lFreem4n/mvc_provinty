@@ -618,19 +618,19 @@ input[type="radio"]:checked ~ label {
 
 switch (id) {
     case "radio1":
-        numId = 1;
+        numId = 5;
         break;
     case "radio2":
-        numId = 2;
+        numId = 4;
         break;
     case "radio3":
         numId = 3;
         break;
     case "radio4":
-        numId = 4;
+        numId = 2;
         break;
     case "radio5":
-        numId = 5;
+        numId = 1;
         break;
 }
 
@@ -670,7 +670,7 @@ console.log("El valor de numId es:", numId);
 
 (function () {
 
-  let intervalo = setInterval(enviarTiempo, 2000);
+  let intervalo = setInterval(enviarTiempo, 3000);
   
 })();
 

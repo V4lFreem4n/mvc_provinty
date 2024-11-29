@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2024 a las 18:22:33
+-- Tiempo de generación: 29-11-2024 a las 08:44:55
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -54,10 +54,6 @@ INSERT INTO `categoria_evento` (`id`, `nombre_categoria_evento`, `precio_venta`,
 (40, 'SUPER VIP', 22.00, 22.00, 37),
 (41, 'VIP', 1.00, 333.00, 38),
 (42, 'SUPER VIP', 1.00, 11.00, 39),
-(43, 'SUPER VIP', 11.00, 222.00, 39),
-(44, 'SUPER VIP', 1.00, 11.00, 39),
-(45, 'SUPER VIP', 1.00, 11.00, 39),
-(46, 'VIP', 2.00, 22.00, 39),
 (47, 'SUPER VIP', 1.00, 33.00, 43),
 (48, 'VIP', 2.00, 44.00, 43),
 (49, 'VIP', 1.00, 22.00, 44),
@@ -84,7 +80,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `documento_identidad`, `fecha_nacimiento`, `correo`, `contrasena`) VALUES
-(3, 'victorr', 'Pérez', 72423362, '2024-11-07', 'correo@correo', '$2y$10$GMy3pGjOMqLpLliSizOj/OEjG0fsEG6ksP9ZqVJwT36xyEWJR1jD.');
+(3, 'victorr', 'Pérez', 72423362, '2024-11-07', 'correo@correo', '$2y$10$GMy3pGjOMqLpLliSizOj/OEjG0fsEG6ksP9ZqVJwT36xyEWJR1jD.'),
+(4, 'Alex', 'Perez', 82423365, '2024-11-20', 'email@email', '$2y$10$VY0ioQvecp8rW6fLWbZMLO90PH9I.Uh070LbDpS0mUkijK/QIjx/O');
 
 -- --------------------------------------------------------
 
@@ -182,68 +179,27 @@ INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `t
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `interacciones_estrellas`
+-- Estructura de tabla para la tabla `interaccion`
 --
 
-CREATE TABLE `interacciones_estrellas` (
+CREATE TABLE `interaccion` (
   `id` int(11) NOT NULL,
+  `comentario` varchar(700) NOT NULL,
   `estrellas` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_evento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `interacciones_estrellas`
---
-
-INSERT INTO `interacciones_estrellas` (`id`, `estrellas`, `id_cliente`, `id_evento`) VALUES
-(1, 5, 3, 24),
-(2, 1, 3, 37),
-(3, 4, 3, 39);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `interaccion_comentarios`
---
-
-CREATE TABLE `interaccion_comentarios` (
-  `id` int(11) NOT NULL,
-  `comentario` varchar(500) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_evento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `interaccion_comentarios`
---
-
-INSERT INTO `interaccion_comentarios` (`id`, `comentario`, `id_cliente`, `id_evento`) VALUES
-(1, 'Muy chévere', 3, 24),
-(2, 'estuvo muuuy bueno', 3, 23),
-(3, 'Muyyyy epicoo', 3, 39);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `interaccion_tiempo`
---
-
-CREATE TABLE `interaccion_tiempo` (
-  `id` int(11) NOT NULL,
   `tiempo` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_evento` int(11) NOT NULL
+  `id_evento` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `interaccion_tiempo`
+-- Volcado de datos para la tabla `interaccion`
 --
 
-INSERT INTO `interaccion_tiempo` (`id`, `tiempo`, `id_cliente`, `id_evento`) VALUES
-(1, 42, 3, 44),
-(2, 136, 3, 43),
-(3, 32, 3, 39);
+INSERT INTO `interaccion` (`id`, `comentario`, `estrellas`, `tiempo`, `id_evento`, `id_cliente`) VALUES
+(1, '', 0, 2, 43, 3),
+(2, 'excelente', 5, 486, 39, 3),
+(3, '', 2, 189, 38, 3),
+(4, 'Me gustó mucho', 1, 918, 39, 4);
 
 -- --------------------------------------------------------
 
@@ -412,28 +368,12 @@ ALTER TABLE `eventos`
   ADD KEY `id` (`id_usuario`);
 
 --
--- Indices de la tabla `interacciones_estrellas`
+-- Indices de la tabla `interaccion`
 --
-ALTER TABLE `interacciones_estrellas`
+ALTER TABLE `interaccion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_evento` (`id_evento`),
   ADD KEY `id_cliente` (`id_cliente`);
-
---
--- Indices de la tabla `interaccion_comentarios`
---
-ALTER TABLE `interaccion_comentarios`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_evento` (`id_evento`);
-
---
--- Indices de la tabla `interaccion_tiempo`
---
-ALTER TABLE `interaccion_tiempo`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_evento` (`id_evento`);
 
 --
 -- Indices de la tabla `log_acciones`
@@ -494,7 +434,7 @@ ALTER TABLE `categoria_evento`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -521,22 +461,10 @@ ALTER TABLE `eventos`
   MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT de la tabla `interacciones_estrellas`
+-- AUTO_INCREMENT de la tabla `interaccion`
 --
-ALTER TABLE `interacciones_estrellas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `interaccion_comentarios`
---
-ALTER TABLE `interaccion_comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `interaccion_tiempo`
---
-ALTER TABLE `interaccion_tiempo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `interaccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `log_acciones`
@@ -598,25 +526,11 @@ ALTER TABLE `eventos`
   ADD CONSTRAINT `relacion_usuario_evento` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `interacciones_estrellas`
+-- Filtros para la tabla `interaccion`
 --
-ALTER TABLE `interacciones_estrellas`
-  ADD CONSTRAINT `relacion_cliente_estrellas` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relacion_cliente_eventos` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `interaccion_comentarios`
---
-ALTER TABLE `interaccion_comentarios`
-  ADD CONSTRAINT `relacion_comentarios_clientes` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relacion_comentarios_eventos` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `interaccion_tiempo`
---
-ALTER TABLE `interaccion_tiempo`
-  ADD CONSTRAINT `relacion_cliente_tiempo` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relacion_evento_tiempo` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `interaccion`
+  ADD CONSTRAINT `relacion_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relacion_evento` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`ID_Evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `log_acciones`

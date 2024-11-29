@@ -2,7 +2,7 @@
 require_once '../autoload.php';
 
 session_start();
-if(!isset($_SESSION['rol']) && ($_SESSION['rol'] == "superadministrador" || $_SESSION['rol'] == "administrador" ||$_SESSION['rol'] == "promotor")){
+if(!isset($_SESSION['rol']) && !($_SESSION['rol'] == "superadministrador" || $_SESSION['rol'] == "administrador" ||$_SESSION['rol'] == "promotor")){
     header("Location: ./login-trabajadores.php");
         exit();
 }
@@ -15,36 +15,31 @@ if(!isset($_GET['id'])){
 $id = $_GET['id'];
 
 
+
 $db = new Database();
+
 $eventosObjeto = new Evento($db->connect());
-$interaccion_tiempo = new Interaccion_tiempo($db->connect());
-$interaccion_comentario = new InteraccionesComentario($db->connect());
-$interaccion_estrellas = new InteraccionesEstrellas($db->connect());
-$clienteObjeto = new Cliente($db->connect());
-
-$tiempo = $interaccion_tiempo->mostrarInteracciones();
-$comentarios = $interaccion_comentario->mostrarInteracciones();
-$clientes = $clienteObjeto->mostrarClientes();
 $eventos = $eventosObjeto->mostrarEventos();
-$estrellas = $interaccion_estrellas->mostrarInteracciones();
+$existenciaId=false;
 
-$listaEventosInteractuados = [];
+$nombreEvento = "";
 
-foreach($comentarios as $comentario){
-if($comentario['id_evento']==$id){
-
-    foreach($estrellas as $estrella){
-        if($estrella['id_evento']==$id){
-            
-            $listaEventosInteractuados = ['cliente' => 'cliente', 'estrellas' => $estrella['estrellas'], 'comentario' => 3];
-
-        }
+foreach($eventos as $evento){
+    if($evento['ID_Evento']==$id){
+        $existenciaId = true;
+        $nombreEvento = $evento['Titulo'];
     }
-
-}
 }
 
+if(!$existenciaId){
+    header('Location: admin-informes-eventos.php');
+    exit(); 
+}
 
+$interaccionesObjeto = new Interaccion($db->connect());
+
+$interacciones = $interaccionesObjeto->mostrarInteracciones();
+$promedios = $interaccionesObjeto->obtenerPromedios($id);
 
 include '../vista/admin/informe/detalle_informes.php';
 

@@ -14,8 +14,8 @@ try {
         $id_evento = intval($data['id_evento']);
 
         $conn = new Database();
-        $tiempoModelo = new Interaccion_tiempo($conn->connect());
-        $tiempoModelo->crearTiempoTranscurrido(2,$id_cliente, $id_evento);
+        $tiempoModelo = new Interaccion($conn->connect());
+        $tiempoModelo->crearTiempoTranscurrido(3,$id_cliente, $id_evento); //El 3 es porque los datos se envían cada 3 segundos
         
         echo json_encode([
             'status' => 'success',

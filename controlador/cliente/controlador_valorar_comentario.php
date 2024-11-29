@@ -6,7 +6,7 @@ $idCliente = $_SESSION['idCliente'];
 $idEventos = $_POST['id_evento'];
 $conn = new Database();
 $db = $conn->connect();
-$comentarios = new InteraccionesComentario($db);
+$comentarios = new Interaccion($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Verificar si el campo comentario está establecido y no está vacío
