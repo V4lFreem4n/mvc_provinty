@@ -87,23 +87,36 @@ $menu_items = $accesos[$_SESSION['rol']];
                     </a>
                 <?php endforeach; ?>
                 
-                <!-- Barra de búsqueda -->
-                <div class="relative">
-                    <input type="search" class="bg-teal-700 text-white rounded-full py-1 px-4 focus:outline-none focus:ring-2 focus:ring-teal-300 w-48" placeholder="Buscar...">
-                </div>
+              
                 
                 <!-- Icono de notificación -->
                 <button class="text-white hover:text-teal-200 relative">
                     <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">3</span>
+                <!--<span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">3</span>-->
                 </button>
                 
                 <!-- Icono de usuario con dropdown -->
                 <div class="relative">
                     <button id="userDropdown" class="text-white hover:text-teal-200 flex items-center space-x-2">
-                        <?php //if ($usuario['foto_url']): ?>
-                            <img src="<?php //echo htmlspecialchars($usuario['foto_url']); ?>" alt="Perfil" class="w-8 h-8 rounded-full">
-                        <?php //else: ?>
+                        <?php 
+                            switch ($_SESSION['rol']) {
+                                case "superadministrador":
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1896/1896513.png " width="30" height="30" alt="" title="" class="img-small">';
+                                    break;
+                                case "administrador":
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1754/1754719.png" width="30" height="30" alt="" title="" class="img-small">';
+                                   
+                                    break;
+                                case "promotor":
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1253/1253665.png" width="30" height="30" alt="" title="" class="img-small">';
+                                     break;
+                                    default:
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1896/1896513.png " width="30" height="30" alt="" title="" class="img-small">';
+                                    break;
+                            }
+                            
+                            
+                        ?>
                             <i class="fas fa-user-circle text-2xl"></i>
                         <?php //endif; ?>
                     </button>
@@ -111,9 +124,25 @@ $menu_items = $accesos[$_SESSION['rol']];
                     <!-- Dropdown menu -->
                     <div id="userMenu" class="dropdown bg-white rounded-lg shadow-xl p-4" style="z-index: 100;">
                         <div class="flex items-center space-x-3 border-b pb-3">
-                            <?php //if ($usuario['foto_url']): ?>
-                                <img src="<?php //echo htmlspecialchars($usuario['foto_url']); ?>" alt="Perfil" class="w-12 h-12 rounded-full">
-                            <?php //else: ?>
+                        <?php 
+                            switch ($_SESSION['rol']) {
+                                case "superadministrador":
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1896/1896513.png " width="30" height="30" alt="" title="" class="img-small">';
+                                    break;
+                                case "administrador":
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1754/1754719.png" width="30" height="30" alt="" title="" class="img-small">';
+                                   
+                                    break;
+                                case "promotor":
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1253/1253665.png" width="30" height="30" alt="" title="" class="img-small">';
+                                     break;
+                                    default:
+                                    echo '<img src="https://cdn-icons-png.flaticon.com/512/1896/1896513.png " width="30" height="30" alt="" title="" class="img-small">';
+                                    break;
+                            }
+                            
+                            
+                        ?>
                                 <i class="fas fa-user-circle text-4xl text-teal-700"></i>
                             <?php //endif; ?>
                             <div>
@@ -122,15 +151,7 @@ $menu_items = $accesos[$_SESSION['rol']];
                             </div>
                         </div>
                         <div class="mt-3 space-y-2">
-                            <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-teal-600 py-2">
-                                <i class="fas fa-user-cog"></i>
-                                <span>Perfil</span>
-                            </a>
-                            <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-teal-600 py-2">
-                                <i class="fas fa-cog"></i>
-                                <span>Configuración</span>
-                            </a>
-                            <hr class="my-2">
+                        
                             <a href="../controlador/Usuario/logout.php" class="flex items-center space-x-2 text-red-600 hover:text-red-700 py-2">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Cerrar Sesión</span>
