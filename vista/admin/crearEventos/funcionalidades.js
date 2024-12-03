@@ -18,6 +18,11 @@ const lista = document.getElementById('eventos');
 const items = lista.getElementsByTagName('li');
 const ArrayDeDivsEventos = Array.from(items);
 
+
+let listaPreciosCategoriasGuardado;
+let listaPoliticasGuardado;
+
+
 console.log("Cantidad de eventos:" + items.length);
 console.log("Array : ",ArrayDeDivsEventos);
 
@@ -245,13 +250,13 @@ document.getElementById("categoria_entrada").addEventListener('click',(event)=>{
     console.log("LLEGAMOS ACA 2")
     document.getElementById("categoria_entrada").style.display="none"; 
     //Acá vamos a cerrar el modal y vamos a formatear todos los campos
-    for (let indice = 1; indice <= 10; indice++) {
+    /*for (let indice = 1; indice <= 10; indice++) {
       document.getElementById("cat-venta-"+indice).value= "";
       document.getElementById("cat-preventa-"+indice).value= "";
       document.getElementById("cat"+indice).checked = false;
       document.getElementById("cat-venta-"+indice).style.display="none";
     document.getElementById("cat-preventa-"+indice).style.display="none";
-    }
+    }*/
   }
   
 })
@@ -471,7 +476,7 @@ function confirmarDatosAlGuardar(){
 
 }
 
-
+console.log(listaPreciosCategoriasGuardado);
 function guardarDatosPreciosCategoria(){
   let estado = false;
   let listaPrecios = [];
@@ -496,6 +501,9 @@ let precios = {
   if(estado){
     let preciosJSON = JSON.stringify(listaPrecios);
     insertarJsonCategoriasEntrada(preciosJSON);
+
+    listaPreciosCategoriasGuardado = listaPrecios; //Guardamos por mietras, si se borra no afecta
+
   console.log(preciosJSON);
   }else{
     alert("Aún no ha completado todos los campos de los precios de las categorías de entrada");   

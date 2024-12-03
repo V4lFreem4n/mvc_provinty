@@ -268,7 +268,7 @@ function cargarImagenesCarousel(){
     let div = document.createElement("div");
     div.className = index === 0 ? "carousel-item active" : "carousel-item"; // Solo el primero tiene "active"
     div.innerHTML = `
-        <img class="d-block w-100" src="../${element['nombre_imagen']}" alt="Imagen evento">
+        <img class="d-block w-100" src="../uploads/${element['nombre_imagen']}" alt="Imagen evento">
         <div class="carousel-caption-left">
             <h3>${element['nombre_evento']}</h3>
             <p>${element['artista']}</p>
