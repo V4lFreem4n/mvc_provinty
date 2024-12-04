@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2024 a las 08:44:55
+-- Tiempo de generación: 05-12-2024 a las 00:38:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -81,7 +81,13 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `documento_identidad`, `fecha_nacimiento`, `correo`, `contrasena`) VALUES
 (3, 'victorr', 'Pérez', 72423362, '2024-11-07', 'correo@correo', '$2y$10$GMy3pGjOMqLpLliSizOj/OEjG0fsEG6ksP9ZqVJwT36xyEWJR1jD.'),
-(4, 'Alex', 'Perez', 82423365, '2024-11-20', 'email@email', '$2y$10$VY0ioQvecp8rW6fLWbZMLO90PH9I.Uh070LbDpS0mUkijK/QIjx/O');
+(4, 'Alex', 'Perez', 82423365, '2024-11-20', 'email@email', '$2y$10$VY0ioQvecp8rW6fLWbZMLO90PH9I.Uh070LbDpS0mUkijK/QIjx/O'),
+(5, 'Juan', 'Pérez', 98323123, '1989-12-13', 'juanp@gmail.com', '$2y$10$e5sDIPsnjjzjKVMPpi5raureOPwJfpeWSGRcETobkW7gp6i9yrtDO'),
+(6, 'María', 'Gómez', 2147483647, '1999-12-26', 'mariag@gmail.com', '$2y$10$S.HVZxdWVe2A.2CmIvZB0esRGr1Se1g1O8/Ofpwip.GmMVhtJPBpW'),
+(7, 'Carlos', 'López', 32323233, '1990-12-20', 'carlosl@gmail.com', '$2y$10$yJwyDvYNlTRTtspLfle0quwKPHhr1lsIu5YI6c3KoKng/Kz7IhmNW'),
+(8, 'Ana', 'Torres', 44444444, '2000-12-19', 'anat@gmail.com', '$2y$10$jzQ2NusWx40o8y5nnvhsfuA5gEgm/jl.Zd1h9p794r0eid1mR8cRG'),
+(9, 'Luis', 'Fernández', 322323133, '1990-12-25', 'luisf@gmail.com', '$2y$10$Xj2tewNQ50pNazQW4hKESuytBtaj3y0hHbjdF39KT.h8ngsGNky4S'),
+(10, 'Sofía', 'Ramírez', 33224555, '1980-12-01', 'sofia@gmail.com', '$2y$10$n/nst6f1p2ipL.Z6ii/ve.GHpEiNp9Ly..1W0nfpYskOZehZ1sYna');
 
 -- --------------------------------------------------------
 
@@ -164,13 +170,13 @@ CREATE TABLE `eventos` (
 
 INSERT INTO `eventos` (`ID_Evento`, `Titulo`, `Aforo`, `Foto`, `Descripcion`, `terminos_condiciones`, `Artista_Autor`, `Fecha_Evento`, `Fecha_Creacion`, `Estado_Publicacion`, `visibilidad`, `organizador`, `contacto_organizador`, `politica_cancelacion`, `f_actualizacion`, `f_borrado`, `hora_borrado`, `ubicacion`, `activoPospuesto`, `horaInicioEvento`, `horaFinEvento`, `redes`, `id_usuario`) VALUES
 (23, 'Purizaca Pérez', 4444, 'WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'El concierto ofreció una experiencia vibrante y enérgica, con una impecable mezcla de luces, sonido y emociones que hicieron vibrar a la audiencia. Los artistas, entregados completamente al escenario, interpretaron una variedad de canciones icónicas y nuevas, conectando profundamente con los asistentes. La escenografía deslumbrante y el entusiasmo del público crearon una atmósfera inolvidable, donde cada nota y cada coro resonaban como una celebración de la música en su máxima expresión.', '[\"xxxxxxxxxxx\",\"yyyyy yyyyyyy\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'sadasd', 'asdasd', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '18:16:00', '19:16:00', '4444', 51),
-(24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Privado', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54),
+(24, 'evento victor', 444, 'WhatsApp Image 2024-09-30 at 10.53.10 AM.jpeg', 'descripcion del evento', '[\"No perros\",\"No alcohol\"]', '', '2024-11-01 00:00:00', '2024-11-18 00:00:00', 'Publicado', 'Público', 'UEFA', '444444', NULL, NULL, NULL, NULL, 'sdfsdfsdf', NULL, '20:53:00', '21:53:00', 'redes 1', 54),
 (32, 'ggggg', 4444, NULL, 'hhhhhhhh', '[\"333\",\"4444\"]', '', '2024-11-14 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'dsfsdff', '33333', NULL, NULL, '2024-11-25', '16:26:26', 'sdgsdg', NULL, '17:29:00', '20:29:00', 'fsdf', 53),
 (34, 'ONE P', 44, NULL, 'ggggggg', '[\"ffffffffff\"]', '', '2024-11-30 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', 'asdasdas', NULL, NULL, '2024-11-25', '16:26:24', 'Moscú', NULL, '15:38:00', '21:36:00', 'sdd', 53),
 (35, 'foto', 3333, NULL, 'ggggggggg', '[\"fffg fgfg\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', '44444', NULL, NULL, '2024-11-25', '16:26:30', '434', NULL, '20:16:00', '22:16:00', 'rereredes', 53),
 (36, 'Purizaca Pérezssssssss', 23333, NULL, 'gggggggg', '[\"rrrrrrr\"]', '', '2024-11-21 00:00:00', '2024-11-25 00:00:00', 'Cancelado', 'Privado', 'fsdasd', 'asdasdas', NULL, NULL, '2024-11-25', '16:26:28', '434', NULL, '20:18:00', '22:18:00', '31234', 53),
 (37, 'ddddddd', 3434, NULL, 'ffffff', '[\"112123sdasd\"]', '', '2024-11-08 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', 'fdf', NULL, NULL, NULL, NULL, '434', NULL, '20:24:00', '22:24:00', 'rereredes', 53),
-(38, 'fadadadsssss', 3333, 'uploads/WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'gggggggg', '[\"ddff dfdf\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Público', 'UEFA', 'fsdasd', NULL, NULL, NULL, NULL, '323', NULL, '21:32:00', '22:32:00', 'rereredes', 53),
+(38, 'fadadadsssss', 3333, 'uploads/WhatsApp Image 2024-10-14 at 1.02.52 PM.jpeg', 'gggggggg', '[\"ddff dfdf\"]', '', '2024-11-07 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Privado', 'UEFA', 'fsdasd', NULL, NULL, NULL, NULL, '323', NULL, '21:32:00', '22:32:00', 'rereredes', 53),
 (39, 'chih', 333, '39.png', 'ggggggg', '[\"ffff\"]', '', '2024-11-06 00:00:00', '2024-11-25 00:00:00', 'Publicado', 'Público', 'UEFA', '12asd', NULL, NULL, NULL, NULL, 'Moscú', NULL, '19:44:00', '22:44:00', 'gggg', 53),
 (42, 'PRESSS', 3333, '42.png', 'FFFFFFFFFF', '[\"2222\"]', '', '2024-10-30 00:00:00', '2024-11-26 00:00:00', 'Publicado', 'Público', 'UEFA', 'ASDASD', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '20:05:00', '23:05:00', 'SSSS', 53),
 (43, 'SUEÑO', 3333, '43.png', 'FFFFFFFFF', '[\"NO PERROS\"]', '', '2024-10-30 00:00:00', '2024-11-27 00:00:00', 'Publicado', 'Público', 'UEFA', 'ffff', NULL, NULL, NULL, NULL, 'Moscú2', NULL, '05:10:00', '07:10:00', 'rereredes', 53),
@@ -196,10 +202,17 @@ CREATE TABLE `interaccion` (
 --
 
 INSERT INTO `interaccion` (`id`, `comentario`, `estrellas`, `tiempo`, `id_evento`, `id_cliente`) VALUES
-(1, '', 0, 2, 43, 3),
-(2, 'excelente', 5, 486, 39, 3),
+(1, '', 0, 5852, 43, 3),
+(2, 'Amazing', 3, 4143, 39, 3),
 (3, '', 2, 189, 38, 3),
-(4, 'Me gustó mucho', 1, 918, 39, 4);
+(4, 'Me gustó mucho', 1, 918, 39, 4),
+(5, 'excelenteeeeeeee', 1, 1656, 24, 3),
+(6, '', 0, 111, 44, 3),
+(7, 'increíble', 2, 18, 39, 7),
+(8, 'fantástico', 5, 9, 42, 7),
+(9, 'sin palabras', 5, 66, 24, 7),
+(10, 'FANTASTICO', 5, 345, 39, 9),
+(11, '', 0, 21, 43, 9);
 
 -- --------------------------------------------------------
 
@@ -213,6 +226,13 @@ CREATE TABLE `log_acciones` (
   `accion` enum('activado','desactivado') NOT NULL,
   `fecha_accion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `log_acciones`
+--
+
+INSERT INTO `log_acciones` (`id`, `usuario_id`, `accion`, `fecha_accion`) VALUES
+(88, 54, 'desactivado', '2024-12-04 20:22:58');
 
 -- --------------------------------------------------------
 
@@ -305,7 +325,7 @@ INSERT INTO `usuarios` (`id`, `nombre_usuario`, `password`, `rol`, `dni`, `corre
 (51, 'victor', '$2y$10$nF9ysh86oBb1DzIzKvVydOzzodokSE6xOMkvnPL0KfHlqW3w0Zok6', 1, '12333333', 'correo@correo', '931231231', NULL, 1, '2024-11-11 21:43:53'),
 (52, 'Alejandro', '$2y$10$YJGA9FE1woffZvO5KqNjfe14Rtg93y4oB17vdwbmjuGaXlB.OfUwy', 2, '23333333', 'victor@victor', '999999966', NULL, 1, '2024-11-11 21:45:07'),
 (53, 'admin', '$2y$10$UoudodYYrt0X9ohkn4gEFO7c1i/XyJOTiQxWaHPhOTUGouzBa12My', 0, '72423362', 'admin@admin', '789456123', 'admin.png', 1, '2024-11-18 21:24:58'),
-(54, 'Alonso', '$2y$10$omgsR1dMlqN8xIHtcXDSI.YlZ3kLPULOmnIbqnW0pGodpDXRWeOEe', 2, '13333335', 'alonso@alonso', '983654321', NULL, 1, '2024-11-18 21:47:48'),
+(54, 'Alonso', '$2y$10$omgsR1dMlqN8xIHtcXDSI.YlZ3kLPULOmnIbqnW0pGodpDXRWeOEe', 2, '13333335', 'alonso@alonso', '983654321', NULL, 0, '2024-11-18 21:47:48'),
 (55, 'Yamill', '$2y$10$e43MeLNSoxvUgKoHczOInuraxHEFN/5vIT9otD15k79JmhXQ6WJK.', 1, '12423123', 'yamill@yamill', '941111111', NULL, 1, '2024-11-18 21:49:06');
 
 --
@@ -434,7 +454,7 @@ ALTER TABLE `categoria_evento`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -464,13 +484,13 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `interaccion`
 --
 ALTER TABLE `interaccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `log_acciones`
 --
 ALTER TABLE `log_acciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

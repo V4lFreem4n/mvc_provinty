@@ -465,8 +465,8 @@ session_start();
             <tr>
               <th>#</th>
               <th>SECTOR</th>
-              <th>CANTIDAD</th>
-              <th>PRECIO</th>
+              <th>PRECIO PREVENTA</th>
+              <th>PRECIO VENTA</th>
             </tr>
           </thead>
           <tbody>
@@ -477,7 +477,7 @@ $contador = 1;
         echo '<tr>
       <th scope="row">'.$contador.'</th>
       <td>'.$categoria['nombre_categoria_evento'].'</td>
-      <td>36</td>
+      <td>'.$categoria['precio_preventa'].'</td>
       <td>S/. '.$categoria['precio_venta'].'</td>
     </tr>';
     $contador++;
