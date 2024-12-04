@@ -14,7 +14,7 @@
       <img src="../vista/admin/informe/img/logo_provint.png" alt="Logo" class="h-12 mr-4">
       <h1 class="text-2xl font-bold">DETALLE - INFORME DE EVENTOS</h1>
     </div>
-    <button class="bg-white text-[#004f63] px-4 py-2 rounded-md flex items-center">
+    <button class="bg-white text-[#004f63] px-4 py-2 rounded-md flex items-center" onclick="generarPDF()">
       <i class="fas fa-download mr-2"></i> DESCARGAR TODO
     </button>
   </header>
@@ -25,7 +25,7 @@
     <div class="ms-auto me-5"><strong>TIEMPO PROMEDIO :</strong> <?php echo $promedios['tiempo_promedio'];?> en segundos</div>
     <div class="ms-auto"><strong>ESTRELLAS PROMEDIO:</strong> <?php echo $promedios['estrellas_promedio'];?></div>
     </div>
-   <div class="flex border border-slate-300 p-2">
+   <div class="flex border border-slate-300 p-2" id="zona_graficos">
    <div style="width: 25%;">
   <canvas id="donaGrafico"></canvas>
 </div>
@@ -48,9 +48,7 @@
         <p class="mb-4">'.$interaccion['comentario'].'</p>
       </div>
       <div class="flex flex-col items-end">
-        <button class="bg-[#004f63] text-white px-4 py-2 rounded-md flex items-center mb-2">
-          <i class="fas fa-download mr-2"></i> DESCARGAR
-        </button>
+        
         <div class="flex items-center text-xl text-orange-500">';
           //Vamos a verificar si es que existe comentario
         if(isset($interaccion['estrellas'])){
@@ -168,6 +166,27 @@ let graphDispersion = document.getElementById("myChart").getContext("2d");
     let graphDona = document.getElementById("donaGrafico").getContext("2d");
     let dona = new Chart(graphDona, configuracion);
 
+</script>
+
+<script type="text/javascript" src="../vista/admin/informe/jspdf.min.js"></script>
+<script type="text/javascript">
+  function generarPDF(){
+    var doc = new jsPDF();
+
+    <?php
+    $espacio = 10;
+    //Título
+    echo 'doc.text(20,'.$espacio.',"'.$nombreEvento.'.            Tiempo promedio (seg): '.$promedios['tiempo_promedio'].'.  Estrellas promedio : '.$promedios['estrellas_promedio'].'");';
+    foreach($interacciones as $interaccion){
+      $espacio = $espacio + 10;
+      if($interaccion['id_evento']==$id){
+        echo 'doc.text(20,'.$espacio.',"Cliente : '.$interaccion['nombre_cliente'].'. ID: '.$interaccion['id_cliente'].'.  Estrellas: '.$interaccion['estrellas'].'. Tiempo (seg): '.$interaccion['tiempo'].'");';
+      }}
+    ?>
+    
+    
+    doc.save('Reporte.pdf');
+  }
 </script>
 </html>
 

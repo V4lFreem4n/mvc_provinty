@@ -234,7 +234,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     
       <div>
         <div class="bg-white px-5 ml-5 mb-1 flex" style="width: 150px; height: 150px;">
-          <img src="images/imagen.png" class="my-auto mx-auto" id="imagen_evento_'.$evento['ID_Evento'].'">
+          <img src="../uploads/'.$evento['Foto'].'" class="my-auto mx-auto" id="imagen_evento_'.$evento['ID_Evento'].'">
      
         </div>
         <p class="text-xs ml-5 my-1">Imagen del evento*</p>
@@ -402,7 +402,7 @@ if($evento['Estado_Publicacion'] !== "Cancelado"){
     
       <div>
         <div class="bg-white px-5 ml-5 mb-1 flex" style="width: 150px; height: 150px;">
-          <img src="images/imagen.png" class="my-auto mx-auto" id="imagen_evento_'.$evento['ID_Evento'].'">
+          <img src="../uploads/d" class="my-auto mx-auto" id="imagen_evento_'.$evento['ID_Evento'].'">
      
         </div>
         <p class="text-xs ml-5 my-1">Imagen del evento*</p>
