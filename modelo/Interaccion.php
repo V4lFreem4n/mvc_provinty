@@ -264,6 +264,36 @@ class Interaccion {
         // Retornar false si algo falla
         return false;
     }
+
+    public function arrayEstrellas($id_Evento) {
+        $sql = "SELECT 
+                    SUM(CASE WHEN estrellas = 1 THEN 1 ELSE 0 END) AS total_1_estrellas,
+                    SUM(CASE WHEN estrellas = 2 THEN 1 ELSE 0 END) AS total_2_estrellas,
+                    SUM(CASE WHEN estrellas = 3 THEN 1 ELSE 0 END) AS total_3_estrellas,
+                    SUM(CASE WHEN estrellas = 4 THEN 1 ELSE 0 END) AS total_4_estrellas,
+                    SUM(CASE WHEN estrellas = 5 THEN 1 ELSE 0 END) AS total_5_estrellas
+                FROM interaccion
+                WHERE id_evento = ?";
+    
+        $stmt = mysqli_prepare($this->connection, $sql);
+    
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, 'i', $id_Evento); // Parámetro seguro
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+    
+            if ($result) {
+                $row = mysqli_fetch_assoc($result); // Devuelve una sola fila
+                mysqli_stmt_close($stmt);
+                return $row; // Devolvemos directamente la fila
+            }
+    
+            mysqli_stmt_close($stmt);
+        }
+    
+        return false;
+    }
+    
     
 }
 

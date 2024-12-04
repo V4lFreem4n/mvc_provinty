@@ -520,9 +520,9 @@ if(isset($_SESSION['roles']) && $_SESSION['roles'] == "cliente"){
    <h2 class="section-header">¿Qué te pareció?</h2>
 <div class="review-section">
   <form method="post" action="../controlador/cliente/controlador_valorar_comentario.php">
-    <textarea class="form-control review-textarea" rows="4" name="comentario" placeholder="Comparte tu experiencia con nosotros..."></textarea>
+    <textarea maxlength="690" class="form-control review-textarea" rows="4" name="comentario" placeholder="Comparte tu experiencia con nosotros..."></textarea>
     <div class="d-flex justify-content-between align-items-center mt-3">
-      <input type="hidden" value="39" name="id_evento">
+      <input type="hidden" value="'.$id.'" name="id_evento">
       <button class="review-button" type="submit">Enviar reseña</button>
     </div>
   </form>

@@ -22,7 +22,7 @@ $eventosObjeto = new Evento($db->connect());
 $eventos = $eventosObjeto->mostrarEventos();
 $existenciaId=false;
 
-$nombreEvento = "";
+
 
 foreach($eventos as $evento){
     if($evento['ID_Evento']==$id){
@@ -41,6 +41,14 @@ $interaccionesObjeto = new Interaccion($db->connect());
 $interacciones = $interaccionesObjeto->mostrarInteracciones();
 $promedios = $interaccionesObjeto->obtenerPromedios($id);
 
+$estrellas = $interaccionesObjeto->arrayEstrellas($id);
+$arrayEstrellas = [
+    (int)$estrellas['total_1_estrellas'],
+    (int)$estrellas['total_2_estrellas'],
+    (int)$estrellas['total_3_estrellas'],
+    (int)$estrellas['total_4_estrellas'],
+    (int)$estrellas['total_5_estrellas']
+];
 include '../vista/admin/informe/detalle_informes.php';
 
 ?>
